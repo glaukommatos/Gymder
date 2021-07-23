@@ -8,13 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */; };
-		76EF500F26AAAD3200A8EAC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500E26AAAD3200A8EAC3 /* SceneDelegate.swift */; };
-		76EF501126AAAD3200A8EAC3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* ViewController.swift */; };
-		76EF501426AAAD3200A8EAC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501226AAAD3200A8EAC3 /* Main.storyboard */; };
+		76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* MainViewController.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
 		76EF501926AAAD3500A8EAC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */; };
-		76EF502426AAAD3600A8EAC3 /* TestingTestingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF502326AAAD3600A8EAC3 /* TestingTestingTests.swift */; };
 		76EF502F26AAAD3600A8EAC3 /* TestingTestingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */; };
+		76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503C26AAAFBC00A8EAC3 /* CardView.swift */; };
+		76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */; };
+		76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504026AAB0A300A8EAC3 /* Card.swift */; };
+		76EF504526AAC5C600A8EAC3 /* CardPileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504426AAC5C600A8EAC3 /* CardPileView.swift */; };
+		76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */; };
+		76EF504926AAFDE600A8EAC3 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */; };
+		76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504A26AAFE0500A8EAC3 /* MatchView.swift */; };
+		76EF504D26AAFFBB00A8EAC3 /* MatchViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504C26AAFFBB00A8EAC3 /* MatchViewTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +40,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		76EF500926AAAD3200A8EAC3 /* TestingTesting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestingTesting.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		76EF500E26AAAD3200A8EAC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		76EF501026AAAD3200A8EAC3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		76EF501326AAAD3200A8EAC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76EF501026AAAD3200A8EAC3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		76EF501526AAAD3500A8EAC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76EF501826AAAD3500A8EAC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76EF501A26AAAD3500A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76EF501F26AAAD3600A8EAC3 /* TestingTestingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestingTestingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76EF502326AAAD3600A8EAC3 /* TestingTestingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingTestingTests.swift; sourceTree = "<group>"; };
+		76EF501F26AAAD3600A8EAC3 /* GymderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF502526AAAD3600A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76EF502A26AAAD3600A8EAC3 /* TestingTestingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestingTestingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		76EF502A26AAAD3600A8EAC3 /* GymderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingTestingUITests.swift; sourceTree = "<group>"; };
 		76EF503026AAAD3600A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		76EF503C26AAAFBC00A8EAC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewTests.swift; sourceTree = "<group>"; };
+		76EF504026AAB0A300A8EAC3 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		76EF504426AAC5C600A8EAC3 /* CardPileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileView.swift; sourceTree = "<group>"; };
+		76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewTests.swift; sourceTree = "<group>"; };
+		76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		76EF504A26AAFE0500A8EAC3 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
+		76EF504C26AAFFBB00A8EAC3 /* MatchViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewTests.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +89,9 @@
 		76EF500026AAAD3200A8EAC3 = {
 			isa = PBXGroup;
 			children = (
-				76EF500B26AAAD3200A8EAC3 /* TestingTesting */,
-				76EF502226AAAD3600A8EAC3 /* TestingTestingTests */,
-				76EF502D26AAAD3600A8EAC3 /* TestingTestingUITests */,
+				76EF500B26AAAD3200A8EAC3 /* Gymder */,
+				76EF502226AAAD3600A8EAC3 /* GymderTests */,
+				76EF502D26AAAD3600A8EAC3 /* GymderUITests */,
 				76EF500A26AAAD3200A8EAC3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -89,51 +99,56 @@
 		76EF500A26AAAD3200A8EAC3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				76EF500926AAAD3200A8EAC3 /* TestingTesting.app */,
-				76EF501F26AAAD3600A8EAC3 /* TestingTestingTests.xctest */,
-				76EF502A26AAAD3600A8EAC3 /* TestingTestingUITests.xctest */,
+				76EF500926AAAD3200A8EAC3 /* Gymder.app */,
+				76EF501F26AAAD3600A8EAC3 /* GymderTests.xctest */,
+				76EF502A26AAAD3600A8EAC3 /* GymderUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		76EF500B26AAAD3200A8EAC3 /* TestingTesting */ = {
+		76EF500B26AAAD3200A8EAC3 /* Gymder */ = {
 			isa = PBXGroup;
 			children = (
 				76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */,
-				76EF500E26AAAD3200A8EAC3 /* SceneDelegate.swift */,
-				76EF501026AAAD3200A8EAC3 /* ViewController.swift */,
-				76EF501226AAAD3200A8EAC3 /* Main.storyboard */,
+				76EF501026AAAD3200A8EAC3 /* MainViewController.swift */,
+				76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */,
+				76EF504A26AAFE0500A8EAC3 /* MatchView.swift */,
+				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
+				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
+				76EF504026AAB0A300A8EAC3 /* Card.swift */,
 				76EF501526AAAD3500A8EAC3 /* Assets.xcassets */,
 				76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */,
 				76EF501A26AAAD3500A8EAC3 /* Info.plist */,
 			);
-			path = TestingTesting;
+			path = Gymder;
 			sourceTree = "<group>";
 		};
-		76EF502226AAAD3600A8EAC3 /* TestingTestingTests */ = {
+		76EF502226AAAD3600A8EAC3 /* GymderTests */ = {
 			isa = PBXGroup;
 			children = (
-				76EF502326AAAD3600A8EAC3 /* TestingTestingTests.swift */,
+				76EF504C26AAFFBB00A8EAC3 /* MatchViewTests.swift */,
+				76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */,
 				76EF502526AAAD3600A8EAC3 /* Info.plist */,
+				76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */,
 			);
-			path = TestingTestingTests;
+			path = GymderTests;
 			sourceTree = "<group>";
 		};
-		76EF502D26AAAD3600A8EAC3 /* TestingTestingUITests */ = {
+		76EF502D26AAAD3600A8EAC3 /* GymderUITests */ = {
 			isa = PBXGroup;
 			children = (
 				76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */,
 				76EF503026AAAD3600A8EAC3 /* Info.plist */,
 			);
-			path = TestingTestingUITests;
+			path = GymderUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		76EF500826AAAD3200A8EAC3 /* TestingTesting */ = {
+		76EF500826AAAD3200A8EAC3 /* Gymder */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76EF503326AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTesting" */;
+			buildConfigurationList = 76EF503326AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "Gymder" */;
 			buildPhases = (
 				76EF500526AAAD3200A8EAC3 /* Sources */,
 				76EF500626AAAD3200A8EAC3 /* Frameworks */,
@@ -143,14 +158,14 @@
 			);
 			dependencies = (
 			);
-			name = TestingTesting;
+			name = Gymder;
 			productName = TestingTesting;
-			productReference = 76EF500926AAAD3200A8EAC3 /* TestingTesting.app */;
+			productReference = 76EF500926AAAD3200A8EAC3 /* Gymder.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76EF501E26AAAD3600A8EAC3 /* TestingTestingTests */ = {
+		76EF501E26AAAD3600A8EAC3 /* GymderTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76EF503626AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTestingTests" */;
+			buildConfigurationList = 76EF503626AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "GymderTests" */;
 			buildPhases = (
 				76EF501B26AAAD3600A8EAC3 /* Sources */,
 				76EF501C26AAAD3600A8EAC3 /* Frameworks */,
@@ -161,14 +176,14 @@
 			dependencies = (
 				76EF502126AAAD3600A8EAC3 /* PBXTargetDependency */,
 			);
-			name = TestingTestingTests;
+			name = GymderTests;
 			productName = TestingTestingTests;
-			productReference = 76EF501F26AAAD3600A8EAC3 /* TestingTestingTests.xctest */;
+			productReference = 76EF501F26AAAD3600A8EAC3 /* GymderTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		76EF502926AAAD3600A8EAC3 /* TestingTestingUITests */ = {
+		76EF502926AAAD3600A8EAC3 /* GymderUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 76EF503926AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTestingUITests" */;
+			buildConfigurationList = 76EF503926AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "GymderUITests" */;
 			buildPhases = (
 				76EF502626AAAD3600A8EAC3 /* Sources */,
 				76EF502726AAAD3600A8EAC3 /* Frameworks */,
@@ -179,9 +194,9 @@
 			dependencies = (
 				76EF502C26AAAD3600A8EAC3 /* PBXTargetDependency */,
 			);
-			name = TestingTestingUITests;
+			name = GymderUITests;
 			productName = TestingTestingUITests;
-			productReference = 76EF502A26AAAD3600A8EAC3 /* TestingTestingUITests.xctest */;
+			productReference = 76EF502A26AAAD3600A8EAC3 /* GymderUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -206,7 +221,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 76EF500426AAAD3200A8EAC3 /* Build configuration list for PBXProject "TestingTesting" */;
+			buildConfigurationList = 76EF500426AAAD3200A8EAC3 /* Build configuration list for PBXProject "Gymder" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -219,9 +234,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				76EF500826AAAD3200A8EAC3 /* TestingTesting */,
-				76EF501E26AAAD3600A8EAC3 /* TestingTestingTests */,
-				76EF502926AAAD3600A8EAC3 /* TestingTestingUITests */,
+				76EF500826AAAD3200A8EAC3 /* Gymder */,
+				76EF501E26AAAD3600A8EAC3 /* GymderTests */,
+				76EF502926AAAD3600A8EAC3 /* GymderUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -233,7 +248,6 @@
 			files = (
 				76EF501926AAAD3500A8EAC3 /* LaunchScreen.storyboard in Resources */,
 				76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */,
-				76EF501426AAAD3200A8EAC3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +272,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76EF501126AAAD3200A8EAC3 /* ViewController.swift in Sources */,
+				76EF504926AAFDE600A8EAC3 /* MatchViewController.swift in Sources */,
+				76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */,
 				76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */,
-				76EF500F26AAAD3200A8EAC3 /* SceneDelegate.swift in Sources */,
+				76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */,
+				76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */,
+				76EF504526AAC5C600A8EAC3 /* CardPileView.swift in Sources */,
+				76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,7 +286,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76EF502426AAAD3600A8EAC3 /* TestingTestingTests.swift in Sources */,
+				76EF504D26AAFFBB00A8EAC3 /* MatchViewTests.swift in Sources */,
+				76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */,
+				76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,25 +305,17 @@
 /* Begin PBXTargetDependency section */
 		76EF502126AAAD3600A8EAC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76EF500826AAAD3200A8EAC3 /* TestingTesting */;
+			target = 76EF500826AAAD3200A8EAC3 /* Gymder */;
 			targetProxy = 76EF502026AAAD3600A8EAC3 /* PBXContainerItemProxy */;
 		};
 		76EF502C26AAAD3600A8EAC3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 76EF500826AAAD3200A8EAC3 /* TestingTesting */;
+			target = 76EF500826AAAD3200A8EAC3 /* Gymder */;
 			targetProxy = 76EF502B26AAAD3600A8EAC3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		76EF501226AAAD3200A8EAC3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				76EF501326AAAD3200A8EAC3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -366,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -421,7 +433,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -438,12 +450,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTesting/Info.plist;
+				INFOPLIST_FILE = Gymder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTesting;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.Gymder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -457,12 +469,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTesting/Info.plist;
+				INFOPLIST_FILE = Gymder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTesting;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.Gymder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -476,18 +488,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTestingTests/Info.plist;
+				INFOPLIST_FILE = GymderTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTestingTests;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.GymderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestingTesting.app/TestingTesting";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gymder.app/Gymder";
 			};
 			name = Debug;
 		};
@@ -498,18 +510,18 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTestingTests/Info.plist;
+				INFOPLIST_FILE = GymderTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTestingTests;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.GymderTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestingTesting.app/TestingTesting";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gymder.app/Gymder";
 			};
 			name = Release;
 		};
@@ -519,17 +531,18 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTestingUITests/Info.plist;
+				INFOPLIST_FILE = GymderUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTestingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.GymderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TestingTesting;
+				TEST_TARGET_NAME = Gymder;
 			};
 			name = Debug;
 		};
@@ -539,24 +552,25 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = TestingTestingUITests/Info.plist;
+				INFOPLIST_FILE = GymderUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.TestingTestingUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = glaukommatos.GymderUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = TestingTesting;
+				TEST_TARGET_NAME = Gymder;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		76EF500426AAAD3200A8EAC3 /* Build configuration list for PBXProject "TestingTesting" */ = {
+		76EF500426AAAD3200A8EAC3 /* Build configuration list for PBXProject "Gymder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76EF503126AAAD3600A8EAC3 /* Debug */,
@@ -565,7 +579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76EF503326AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTesting" */ = {
+		76EF503326AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "Gymder" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76EF503426AAAD3600A8EAC3 /* Debug */,
@@ -574,7 +588,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76EF503626AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTestingTests" */ = {
+		76EF503626AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "GymderTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76EF503726AAAD3600A8EAC3 /* Debug */,
@@ -583,7 +597,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		76EF503926AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "TestingTestingUITests" */ = {
+		76EF503926AAAD3600A8EAC3 /* Build configuration list for PBXNativeTarget "GymderUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				76EF503A26AAAD3600A8EAC3 /* Debug */,
