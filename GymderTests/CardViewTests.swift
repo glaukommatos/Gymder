@@ -11,8 +11,8 @@ import XCTest
 class CardViewTests: XCTestCase {
 
     func testAddsLabels() throws {
-        let card = Card(title: "Title", distance: "x km")
-        let view = CardView()
+        let card = Card(title: "Title", distance: "x km", url: URL(string: "http://valid.url.com/")!)
+        let view = CardView(frame: .zero)
         view.card = card
 
         XCTAssertTrue(view.subviews.contains { view in

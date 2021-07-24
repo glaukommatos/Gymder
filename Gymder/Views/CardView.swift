@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class CardView: UIView {
     var imageView: UIImageView!
@@ -14,27 +15,29 @@ class CardView: UIView {
 
     var card: Card? {
         didSet {
-            guard let card = card else { return }
+            updateView(for: card)
+        }
+    }
+
+    func updateView(for card: Card?) {
+        if let card = card {
             titleLabel.text = card.title
             distanceLabel.text = card.distance
-            DispatchQueue.global().async {
-                guard let data = try? Data(contentsOf: card.url) else { return }
-                let image = UIImage(data: data)
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.imageView.image = image
-                }
-            }
+            fetchImage(url: card.url)
         }
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        customizeAppearance()
         addImage()
         addTitleLabel()
         addDistanceLabel()
-        customizeAppearance()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func customizeAppearance() {
@@ -53,12 +56,23 @@ class CardView: UIView {
         let contentWidth = bounds.width - 20
 
         imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: contentWidth, height: contentWidth))
-        imageView.layer.cornerRadius = 5
+
         imageView.clipsToBounds = true
         imageView.backgroundColor = .darkGray
         imageView.contentMode = .scaleAspectFill
 
         addSubview(imageView)
+    }
+
+    private func fetchImage(url: URL) {
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            let image = UIImage(data: data)
+
+            DispatchQueue.main.async { [weak self] in
+                self?.imageView.image = image
+            }
+        }
     }
 
     private func addTitleLabel() {
@@ -67,6 +81,8 @@ class CardView: UIView {
 
         titleLabel = UILabel(frame: CGRect(x: 10, y: y, width: bounds.width - 20, height: remainingHeight * (2/3)))
         titleLabel.font = UIFont.boldSystemFont(ofSize: remainingHeight * (2/3) - 5)
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.minimumScaleFactor = 0.1
 
         addSubview(titleLabel)
     }
@@ -80,6 +96,4 @@ class CardView: UIView {
 
         addSubview(distanceLabel)
     }
-
-    required init(coder: NSCoder) { fatalError() }
 }

@@ -12,11 +12,14 @@ class MatchView: UIView {
     private var ball1: UILabel!
     private var ball2: UILabel!
 
+    private let balls = ["⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉"]
+
     var stackView: UIStackView!
     var closeHandler: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+
         backgroundColor = .white
 
         addStackView()
@@ -26,6 +29,9 @@ class MatchView: UIView {
         addAnimations()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     private func addStackView() {
         stackView = UIStackView()
@@ -64,7 +70,7 @@ class MatchView: UIView {
     private func addBalls() {
         ball1 = UILabel()
         ball1.translatesAutoresizingMaskIntoConstraints = false
-        ball1.text = "🏀"
+        ball1.text = balls.randomElement()
         ball1.alpha = 0.5
         ball1.baselineAdjustment = .alignCenters
         ball1.font = UIFont.systemFont(ofSize: 300)
@@ -74,7 +80,7 @@ class MatchView: UIView {
 
         ball2 = UILabel()
         ball2.translatesAutoresizingMaskIntoConstraints = false
-        ball2.text = "⚾️"
+        ball2.text = balls.randomElement()
         ball2.alpha = 0.5
         ball2.baselineAdjustment = .alignCenters
         ball2.font = UIFont.systemFont(ofSize: 300)
@@ -109,6 +115,4 @@ class MatchView: UIView {
     @objc func executeCloseHandler() {
         closeHandler?()
     }
-
-    required init?(coder: NSCoder) { fatalError() }
 }

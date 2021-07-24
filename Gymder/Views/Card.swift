@@ -10,5 +10,5 @@ import Foundation
 struct Card {
     let title: String
     let distance: String
-    let url = URL(string: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Golde33443.jpg")!
+    let url: URL
 }

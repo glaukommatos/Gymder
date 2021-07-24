@@ -9,13 +9,14 @@ import XCTest
 @testable import Gymder
 
 class CardPileViewTests: XCTestCase {
+    let validUrl = URL(string: "http://www.url.com/")!
 
     func testDisplaysAndMaintainsThreeCards() throws {
         let cards = [
-            Card(title: "Card 1", distance: "Distance 1"),
-            Card(title: "Card 2", distance: "Distance 2"),
-            Card(title: "Card 3", distance: "Distance 3"),
-            Card(title: "Card 4", distance: "Distance 4")
+            Card(title: "Card 1", distance: "Distance 1", url: validUrl),
+            Card(title: "Card 2", distance: "Distance 2", url: validUrl),
+            Card(title: "Card 3", distance: "Distance 3", url: validUrl),
+            Card(title: "Card 4", distance: "Distance 4", url: validUrl)
         ]
 
         let view = CardPileView()
@@ -43,7 +44,7 @@ class CardPileViewTests: XCTestCase {
 
     func testRefreshesViewWhenCardsPropertyIsSet() {
         let cards = [
-            Card(title: "Card 1", distance: "Distance 1")
+            Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
         let view = CardPileView()
@@ -58,7 +59,7 @@ class CardPileViewTests: XCTestCase {
 
     func testEmptyOnceWeRunOutOfCards() throws {
         let cards = [
-            Card(title: "Card 1", distance: "Distance 1")
+            Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
         let view = CardPileView()
@@ -78,7 +79,7 @@ class CardPileViewTests: XCTestCase {
 
     func testCentersCardAgainIfGestureEndsWithoutDoingAnything() throws {
         let cards = [
-            Card(title: "Card 1", distance: "Distance 1")
+            Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
         let view = CardPileView()
@@ -98,7 +99,7 @@ class CardPileViewTests: XCTestCase {
 
     func testCardPanning() throws {
         let cards = [
-            Card(title: "Card 1", distance: "Distance 1")
+            Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
         let view = CardPileView()
@@ -111,7 +112,7 @@ class CardPileViewTests: XCTestCase {
 
     func testMatchAccept() {
         let cards = [
-            Card(title: "Gym 1", distance: "Distance 1")
+            Card(title: "Gym 1", distance: "Distance 1", url: validUrl)
         ]
 
         let mockDelegate = MockCardChoiceDelegate()
@@ -129,7 +130,7 @@ class CardPileViewTests: XCTestCase {
 
     func testMatchReject() {
         let cards = [
-            Card(title: "Gym 1", distance: "Distance 1")
+            Card(title: "Gym 1", distance: "Distance 1", url: validUrl)
         ]
 
         let mockDelegate = MockCardChoiceDelegate()

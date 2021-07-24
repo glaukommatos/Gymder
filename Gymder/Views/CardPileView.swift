@@ -12,10 +12,12 @@ class CardPileView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = #colorLiteral(red: 1, green: 0.9180306636, blue: 0.8244608181, alpha: 1)
+        backgroundColor = .white
     }
 
-    required init?(coder: NSCoder) { fatalError() }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     private var remainingCards = [Card]()
     var cards: [Card] {
@@ -118,9 +120,4 @@ class CardPileView: UIView {
     private func radians(from degrees: CGFloat) -> CGFloat {
         degrees * (CGFloat.pi / 180)
     }
-}
-
-protocol CardChoiceDelegate: AnyObject {
-    func accept()
-    func reject()
 }
