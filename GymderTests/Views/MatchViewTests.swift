@@ -1,6 +1,6 @@
 //
 //  MatchViewTests.swift
-//  TestingTestingTests
+//  GymderTests
 //
 //  Created by Kyle Pointer on 23.07.21.
 //

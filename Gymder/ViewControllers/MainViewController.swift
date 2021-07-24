@@ -1,6 +1,6 @@
 //
 //  MainViewController.swift
-//  TestingTesting
+//  Gymder
 //
 //  Created by Kyle Pointer on 23.07.21.
 //
@@ -9,7 +9,20 @@ import UIKit
 import CoreLocation
 
 class MainViewController: UIViewController, CardChoiceDelegate, CLLocationManagerDelegate {
-    let locationService = LocationProvider()
+    let dataSource: CardDataSource
+
+    init(dataSource: CardDataSource) {
+        self.dataSource = dataSource
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    var cardPileView: CardPileView {
+        view as! CardPileView
+    }
 
     override func loadView() {
         self.view = CardPileView(frame: UIScreen.main.bounds)
@@ -18,39 +31,16 @@ class MainViewController: UIViewController, CardChoiceDelegate, CLLocationManage
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let view = view as? CardPileView {
-            view.cardChoiceDelegate = self
-        }
+        cardPileView.cardChoiceDelegate = self
+        cardPileView.cardDataSource = dataSource
+        dataSource.cardPileView = cardPileView
 
-        locationService.getCurrentLocation { [weak self] location in
-            self?.loadGyms(with: location)
-        }
+        dataSource.load()
     }
-
-    private func loadGyms(with currentLocation: CLLocation?) {
-        if let view = view as? CardPileView {
-            let gymService = GymService(urlSessionWrapper: URLSessionWrapper(), partnersResponseMapper: PartnersResponseMapper())
-
-            gymService.getGyms { gyms in
-                DispatchQueue.main.async {
-                    view.cards = gyms!.map { gym in
-                        if let currentLocation = currentLocation {
-                            return Card(title: gym.name, distance: currentLocation.formattedDistanceTo(CLLocation(latitude: gym.latitude, longitude: gym.longitude)), url: gym.imageUrl)
-                        } else {
-                            return Card(title: gym.name, distance: "...", url: gym.imageUrl)
-                        }
-
-                    }.shuffled()
-                }
-            }
-        }
-    }
-
-    // MARK: - CardChoiceDelegate
 
     func accept() {
-        present(MatchViewController(), animated: true, completion: nil)
+        if Int.random(in: 0..<20) == 0 {
+            present(MatchViewController(), animated: true, completion: nil)
+        }
     }
-
-    func reject() {}
 }

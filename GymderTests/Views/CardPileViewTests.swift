@@ -1,6 +1,6 @@
 //
 //  CardPileViewTests.swift
-//  TestingTestingTests
+//  GymderTests
 //
 //  Created by Kyle Pointer on 23.07.21.
 //
@@ -9,7 +9,20 @@ import XCTest
 @testable import Gymder
 
 class CardPileViewTests: XCTestCase {
-    let validUrl = URL(string: "http://www.url.com/")!
+    private let validUrl = URL(string: "http://www.url.com/")!
+    private var view: CardPileView!
+    private var mockDataSource: MockCardDataSource!
+    private var mockDelegate: MockCardChoiceDelegate!
+
+    override func setUp() {
+        view = CardPileView()
+        mockDelegate = MockCardChoiceDelegate()
+        mockDataSource = MockCardDataSource()
+        view.cardChoiceDelegate = mockDelegate
+        view.cardDataSource = mockDataSource
+        mockDataSource.cardPileView = view
+
+    }
 
     func testDisplaysAndMaintainsThreeCards() throws {
         let cards = [
@@ -19,22 +32,22 @@ class CardPileViewTests: XCTestCase {
             Card(title: "Card 4", distance: "Distance 4", url: validUrl)
         ]
 
-        let view = CardPileView()
-        view.cards = cards
+        mockDataSource.cards = cards
+        mockDataSource.load()
 
         XCTAssertEqual(view.subviews.count, 3)
 
         let expectation = XCTestExpectation()
 
-        view.pan(sender: self.swipeRight(card: view.subviews.last!))
+        view.pan(sender: rightSwipe(card: view.subviews.last!))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqual(view.subviews.count, 3)
-            view.pan(sender: self.swipeRight(card: view.subviews.last!))
+            XCTAssertEqual(self.view.subviews.count, 3)
+            self.view.pan(sender: self.rightSwipe(card: self.view.subviews.last!))
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                XCTAssertEqual(view.subviews.count, 2)
-                XCTAssertEqual(view.subviews.last!.gestureRecognizers?.count, 1)
+                XCTAssertEqual(self.view.subviews.count, 2)
+                XCTAssertEqual(self.view.subviews.last!.gestureRecognizers?.count, 1)
                 expectation.fulfill()
             }
         }
@@ -42,35 +55,20 @@ class CardPileViewTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
 
-    func testRefreshesViewWhenCardsPropertyIsSet() {
-        let cards = [
-            Card(title: "Card 1", distance: "Distance 1", url: validUrl)
-        ]
-
-        let view = CardPileView()
-        view.cards = cards
-
-        XCTAssertEqual(view.subviews.count, 1)
-
-        view.cards = []
-
-        XCTAssertEqual(view.subviews.count, 0)
-    }
-
     func testEmptyOnceWeRunOutOfCards() throws {
         let cards = [
             Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
-        let view = CardPileView()
-        view.cards = cards
+        mockDataSource.cards = cards
+        mockDataSource.load()
 
         let expectation = XCTestExpectation()
 
-        view.pan(sender: self.swipeRight(card: view.subviews.last!))
+        view.pan(sender: rightSwipe(card: view.subviews.last!))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqual(view.subviews.count, 0)
+            XCTAssertEqual(self.view.subviews.count, 0)
             expectation.fulfill()
         }
 
@@ -82,15 +80,15 @@ class CardPileViewTests: XCTestCase {
             Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
-        let view = CardPileView()
-        view.cards = cards
+        mockDataSource.cards = cards
+        mockDataSource.load()
 
         let expectation = XCTestExpectation()
 
-        view.pan(sender: self.swipeButNotEnough(card: view.subviews.last!))
+        view.pan(sender: nonCommittalSwipe(card: view.subviews.last!))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            XCTAssertEqual(view.subviews.first!.transform, .identity)
+            XCTAssertEqual(self.view.subviews.first!.transform, .identity)
             expectation.fulfill()
         }
 
@@ -102,12 +100,12 @@ class CardPileViewTests: XCTestCase {
             Card(title: "Card 1", distance: "Distance 1", url: validUrl)
         ]
 
-        let view = CardPileView()
-        view.cards = cards
+        mockDataSource.cards = cards
+        mockDataSource.load()
 
-        view.pan(sender: self.swipeAndHold(card: view.subviews.last!))
+        view.pan(sender: dragAndHold(card: view.subviews.last!))
 
-        XCTAssertNotEqual(view.subviews.first!.transform, .identity)
+        XCTAssertNotEqual(self.view.subviews.first!.transform, .identity)
     }
 
     func testMatchAccept() {
@@ -115,35 +113,14 @@ class CardPileViewTests: XCTestCase {
             Card(title: "Gym 1", distance: "Distance 1", url: validUrl)
         ]
 
-        let mockDelegate = MockCardChoiceDelegate()
-
-        let view = CardPileView()
-        view.cardChoiceDelegate = mockDelegate
-        view.cards = cards
+        mockDataSource.cards = cards
+        mockDataSource.load()
 
         let topCard = view.subviews.last!
 
-        view.pan(sender: swipeRight(card: topCard))
+        view.pan(sender: rightSwipe(card: topCard))
 
         XCTAssertEqual(mockDelegate.lastChoice, .accept)
-    }
-
-    func testMatchReject() {
-        let cards = [
-            Card(title: "Gym 1", distance: "Distance 1", url: validUrl)
-        ]
-
-        let mockDelegate = MockCardChoiceDelegate()
-
-        let view = CardPileView()
-        view.cardChoiceDelegate = mockDelegate
-        view.cards = cards
-
-        let topCard = view.subviews.last!
-
-        view.pan(sender: swipeLeft(card: topCard))
-
-        XCTAssertEqual(mockDelegate.lastChoice, .reject)
     }
 
     private func swipeLeft(card: UIView) -> UIPanGestureRecognizer {
@@ -155,7 +132,7 @@ class CardPileViewTests: XCTestCase {
         return gesture
     }
 
-    private func swipeRight(card: UIView) -> UIPanGestureRecognizer {
+    private func rightSwipe(card: UIView) -> UIPanGestureRecognizer {
         let gesture = MockUIPanGestureRecognizer()
         gesture.theView = card
         gesture.xTranslation = 300
@@ -164,7 +141,7 @@ class CardPileViewTests: XCTestCase {
         return gesture
     }
 
-    private func swipeButNotEnough(card: UIView) -> UIPanGestureRecognizer {
+    private func nonCommittalSwipe(card: UIView) -> UIPanGestureRecognizer {
         let gesture = MockUIPanGestureRecognizer()
         gesture.theView = card
         gesture.xTranslation = 0
@@ -173,7 +150,7 @@ class CardPileViewTests: XCTestCase {
         return gesture
     }
 
-    private func swipeAndHold(card: UIView) -> UIPanGestureRecognizer {
+    private func dragAndHold(card: UIView) -> UIPanGestureRecognizer {
         let gesture = MockUIPanGestureRecognizer()
         gesture.theView = card
         gesture.xTranslation = 10
@@ -186,7 +163,6 @@ class CardPileViewTests: XCTestCase {
 private class MockCardChoiceDelegate: CardChoiceDelegate {
     enum Choice {
         case accept
-        case reject
         case none
     }
 
@@ -194,10 +170,6 @@ private class MockCardChoiceDelegate: CardChoiceDelegate {
 
     func accept() {
         lastChoice = .accept
-    }
-
-    func reject() {
-        lastChoice = .reject
     }
 }
 
@@ -212,4 +184,18 @@ private class MockUIPanGestureRecognizer: UIPanGestureRecognizer {
     override var view: UIView? {
         theView
     }
+}
+
+private class MockCardDataSource: CardDataSource {
+    var cards = [Card]()
+
+    func next() -> Card? {
+        cards.popLast()
+    }
+
+    func load() {
+        cardPileView?.reload()
+    }
+
+    var cardPileView: CardPileView?
 }

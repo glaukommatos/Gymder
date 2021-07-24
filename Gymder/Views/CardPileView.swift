@@ -1,6 +1,6 @@
 //
 //  CardPileView.swift
-//  TestingTesting
+//  Gymder
 //
 //  Created by Kyle Pointer on 23.07.21.
 //
@@ -9,6 +9,7 @@ import UIKit
 
 class CardPileView: UIView {
     weak var cardChoiceDelegate: CardChoiceDelegate?
+    weak var cardDataSource: CardDataSource?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,40 +20,17 @@ class CardPileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private var remainingCards = [Card]()
-    var cards: [Card] {
-        set {
-            remainingCards = newValue
-            updateCardViews()
-        }
-        get { remainingCards }
-    }
-
-    private func updateCardViews() {
+    func reload() {
         for view in subviews {
             view.removeFromSuperview()
         }
 
-        for _ in 0...2 {
-            if let card = remainingCards.popLast() {
-                let view = CardView(frame: calculateCardRect())
-                view.card = card
-                insertSubview(view, at: 0)
-                positionCard(view)
-            }
-        }
-
-        setupPanGesture()
-    }
-
-    private func setupPanGesture() {
-        if let topCard = subviews.last {
-            let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan(sender:)))
-            topCard.addGestureRecognizer(gestureRecognizer)
+        for _ in 0..<3 {
+            addNextCard()
         }
     }
 
-    private func calculateCardRect() -> CGRect {
+    private var cardRect: CGRect {
         let cardWidth = bounds.width * 0.9
         let cardHeight = bounds.width + (cardWidth / 10)
         let xMargin = bounds.width - cardWidth
@@ -64,7 +42,8 @@ class CardPileView: UIView {
     }
 
     private func positionCard(_ view: CardView) {
-        view.transform = CGAffineTransform(rotationAngle: radians(from: CGFloat.random(in: -3..<3)))
+        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -3..<3))
+        view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
     }
 
     private func removeSwipedCardAndAddAnother(_ card: CardView, _ translation: CGPoint) {
@@ -77,14 +56,21 @@ class CardPileView: UIView {
     }
 
     private func addNextCard() {
-        if let nextCard = remainingCards.popLast() {
-            let nextCardView = CardView(frame: calculateCardRect())
-            nextCardView.card = nextCard
+        if let card = cardDataSource?.next() {
+            let nextCardView = CardView(frame: cardRect)
+            nextCardView.card = card
             insertSubview(nextCardView, at: 0)
             positionCard(nextCardView)
         }
 
-        setupPanGesture()
+        addGestureRecognizerToTopmostCard()
+    }
+
+    private func addGestureRecognizerToTopmostCard() {
+        if let topCard = subviews.last {
+            let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan(sender:)))
+            topCard.addGestureRecognizer(gestureRecognizer)
+        }
     }
 
     @objc func pan(sender: UIPanGestureRecognizer) {
@@ -100,8 +86,6 @@ class CardPileView: UIView {
 
                 if (translation.x > 0) {
                     cardChoiceDelegate?.accept()
-                } else {
-                    cardChoiceDelegate?.reject()
                 }
             } else {
                 returnCardToCenter(card: card)
@@ -117,7 +101,5 @@ class CardPileView: UIView {
         }
     }
 
-    private func radians(from degrees: CGFloat) -> CGFloat {
-        degrees * (CGFloat.pi / 180)
-    }
+
 }

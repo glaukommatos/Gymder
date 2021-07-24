@@ -1,6 +1,6 @@
 //
 //  View.swift
-//  TestingTesting
+//  Gymder
 //
 //  Created by Kyle Pointer on 23.07.21.
 //
@@ -41,6 +41,7 @@ class CardView: UIView {
     }
 
     private func customizeAppearance() {
+        accessibilityIdentifier = "card"
         backgroundColor = .white
         layer.cornerRadius = 5
         layer.shadowColor = UIColor.black.cgColor
@@ -83,6 +84,7 @@ class CardView: UIView {
         titleLabel.font = UIFont.boldSystemFont(ofSize: remainingHeight * (2/3) - 5)
         titleLabel.adjustsFontSizeToFitWidth = true
         titleLabel.minimumScaleFactor = 0.1
+        titleLabel.accessibilityIdentifier = "titleLabel"
 
         addSubview(titleLabel)
     }
@@ -93,6 +95,7 @@ class CardView: UIView {
 
         distanceLabel = UILabel(frame: CGRect(x: 10, y: y, width: bounds.width - 20, height: remainingHeight * (1/3)))
         distanceLabel.font = UIFont.systemFont(ofSize: remainingHeight * (1/3) - 5, weight: .light)
+        distanceLabel.accessibilityIdentifier = "distanceLabel"
 
         addSubview(distanceLabel)
     }

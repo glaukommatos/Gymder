@@ -11,7 +11,7 @@
 		76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* MainViewController.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
 		76EF501926AAAD3500A8EAC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */; };
-		76EF502F26AAAD3600A8EAC3 /* TestingTestingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */; };
+		76EF502F26AAAD3600A8EAC3 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF502E26AAAD3600A8EAC3 /* SmokeTests.swift */; };
 		76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503C26AAAFBC00A8EAC3 /* CardView.swift */; };
 		76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */; };
 		76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504026AAB0A300A8EAC3 /* Card.swift */; };
@@ -32,6 +32,9 @@
 		76EF507526AC2AF600A8EAC3 /* GymServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507426AC2AF600A8EAC3 /* GymServiceProtocol.swift */; };
 		76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */; };
 		76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507826AC2D7C00A8EAC3 /* Gym.swift */; };
+		76EF507B26AC2DEC00A8EAC3 /* CardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */; };
+		76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */; };
+		76EF507F26AC386800A8EAC3 /* CardDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,7 +64,7 @@
 		76EF501F26AAAD3600A8EAC3 /* GymderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF502526AAAD3600A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76EF502A26AAAD3600A8EAC3 /* GymderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GymderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingTestingUITests.swift; sourceTree = "<group>"; };
+		76EF502E26AAAD3600A8EAC3 /* SmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmokeTests.swift; sourceTree = "<group>"; };
 		76EF503026AAAD3600A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76EF503C26AAAFBC00A8EAC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewTests.swift; sourceTree = "<group>"; };
@@ -84,6 +87,9 @@
 		76EF507426AC2AF600A8EAC3 /* GymServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceProtocol.swift; sourceTree = "<group>"; };
 		76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceCodables.swift; sourceTree = "<group>"; };
 		76EF507826AC2D7C00A8EAC3 /* Gym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
+		76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSource.swift; sourceTree = "<group>"; };
+		76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
+		76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardDataSourceImpl.swift; path = Gymder/CardDataSourceImpl.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,13 +159,11 @@
 		76EF502226AAAD3600A8EAC3 /* GymderTests */ = {
 			isa = PBXGroup;
 			children = (
-				76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */,
-				76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */,
-				76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */,
 				76EF502526AAAD3600A8EAC3 /* Info.plist */,
-				76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */,
-				76EF505626AB5DF000A8EAC3 /* GymServiceTests.swift */,
-				76EF505C26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift */,
+				76EF508326AC44FF00A8EAC3 /* Mappers */,
+				76EF508026AC44E000A8EAC3 /* Mocks */,
+				76EF508126AC44EB00A8EAC3 /* Services */,
+				76EF508226AC44F200A8EAC3 /* Views */,
 			);
 			path = GymderTests;
 			sourceTree = "<group>";
@@ -167,7 +171,7 @@
 		76EF502D26AAAD3600A8EAC3 /* GymderUITests */ = {
 			isa = PBXGroup;
 			children = (
-				76EF502E26AAAD3600A8EAC3 /* TestingTestingUITests.swift */,
+				76EF502E26AAAD3600A8EAC3 /* SmokeTests.swift */,
 				76EF503026AAAD3600A8EAC3 /* Info.plist */,
 			);
 			path = GymderUITests;
@@ -184,6 +188,7 @@
 		76EF506C26AC293200A8EAC3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */,
 				76EF501026AAAD3200A8EAC3 /* MainViewController.swift */,
 				76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */,
 			);
@@ -194,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
+				76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */,
 				76EF506626AC19DB00A8EAC3 /* CardChoiceDelegate.swift */,
 				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
 				76EF504026AAB0A300A8EAC3 /* Card.swift */,
@@ -205,6 +211,7 @@
 		76EF506F26AC298600A8EAC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */,
 				76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */,
 			);
 			path = Extensions;
@@ -241,6 +248,40 @@
 			isa = PBXGroup;
 			children = (
 				76EF505E26AB682100A8EAC3 /* PartnersResponseMapper.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		76EF508026AC44E000A8EAC3 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				76EF505C26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		76EF508126AC44EB00A8EAC3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				76EF505626AB5DF000A8EAC3 /* GymServiceTests.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		76EF508226AC44F200A8EAC3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */,
+				76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */,
+				76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		76EF508326AC44FF00A8EAC3 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -376,14 +417,17 @@
 			files = (
 				76EF504926AAFDE600A8EAC3 /* MatchViewController.swift in Sources */,
 				76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */,
+				76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */,
 				76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */,
 				76EF507526AC2AF600A8EAC3 /* GymServiceProtocol.swift in Sources */,
+				76EF507B26AC2DEC00A8EAC3 /* CardDataSource.swift in Sources */,
 				76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */,
 				76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */,
 				76EF505B26AB5F7B00A8EAC3 /* URLSessionWrapper.swift in Sources */,
 				76EF506726AC19DB00A8EAC3 /* CardChoiceDelegate.swift in Sources */,
 				76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */,
 				76EF505526AB5C1B00A8EAC3 /* GymService.swift in Sources */,
+				76EF507F26AC386800A8EAC3 /* CardDataSourceImpl.swift in Sources */,
 				76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */,
 				76EF504526AAC5C600A8EAC3 /* CardPileView.swift in Sources */,
 				76EF506B26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift in Sources */,
@@ -410,7 +454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76EF502F26AAAD3600A8EAC3 /* TestingTestingUITests.swift in Sources */,
+				76EF502F26AAAD3600A8EAC3 /* SmokeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

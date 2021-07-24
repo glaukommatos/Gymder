@@ -9,5 +9,4 @@ import Foundation
 
 protocol CardChoiceDelegate: AnyObject {
     func accept()
-    func reject()
 }
