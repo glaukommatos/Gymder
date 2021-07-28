@@ -11,31 +11,54 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
-        window = UIWindow()
-        window?.rootViewController = constructVC()
-        window?.makeKeyAndVisible()
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+    ) -> Bool {
+        registerDependencies()
+        createRootVC()
 
         return true
     }
 
-    func constructVC() -> MainViewController {
-        let locationProvider = LocationProvider()
-        let gymService = GymService(
-            urlSessionWrapper: URLSessionWrapper(),
-            partnersResponseMapper: PartnersResponseMapper()
-        )
+    private func createRootVC() {
+        window = UIWindow()
+        window?.rootViewController = Container.shared.get(instanceOf: CardPileViewController.self)
+        window?.makeKeyAndVisible()
+    }
 
-        let dataSource = CardDataSourceImpl(
-            gymService: gymService,
-            locationProvider: locationProvider
-        )
+    private func registerDependencies() {
+        Container.shared.register(for: CardPileViewController.self) { container in
+            CardPileViewController(dataSource: container.get(instanceOf: CardDataSourceProtocol.self))
+        }
 
-        let mainVC = MainViewController(
-            dataSource: dataSource
-        )
+        Container.shared.register(for: CardDataSourceProtocol.self) { container in
+            CardDataSource(
+                gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
+                locationProvider: container.get(instanceOf: LocationProvider.self))
+        }
 
-        return mainVC
+        Container.shared.register(for: GymRepositoryProtocol.self) { container in
+            GymRepository(
+                urlSessionWrapper: container.get(instanceOf: DataProviderProtocol.self),
+                partnersResponseMapper: container.get(instanceOf: PartnersResponseMapperProtocol.self)
+            )
+        }
+
+        Container.shared.register(for: DataProviderProtocol.self) { _ in
+            DataProvider()
+        }
+
+        Container.shared.register(for: PartnersResponseMapperProtocol.self) { _ in
+            PartnersResponseMapper()
+        }
+
+        Container.shared.register(for: LocationProvider.self) { _ in
+            LocationProvider()
+        }
+//
+//        Container.shared.register(for: URLSessionWrapperProtocol.self) { _ in
+//            URLSessionWrapper()
+//        }
     }
 }

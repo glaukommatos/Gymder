@@ -7,34 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272224B926B1A2830080A992 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224B826B1A2830080A992 /* Container.swift */; };
+		272224BB26B1A2A20080A992 /* ContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224BA26B1A2A20080A992 /* ContainerTests.swift */; };
+		272224BD26B1A5600080A992 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224BC26B1A5600080A992 /* Serialization.swift */; };
+		272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C526B1B0EF0080A992 /* DataProvider.swift */; };
+		272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C826B1C69C0080A992 /* DataProviderProtocol.swift */; };
+		272224CB26B1CAA90080A992 /* ErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224CA26B1CAA90080A992 /* ErrorViewController.swift */; };
+		272224CD26B1CAC40080A992 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224CC26B1CAC40080A992 /* ErrorView.swift */; };
+		272224D126B1CDED0080A992 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D026B1CDED0080A992 /* Card.swift */; };
 		76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */; };
-		76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* MainViewController.swift */; };
+		76EF501126AAAD3200A8EAC3 /* CardPileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
 		76EF501926AAAD3500A8EAC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */; };
 		76EF502F26AAAD3600A8EAC3 /* SmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF502E26AAAD3600A8EAC3 /* SmokeTests.swift */; };
 		76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503C26AAAFBC00A8EAC3 /* CardView.swift */; };
 		76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */; };
-		76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504026AAB0A300A8EAC3 /* Card.swift */; };
 		76EF504526AAC5C600A8EAC3 /* CardPileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504426AAC5C600A8EAC3 /* CardPileView.swift */; };
 		76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */; };
 		76EF504926AAFDE600A8EAC3 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */; };
 		76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504A26AAFE0500A8EAC3 /* MatchView.swift */; };
 		76EF504F26AB575E00A8EAC3 /* MatchViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */; };
-		76EF505526AB5C1B00A8EAC3 /* GymService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505426AB5C1B00A8EAC3 /* GymService.swift */; };
-		76EF505726AB5DF000A8EAC3 /* GymServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505626AB5DF000A8EAC3 /* GymServiceTests.swift */; };
-		76EF505B26AB5F7B00A8EAC3 /* URLSessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505A26AB5F7B00A8EAC3 /* URLSessionWrapper.swift */; };
-		76EF505D26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505C26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift */; };
+		76EF505526AB5C1B00A8EAC3 /* GymRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505426AB5C1B00A8EAC3 /* GymRepository.swift */; };
+		76EF505726AB5DF000A8EAC3 /* GymRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505626AB5DF000A8EAC3 /* GymRepositoryTests.swift */; };
+		76EF505D26AB5FFB00A8EAC3 /* MockDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */; };
 		76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505E26AB682100A8EAC3 /* PartnersResponseMapper.swift */; };
 		76EF506226AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */; };
 		76EF506726AC19DB00A8EAC3 /* CardChoiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506626AC19DB00A8EAC3 /* CardChoiceDelegate.swift */; };
 		76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506826AC218B00A8EAC3 /* LocationProvider.swift */; };
 		76EF506B26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */; };
-		76EF507526AC2AF600A8EAC3 /* GymServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507426AC2AF600A8EAC3 /* GymServiceProtocol.swift */; };
+		76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507426AC2AF600A8EAC3 /* GymRepositoryProtocol.swift */; };
 		76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */; };
 		76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507826AC2D7C00A8EAC3 /* Gym.swift */; };
-		76EF507B26AC2DEC00A8EAC3 /* CardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */; };
+		76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */; };
 		76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */; };
-		76EF507F26AC386800A8EAC3 /* CardDataSourceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */; };
+		76EF507F26AC386800A8EAC3 /* CardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507E26AC386800A8EAC3 /* CardDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +61,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272224B826B1A2830080A992 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
+		272224BA26B1A2A20080A992 /* ContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTests.swift; sourceTree = "<group>"; };
+		272224BC26B1A5600080A992 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
+		272224C526B1B0EF0080A992 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		272224C826B1C69C0080A992 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
+		272224CA26B1CAA90080A992 /* ErrorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewController.swift; sourceTree = "<group>"; };
+		272224CC26B1CAC40080A992 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		272224D026B1CDED0080A992 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		76EF501026AAAD3200A8EAC3 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewController.swift; sourceTree = "<group>"; };
 		76EF501526AAAD3500A8EAC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76EF501826AAAD3500A8EAC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76EF501A26AAAD3500A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -68,28 +82,25 @@
 		76EF503026AAAD3600A8EAC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76EF503C26AAAFBC00A8EAC3 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewTests.swift; sourceTree = "<group>"; };
-		76EF504026AAB0A300A8EAC3 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		76EF504426AAC5C600A8EAC3 /* CardPileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileView.swift; sourceTree = "<group>"; };
 		76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewTests.swift; sourceTree = "<group>"; };
 		76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		76EF504A26AAFE0500A8EAC3 /* MatchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchView.swift; sourceTree = "<group>"; };
 		76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchViewTests.swift; sourceTree = "<group>"; };
-		76EF505426AB5C1B00A8EAC3 /* GymService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymService.swift; sourceTree = "<group>"; };
-		76EF505626AB5DF000A8EAC3 /* GymServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceTests.swift; sourceTree = "<group>"; };
-		76EF505A26AB5F7B00A8EAC3 /* URLSessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionWrapper.swift; sourceTree = "<group>"; };
-		76EF505C26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSessionWrapper.swift; sourceTree = "<group>"; };
+		76EF505426AB5C1B00A8EAC3 /* GymRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymRepository.swift; sourceTree = "<group>"; };
+		76EF505626AB5DF000A8EAC3 /* GymRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymRepositoryTests.swift; sourceTree = "<group>"; };
+		76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProvider.swift; sourceTree = "<group>"; };
 		76EF505E26AB682100A8EAC3 /* PartnersResponseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersResponseMapper.swift; sourceTree = "<group>"; };
 		76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersResponseMapperTests.swift; sourceTree = "<group>"; };
-		76EF506426AB7CAF00A8EAC3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		76EF506626AC19DB00A8EAC3 /* CardChoiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChoiceDelegate.swift; sourceTree = "<group>"; };
 		76EF506826AC218B00A8EAC3 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationFormattedDistanceExtension.swift; sourceTree = "<group>"; };
-		76EF507426AC2AF600A8EAC3 /* GymServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceProtocol.swift; sourceTree = "<group>"; };
+		76EF507426AC2AF600A8EAC3 /* GymRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymRepositoryProtocol.swift; sourceTree = "<group>"; };
 		76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceCodables.swift; sourceTree = "<group>"; };
 		76EF507826AC2D7C00A8EAC3 /* Gym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
-		76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSource.swift; sourceTree = "<group>"; };
+		76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSourceProtocol.swift; sourceTree = "<group>"; };
 		76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
-		76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardDataSourceImpl.swift; path = Gymder/CardDataSourceImpl.swift; sourceTree = SOURCE_ROOT; };
+		76EF507E26AC386800A8EAC3 /* CardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardDataSource.swift; path = Gymder/Views/CardPile/CardDataSource.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +128,45 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		272224C326B1A81C0080A992 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				76EF507826AC2D7C00A8EAC3 /* Gym.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		272224C426B1A9990080A992 /* BackendModels */ = {
+			isa = PBXGroup;
+			children = (
+				76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */,
+			);
+			path = BackendModels;
+			sourceTree = "<group>";
+		};
+		272224CF26B1CC270080A992 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				76EF501526AAAD3500A8EAC3 /* Assets.xcassets */,
+				76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */,
+				76EF501A26AAAD3500A8EAC3 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		272224D226B1CE360080A992 /* CardPile */ = {
+			isa = PBXGroup;
+			children = (
+				272224D026B1CDED0080A992 /* Card.swift */,
+				76EF506626AC19DB00A8EAC3 /* CardChoiceDelegate.swift */,
+				76EF507E26AC386800A8EAC3 /* CardDataSource.swift */,
+				76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */,
+				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
+				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
+			);
+			path = CardPile;
+			sourceTree = "<group>";
+		};
 		76EF500026AAAD3200A8EAC3 = {
 			isa = PBXGroup;
 			children = (
@@ -124,7 +174,6 @@
 				76EF502226AAAD3600A8EAC3 /* GymderTests */,
 				76EF502D26AAAD3600A8EAC3 /* GymderUITests */,
 				76EF500A26AAAD3200A8EAC3 /* Products */,
-				76EF506326AB7CAF00A8EAC3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,16 +191,15 @@
 			isa = PBXGroup;
 			children = (
 				76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */,
-				76EF501526AAAD3500A8EAC3 /* Assets.xcassets */,
-				76EF507226AC29EB00A8EAC3 /* Services */,
+				272224B826B1A2830080A992 /* Container.swift */,
 				76EF506F26AC298600A8EAC3 /* Extensions */,
 				76EF507126AC29B900A8EAC3 /* Helpers */,
-				76EF501A26AAAD3500A8EAC3 /* Info.plist */,
-				76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */,
 				76EF507326AC2A7A00A8EAC3 /* Mappers */,
+				272224C326B1A81C0080A992 /* Models */,
+				76EF507226AC29EB00A8EAC3 /* Repositories */,
+				272224CF26B1CC270080A992 /* Supporting Files */,
 				76EF506C26AC293200A8EAC3 /* ViewControllers */,
 				76EF506D26AC293F00A8EAC3 /* Views */,
-				76EF507026AC29A700A8EAC3 /* Wrappers */,
 			);
 			path = Gymder;
 			sourceTree = "<group>";
@@ -162,8 +210,9 @@
 				76EF502526AAAD3600A8EAC3 /* Info.plist */,
 				76EF508326AC44FF00A8EAC3 /* Mappers */,
 				76EF508026AC44E000A8EAC3 /* Mocks */,
-				76EF508126AC44EB00A8EAC3 /* Services */,
+				76EF508126AC44EB00A8EAC3 /* Repositories */,
 				76EF508226AC44F200A8EAC3 /* Views */,
+				272224BA26B1A2A20080A992 /* ContainerTests.swift */,
 			);
 			path = GymderTests;
 			sourceTree = "<group>";
@@ -177,20 +226,12 @@
 			path = GymderUITests;
 			sourceTree = "<group>";
 		};
-		76EF506326AB7CAF00A8EAC3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				76EF506426AB7CAF00A8EAC3 /* CoreLocation.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		76EF506C26AC293200A8EAC3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				76EF507E26AC386800A8EAC3 /* CardDataSourceImpl.swift */,
-				76EF501026AAAD3200A8EAC3 /* MainViewController.swift */,
+				76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */,
 				76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */,
+				272224CA26B1CAA90080A992 /* ErrorViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -198,11 +239,8 @@
 		76EF506D26AC293F00A8EAC3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
-				76EF507A26AC2DEC00A8EAC3 /* CardDataSource.swift */,
-				76EF506626AC19DB00A8EAC3 /* CardChoiceDelegate.swift */,
-				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
-				76EF504026AAB0A300A8EAC3 /* Card.swift */,
+				272224D226B1CE360080A992 /* CardPile */,
+				272224CC26B1CAC40080A992 /* ErrorView.swift */,
 				76EF504A26AAFE0500A8EAC3 /* MatchView.swift */,
 			);
 			path = Views;
@@ -217,31 +255,25 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		76EF507026AC29A700A8EAC3 /* Wrappers */ = {
-			isa = PBXGroup;
-			children = (
-				76EF505A26AB5F7B00A8EAC3 /* URLSessionWrapper.swift */,
-			);
-			path = Wrappers;
-			sourceTree = "<group>";
-		};
 		76EF507126AC29B900A8EAC3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				76EF506826AC218B00A8EAC3 /* LocationProvider.swift */,
+				272224C526B1B0EF0080A992 /* DataProvider.swift */,
+				272224C826B1C69C0080A992 /* DataProviderProtocol.swift */,
+				272224BC26B1A5600080A992 /* Serialization.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
 		};
-		76EF507226AC29EB00A8EAC3 /* Services */ = {
+		76EF507226AC29EB00A8EAC3 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				76EF505426AB5C1B00A8EAC3 /* GymService.swift */,
-				76EF507426AC2AF600A8EAC3 /* GymServiceProtocol.swift */,
-				76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */,
-				76EF507826AC2D7C00A8EAC3 /* Gym.swift */,
+				272224C426B1A9990080A992 /* BackendModels */,
+				76EF505426AB5C1B00A8EAC3 /* GymRepository.swift */,
+				76EF507426AC2AF600A8EAC3 /* GymRepositoryProtocol.swift */,
 			);
-			path = Services;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		76EF507326AC2A7A00A8EAC3 /* Mappers */ = {
@@ -255,17 +287,17 @@
 		76EF508026AC44E000A8EAC3 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				76EF505C26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift */,
+				76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		76EF508126AC44EB00A8EAC3 /* Services */ = {
+		76EF508126AC44EB00A8EAC3 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				76EF505626AB5DF000A8EAC3 /* GymServiceTests.swift */,
+				76EF505626AB5DF000A8EAC3 /* GymRepositoryTests.swift */,
 			);
-			path = Services;
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		76EF508226AC44F200A8EAC3 /* Views */ = {
@@ -296,6 +328,7 @@
 				76EF500526AAAD3200A8EAC3 /* Sources */,
 				76EF500626AAAD3200A8EAC3 /* Frameworks */,
 				76EF500726AAAD3200A8EAC3 /* Resources */,
+				272224C726B1C58F0080A992 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -410,6 +443,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		272224C726B1C58F0080A992 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		76EF500526AAAD3200A8EAC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -418,21 +471,26 @@
 				76EF504926AAFDE600A8EAC3 /* MatchViewController.swift in Sources */,
 				76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */,
 				76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */,
-				76EF501126AAAD3200A8EAC3 /* MainViewController.swift in Sources */,
-				76EF507526AC2AF600A8EAC3 /* GymServiceProtocol.swift in Sources */,
-				76EF507B26AC2DEC00A8EAC3 /* CardDataSource.swift in Sources */,
+				76EF501126AAAD3200A8EAC3 /* CardPileViewController.swift in Sources */,
+				76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */,
+				76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */,
 				76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */,
-				76EF504126AAB0A300A8EAC3 /* Card.swift in Sources */,
-				76EF505B26AB5F7B00A8EAC3 /* URLSessionWrapper.swift in Sources */,
+				272224D126B1CDED0080A992 /* Card.swift in Sources */,
+				272224CD26B1CAC40080A992 /* ErrorView.swift in Sources */,
 				76EF506726AC19DB00A8EAC3 /* CardChoiceDelegate.swift in Sources */,
 				76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */,
-				76EF505526AB5C1B00A8EAC3 /* GymService.swift in Sources */,
-				76EF507F26AC386800A8EAC3 /* CardDataSourceImpl.swift in Sources */,
+				76EF505526AB5C1B00A8EAC3 /* GymRepository.swift in Sources */,
+				76EF507F26AC386800A8EAC3 /* CardDataSource.swift in Sources */,
 				76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */,
 				76EF504526AAC5C600A8EAC3 /* CardPileView.swift in Sources */,
 				76EF506B26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift in Sources */,
+				272224CB26B1CAA90080A992 /* ErrorViewController.swift in Sources */,
+				272224BD26B1A5600080A992 /* Serialization.swift in Sources */,
+				272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */,
 				76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */,
+				272224B926B1A2830080A992 /* Container.swift in Sources */,
 				76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */,
+				272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */,
 				76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -443,8 +501,9 @@
 			files = (
 				76EF506226AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift in Sources */,
 				76EF504F26AB575E00A8EAC3 /* MatchViewTests.swift in Sources */,
-				76EF505726AB5DF000A8EAC3 /* GymServiceTests.swift in Sources */,
-				76EF505D26AB5FFB00A8EAC3 /* MockURLSessionWrapper.swift in Sources */,
+				76EF505726AB5DF000A8EAC3 /* GymRepositoryTests.swift in Sources */,
+				76EF505D26AB5FFB00A8EAC3 /* MockDataProvider.swift in Sources */,
+				272224BB26B1A2A20080A992 /* ContainerTests.swift in Sources */,
 				76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */,
 				76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */,
 			);
@@ -608,7 +667,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = Gymder/Info.plist;
+				INFOPLIST_FILE = "Gymder/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -627,7 +686,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QB3E2A9NFW;
-				INFOPLIST_FILE = Gymder/Info.plist;
+				INFOPLIST_FILE = "Gymder/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

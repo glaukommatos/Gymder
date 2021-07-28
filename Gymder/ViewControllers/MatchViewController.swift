@@ -8,8 +8,11 @@
 import UIKit
 
 class MatchViewController: UIViewController {
+    private var matchView: MatchView!
+
     override func loadView() {
-        self.view = MatchView()
+        matchView = MatchView()
+        view = matchView
     }
 
     override func viewDidLoad() {
@@ -17,10 +20,8 @@ class MatchViewController: UIViewController {
     }
 
     private func setCloseHandler() {
-        if let matchView = view as? MatchView {
-            matchView.closeHandler = { [weak self] in
-                self?.dismiss(animated: true, completion: nil)
-            }
+        matchView.closeHandler = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 }

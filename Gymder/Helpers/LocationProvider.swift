@@ -12,14 +12,23 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     private var callback: ((CLLocation?) -> Void)?
 
+    var attemptAlreadyMade = false
+    var cachedLocation: CLLocation?
+
     override init() {
         super.init()
         locationManager.delegate = self
     }
 
     func getCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
-        self.callback = completion
-        locationManager.requestWhenInUseAuthorization()
+        print("\(Date()): getCurrentLocation")
+        if attemptAlreadyMade {
+            completion(cachedLocation)
+        } else {
+            self.callback = completion
+            locationManager.requestWhenInUseAuthorization()
+            attemptAlreadyMade = true
+        }
     }
 
     // MARK: - CLLocationManagerDelegate
@@ -37,10 +46,20 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
-        callback?(locations.last)
+        cachedLocation = locations.last
+        print("\(Date()): got location")
+        callback?(cachedLocation)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        locationManager.stopUpdatingLocation()
+        guard let error = error as? CLError else { return }
+
+        switch error.code {
+        case .locationUnknown:
+            return
+        default:
+            locationManager.stopUpdatingLocation()
+            callback?(nil)
+        }
     }
 }

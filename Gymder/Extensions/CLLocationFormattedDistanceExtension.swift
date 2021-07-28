@@ -13,6 +13,7 @@ extension CLLocation {
         let distance = self.distance(from: location)
         let formatter = MeasurementFormatter()
         formatter.unitStyle = .long
+        formatter.numberFormatter.maximumFractionDigits = 2
 
         return formatter.string(from: Measurement(value: distance, unit: UnitLength.meters))
     }

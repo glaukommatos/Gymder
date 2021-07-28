@@ -26,12 +26,16 @@ class SmokeTests: XCTestCase {
 
         let topCard = app.otherElements["card"].firstMatch
 
-        while(!app.staticTexts["It's a match!"].exists) {
-            topCard.swipeRight()
+        if topCard.waitForExistence(timeout: 15) {
+            while !app.staticTexts["It's a match!"].exists {
+                topCard.swipeRight()
+            }
+
+            app.buttons["Awesome!"].tap()
+
+            topCard.swipeLeft()
+        } else {
+            XCTFail("Card never appeared")
         }
-
-        app.buttons["Awesome!"].tap()
-
-        topCard.swipeLeft()
     }
 }

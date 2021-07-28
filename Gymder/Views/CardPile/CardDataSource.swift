@@ -8,33 +8,35 @@
 import Foundation
 import CoreLocation
 
-class CardDataSourceImpl: CardDataSource {
-    let gymService: GymServiceProtocol
+enum CardDataSourceErrors: Error {
+    case network
+}
+
+class CardDataSource: CardDataSourceProtocol {
+    let gymRepository: GymRepositoryProtocol
     let locationProvider: LocationProvider
-    
-    var cardPileView: CardPileView?
-    
+
     var gyms = [Gym]()
     var currentLocation: CLLocation?
-    
-    init(gymService: GymServiceProtocol,
+
+    init(gymRepository: GymRepositoryProtocol,
          locationProvider: LocationProvider
     ) {
-        self.gymService = gymService
+        self.gymRepository = gymRepository
         self.locationProvider = locationProvider
     }
-    
-    func load() {
+
+    func load(completion: @escaping (Error?) -> Void) {
         locationProvider.getCurrentLocation { [weak self] location in
             if let self = self {
                 self.currentLocation = location
-                self.gymService.getGyms { gyms in
-                    if let gyms = gyms {
+                self.gymRepository.getGyms { gyms in
+                    switch gyms {
+                    case .success(let gyms):
                         self.gyms = gyms.shuffled()
-                    }
-
-                    DispatchQueue.main.async {
-                        self.cardPileView?.reload()
+                        completion(nil)
+                    case .failure:
+                        completion(CardDataSourceErrors.network)
                     }
                 }
             }
@@ -44,7 +46,12 @@ class CardDataSourceImpl: CardDataSource {
     func next() -> Card? {
         if let gym = gyms.popLast() {
             if let currentLocation = currentLocation {
-                return Card(title: gym.name, distance: currentLocation.formattedDistanceTo(CLLocation(latitude: gym.latitude, longitude: gym.longitude)), url: gym.imageUrl)
+                return Card(
+                    title: gym.name,
+                    distance: currentLocation.formattedDistanceTo(
+                        CLLocation(latitude: gym.latitude, longitude: gym.longitude)
+                    ),
+                    url: gym.imageUrl)
             } else {
                 return Card(title: gym.name, distance: "...", url: gym.imageUrl)
             }

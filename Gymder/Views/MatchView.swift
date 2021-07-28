@@ -26,7 +26,7 @@ class MatchView: UIView {
         addMessage()
         addButton()
         addBalls()
-        addAnimations()
+        addAndStartAnimations()
     }
 
     required init?(coder: NSCoder) {
@@ -96,7 +96,7 @@ class MatchView: UIView {
         ])
     }
 
-    private func addAnimations() {
+    private func addAndStartAnimations() {
         animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: { [weak self] in
             if let ball1 = self?.ball1,
                let ball2 = self?.ball2 {
@@ -106,7 +106,7 @@ class MatchView: UIView {
         })
 
         animator.addCompletion { [weak self] _ in
-            self?.addAnimations()
+            self?.addAndStartAnimations()
         }
 
         animator.startAnimation()

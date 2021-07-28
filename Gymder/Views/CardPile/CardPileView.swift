@@ -9,11 +9,17 @@ import UIKit
 
 class CardPileView: UIView {
     weak var cardChoiceDelegate: CardChoiceDelegate?
-    weak var cardDataSource: CardDataSource?
+    weak var cardDataSource: CardDataSourceProtocol?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
+
+        let loading = UIActivityIndicatorView(style: .gray)
+        loading.startAnimating()
+        loading.center = center
+
+        addSubview(loading)
     }
 
     required init?(coder: NSCoder) {
@@ -84,7 +90,7 @@ class CardPileView: UIView {
             if abs(translation.x) > 100 {
                 removeSwipedCardAndAddAnother(card, translation)
 
-                if (translation.x > 0) {
+                if translation.x > 0 {
                     cardChoiceDelegate?.accept()
                 }
             } else {
@@ -100,6 +106,4 @@ class CardPileView: UIView {
             card.transform = .identity
         }
     }
-
-
 }

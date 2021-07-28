@@ -5,6 +5,8 @@
 //  Created by Kyle Pointer on 23.07.21.
 //
 
+// swiftlint:disable weak_delegate
+
 import XCTest
 @testable import Gymder
 
@@ -21,7 +23,6 @@ class CardPileViewTests: XCTestCase {
         view.cardChoiceDelegate = mockDelegate
         view.cardDataSource = mockDataSource
         mockDataSource.cardPileView = view
-
     }
 
     func testDisplaysAndMaintainsThreeCards() throws {
@@ -33,7 +34,9 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        mockDataSource.load()
+        mockDataSource.load { _ in
+            self.view.reload()
+        }
 
         XCTAssertEqual(view.subviews.count, 3)
 
@@ -61,7 +64,9 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        mockDataSource.load()
+        mockDataSource.load { _ in
+            self.view.reload()
+        }
 
         let expectation = XCTestExpectation()
 
@@ -81,7 +86,9 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        mockDataSource.load()
+        mockDataSource.load { _ in
+            self.view.reload()
+        }
 
         let expectation = XCTestExpectation()
 
@@ -101,7 +108,9 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        mockDataSource.load()
+        mockDataSource.load { _ in
+            self.view.reload()
+        }
 
         view.pan(sender: dragAndHold(card: view.subviews.last!))
 
@@ -114,7 +123,9 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        mockDataSource.load()
+        mockDataSource.load { _ in
+            self.view.reload()
+        }
 
         let topCard = view.subviews.last!
 
@@ -186,15 +197,15 @@ private class MockUIPanGestureRecognizer: UIPanGestureRecognizer {
     }
 }
 
-private class MockCardDataSource: CardDataSource {
+private class MockCardDataSource: CardDataSourceProtocol {
     var cards = [Card]()
 
     func next() -> Card? {
         cards.popLast()
     }
 
-    func load() {
-        cardPileView?.reload()
+    func load(completion: @escaping (Error?) -> Void) {
+        completion(nil)
     }
 
     var cardPileView: CardPileView?

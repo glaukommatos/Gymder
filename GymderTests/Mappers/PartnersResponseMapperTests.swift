@@ -13,11 +13,11 @@ class PartnersResponseMapperTests: XCTestCase {
     func testExample() throws {
         let partnersResponse = PartnersResponse(
             data: [
-                Partner(
+                PartnersResponse.Data(
                     name: "Gym 1",
-                    headerImage: PartnerImage(mobile: URL(string: "https://valid.url.com/")!),
+                    headerImage: PartnersResponse.Data.Image(mobile: URL(string: "https://valid.url.com/")!),
                     locations: [
-                        PartnerLocation(latitude: 12.32, longitude: 43.34)
+                        PartnersResponse.Data.Location(latitude: 12.32, longitude: 43.34)
                     ]
                 )
         ])

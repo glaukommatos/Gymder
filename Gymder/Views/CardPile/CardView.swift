@@ -5,6 +5,8 @@
 //  Created by Kyle Pointer on 23.07.21.
 //
 
+// swiftlint:disable identifier_name
+
 import UIKit
 import CoreLocation
 

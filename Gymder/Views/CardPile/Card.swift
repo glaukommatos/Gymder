@@ -2,7 +2,7 @@
 //  Card.swift
 //  Gymder
 //
-//  Created by Kyle Pointer on 23.07.21.
+//  Created by Kyle Pointer on 28.07.21.
 //
 
 import Foundation
