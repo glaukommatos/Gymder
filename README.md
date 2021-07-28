@@ -21,11 +21,15 @@ in comments at the top of most files.
 ## Caveats
 
 There's a few things I just haven't done because of time:
-    - More testing (ideally I would also like to test the lone view model and view controllers).
-    - No way to reload once you run out of data (although for a while I thought about putting a
-      cute animation or something if you actually swiped through everything).
-    - The match view could actually include some details about the match.
-    - If location permissions change while the app is running (if they are granted when they
-      previously were not, specifically), then you'll have to kill and relaunch the app in order
-      to see the changes take effect. I have made no effort to listen to these changes, although
-      this could be done.
+
+- More testing (ideally I would also like to test the lone view model and view controllers).
+
+- No way to reload once you run out of data (although for a while I thought about putting a
+  cute animation or something if you actually swiped through everything).
+  
+- The match view could actually include some details about the match.
+
+- If location permissions change while the app is running (if they are granted when they
+  previously were not, specifically), then you'll have to kill and relaunch the app in order
+  to see the changes take effect. I have made no effort to listen to these changes, although
+  this could be done.
