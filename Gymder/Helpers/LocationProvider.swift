@@ -17,7 +17,9 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
 
     override init() {
         super.init()
+
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
 
     func getCurrentLocation(completion: @escaping (CLLocation?) -> Void) {

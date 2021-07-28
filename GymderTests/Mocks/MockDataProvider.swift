@@ -18,7 +18,7 @@ enum MockDataProviderError: Error {
 }
 
 struct MockDataProvider: DataProviderProtocol {
-    private let setupRequests: [MockDataRequest: Data]
+    let setupRequests: [MockDataRequest: Data]
 
     func download(url: URL, withUserAgent userAgent: String?, completion: @escaping (Result<Data, Error>) -> Void) {
         let mockDataRequest = MockDataRequest(url: url, userAgent: userAgent)

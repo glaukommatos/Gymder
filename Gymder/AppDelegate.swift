@@ -29,11 +29,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerDependencies() {
         Container.shared.register(for: CardPileViewController.self) { container in
-            CardPileViewController(dataSource: container.get(instanceOf: CardDataSourceProtocol.self))
+            CardPileViewController(viewModel: container.get(instanceOf: CardPileViewModel.self))
         }
 
-        Container.shared.register(for: CardDataSourceProtocol.self) { container in
-            CardDataSource(
+        Container.shared.register(for: LocationProvider.self) { _ in
+            LocationProvider()
+        }
+
+        Container.shared.register(for: CardPileViewModel.self) { container in
+            CardPileViewModel(
                 gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
                 locationProvider: container.get(instanceOf: LocationProvider.self))
         }
@@ -56,9 +60,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Container.shared.register(for: LocationProvider.self) { _ in
             LocationProvider()
         }
-//
-//        Container.shared.register(for: URLSessionWrapperProtocol.self) { _ in
-//            URLSessionWrapper()
-//        }
     }
 }

@@ -9,5 +9,4 @@ import Foundation
 
 protocol CardDataSourceProtocol: AnyObject {
     func next() -> Card?
-    func load(completion: @escaping (Error?) -> Void)
 }

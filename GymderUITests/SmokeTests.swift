@@ -26,7 +26,7 @@ class SmokeTests: XCTestCase {
 
         let topCard = app.otherElements["card"].firstMatch
 
-        if topCard.waitForExistence(timeout: 15) {
+        if topCard.waitForExistence(timeout: 5) {
             while !app.staticTexts["It's a match!"].exists {
                 topCard.swipeRight()
             }

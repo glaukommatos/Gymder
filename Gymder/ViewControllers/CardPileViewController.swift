@@ -8,19 +8,14 @@
 import UIKit
 import CoreLocation
 
-class CardPileViewModel {
-    @Published var gyms = [Gym]()
-}
-
-class CardPileViewController: UIViewController, CardChoiceDelegate, CLLocationManagerDelegate {
-    var viewModel = CardPileViewModel()
-
+class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileViewModelDelegate {
     var cardPileView: CardPileView!
-    let dataSource: CardDataSourceProtocol
+    let viewModel: CardPileViewModel
 
-    init(dataSource: CardDataSourceProtocol) {
-        self.dataSource = dataSource
+    init(viewModel: CardPileViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        title = "Gymber"
     }
 
     required init?(coder: NSCoder) {
@@ -28,7 +23,7 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CLLocationMa
     }
 
     override func loadView() {
-        cardPileView = CardPileView(frame: UIScreen.main.bounds)
+        cardPileView = CardPileView()
         self.view = cardPileView
     }
 
@@ -36,27 +31,26 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CLLocationMa
         super.viewDidLoad()
 
         cardPileView.cardChoiceDelegate = self
-        cardPileView.cardDataSource = dataSource
+        cardPileView.cardDataSource = viewModel
+        viewModel.delegate = self
 
-        loadData()
+        viewModel.load()
     }
 
-    private func loadData() {
-        dataSource.load { error in
-            if error == nil {
-                DispatchQueue.main.async {
-                    self.cardPileView.reload()
+    func update(error: GymRepositoryError?) {
+        if error == nil {
+            DispatchQueue.main.async {
+                self.cardPileView.reload()
+            }
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                let errorViewController = ErrorViewController()
+                errorViewController.retryHandler = { [weak self] in
+                    self?.dismiss(animated: true, completion: nil)
+                    self?.viewModel.load()
                 }
-            } else {
-                DispatchQueue.main.async {
-                    let errorVC = ErrorViewController()
-                    errorVC.retryHandler = { [weak self] in
-                        self?.loadData()
-                        self?.dismiss(animated: true, completion: nil)
-                    }
 
-                    self.present(errorVC, animated: true, completion: nil)
-                }
+                self?.present(errorViewController, animated: true, completion: nil)
             }
         }
     }
