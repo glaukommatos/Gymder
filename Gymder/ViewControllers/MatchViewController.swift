@@ -7,6 +7,13 @@
 
 import UIKit
 
+/**
+
+    There's not that much going on here, mostly just presenting a cute little
+    match view and letting you dismiss it.
+
+ */
+
 class MatchViewController: UIViewController {
     private var matchView: MatchView!
 

@@ -72,6 +72,7 @@
 		272224D026B1CDED0080A992 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		272224D426B1DFB60080A992 /* CardPileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModel.swift; sourceTree = "<group>"; };
 		272224D626B1DFCF0080A992 /* CardPileViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModelDelegate.swift; sourceTree = "<group>"; };
+		272224D826B205B20080A992 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewController.swift; sourceTree = "<group>"; };
@@ -180,6 +181,7 @@
 		76EF500026AAAD3200A8EAC3 = {
 			isa = PBXGroup;
 			children = (
+				272224D826B205B20080A992 /* README.md */,
 				76EF500B26AAAD3200A8EAC3 /* Gymder */,
 				76EF502226AAAD3600A8EAC3 /* GymderTests */,
 				76EF502D26AAAD3600A8EAC3 /* GymderUITests */,

@@ -8,9 +8,38 @@
 import UIKit
 import CoreLocation
 
+/**
+
+    Here's where a lot of things come together.
+
+    This `CardPileViewController` manages a
+    `CardPileView` and listens to changes from the
+    `CardPileViewModelDelegate` and to selections
+    from the `CardChoiceDelegate`.
+
+    In order to keep a lot of extra cruft out of here, I've
+    implemented the MVVM pattern (or at least something
+    like it). This way this view controller can focus on what
+    it really loves to do– *presenting other view controllers*.
+
+ */
+
 class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileViewModelDelegate {
     var cardPileView: CardPileView!
     let viewModel: CardPileViewModel
+
+    private var errorViewController: ErrorViewController {
+        let errorViewController = ErrorViewController()
+        errorViewController.retryHandler = { [weak self] in
+            self?.dismiss(animated: true)
+            self?.viewModel.load()
+        }
+        return errorViewController
+    }
+
+    private var matchViewController: MatchViewController {
+        MatchViewController()
+    }
 
     init(viewModel: CardPileViewModel) {
         self.viewModel = viewModel
@@ -37,6 +66,8 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
         viewModel.load()
     }
 
+    // MARK: CardPileViewModelDelegate
+
     func update(error: GymRepositoryError?) {
         if error == nil {
             DispatchQueue.main.async {
@@ -44,20 +75,17 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
             }
         } else {
             DispatchQueue.main.async { [weak self] in
-                let errorViewController = ErrorViewController()
-                errorViewController.retryHandler = { [weak self] in
-                    self?.dismiss(animated: true, completion: nil)
-                    self?.viewModel.load()
-                }
-
-                self?.present(errorViewController, animated: true, completion: nil)
+                guard let self = self else { return }
+                self.present(self.errorViewController, animated: true, completion: nil)
             }
         }
     }
 
+    // MARK: CardChoiceDelegate
+
     func accept() {
         if Int.random(in: 0..<20) == 0 {
-            present(MatchViewController(), animated: true, completion: nil)
+            present(matchViewController, animated: true, completion: nil)
         }
     }
 }

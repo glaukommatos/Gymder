@@ -7,6 +7,31 @@
 
 import UIKit
 
+/**
+
+    Pretty sure this is the longest file in the project. I hope it's not too bad.
+    If there's any one file that's gonna show how little manual view layout
+    I've done I suspect it's gonna be this one.
+
+    Hopefully it's not too bad though. The idea here is to try to always
+    maintain three `CardView`s as subviews until we exhaust the
+    card data source.
+
+    The cards are wiggled around a bit so that they look cute and a
+    `UIPanGestureRecognizer` is added to the topmost card
+    to allow the user to swipe left and right on the `CardView`s.
+
+    Upon the initial load, there's also a little loading indicator, but
+    this is removed as soon as cards `reload()` is called at
+    which point will new `CardView`s will be created using
+    `Card`s vended from the card data source.
+
+    Hope it's not too unidiomatic as view code. Every time I open
+    the docs for `UIView` I always learn something new, so I'm
+    sure there's some room for improvement here.
+
+ */
+
 class CardPileView: UIView {
     weak var cardChoiceDelegate: CardChoiceDelegate?
     weak var cardDataSource: CardDataSourceProtocol?
@@ -36,31 +61,6 @@ class CardPileView: UIView {
         }
     }
 
-    private var cardRect: CGRect {
-        let cardWidth = bounds.width * 0.9
-        let cardHeight = bounds.width + (cardWidth / 10)
-        let xMargin = bounds.width - cardWidth
-        let yMargin = bounds.height - cardHeight
-
-        let origin = CGPoint(x: xMargin / 2, y: yMargin / 2)
-        let size = CGSize(width: cardWidth, height: cardHeight)
-        return CGRect(origin: origin, size: size)
-    }
-
-    private func positionCard(_ view: CardView) {
-        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -3..<3))
-        view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
-    }
-
-    private func removeSwipedCardAndAddAnother(_ card: CardView, _ translation: CGPoint) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0, options: []) {
-            card.transform = CGAffineTransform(translationX: translation.x * 5, y: translation.y)
-        } completion: { [weak self] _ in
-            card.removeFromSuperview()
-            self?.addNextCard()
-        }
-    }
-
     private func addNextCard() {
         if let card = cardDataSource?.next() {
             let nextCardView = CardView(frame: cardRect)
@@ -70,6 +70,11 @@ class CardPileView: UIView {
         }
 
         addGestureRecognizerToTopmostCard()
+    }
+
+    private func positionCard(_ view: CardView) {
+        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -3..<3))
+        view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
     }
 
     private func addGestureRecognizerToTopmostCard() {
@@ -101,9 +106,29 @@ class CardPileView: UIView {
         }
     }
 
+    private func removeSwipedCardAndAddAnother(_ card: CardView, _ translation: CGPoint) {
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0, options: []) {
+            card.transform = CGAffineTransform(translationX: translation.x * 5, y: translation.y)
+        } completion: { [weak self] _ in
+            card.removeFromSuperview()
+            self?.addNextCard()
+        }
+    }
+
     private func returnCardToCenter(card: CardView) {
         UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0, options: []) {
             card.transform = .identity
         }
+    }
+
+    private var cardRect: CGRect {
+        let cardWidth = bounds.width * 0.9
+        let cardHeight = bounds.width + (cardWidth / 10)
+        let xMargin = bounds.width - cardWidth
+        let yMargin = bounds.height - cardHeight
+
+        let origin = CGPoint(x: xMargin / 2, y: yMargin / 2)
+        let size = CGSize(width: cardWidth, height: cardHeight)
+        return CGRect(origin: origin, size: size)
     }
 }

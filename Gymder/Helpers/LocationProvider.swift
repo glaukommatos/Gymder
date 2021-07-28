@@ -8,6 +8,26 @@
 import Foundation
 import CoreLocation
 
+/**
+
+    Provides the user's current location after going through
+    `CLLocationManager`'s song and dance.
+
+    If location permission is granted and a location can be
+    determined, then it is returned and the location manager's
+    updates will be stopped.
+
+    If location permission is not granted, or if an error occurs
+    that would indicate it's not going to happen (as far as I know),
+    then the callback will be called with `nil`.
+
+    Depending on requirements, this could be changed to give
+    a different location each time, rather than a cached one. But
+    for the way in which is is consumed in this app, it seems
+    prudent just to get the location once at startup.
+
+ */
+
 class LocationProvider: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     private var callback: ((CLLocation?) -> Void)?
@@ -23,7 +43,6 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
     }
 
     func getCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
-        print("\(Date()): getCurrentLocation")
         if attemptAlreadyMade {
             completion(cachedLocation)
         } else {
@@ -49,7 +68,6 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
         cachedLocation = locations.last
-        print("\(Date()): got location")
         callback?(cachedLocation)
     }
 

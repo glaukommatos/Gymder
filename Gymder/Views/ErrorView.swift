@@ -7,6 +7,13 @@
 
 import UIKit
 
+/**
+
+    `CardPileView` might be technically more interesting,
+    but this view was probably the most fun.
+
+ */
+
 class ErrorView: UIView {
     var retryHandler: (() -> Void)?
     private var stackView: UIStackView!

@@ -1,5 +1,5 @@
 //
-//  View.swift
+//  CardView.swift
 //  Gymder
 //
 //  Created by Kyle Pointer on 23.07.21.
@@ -10,6 +10,20 @@
 import UIKit
 import CoreLocation
 
+/**
+
+    Might not be the prettiest view, but is sure knows how to draw
+    rectangular regions on the screen.
+
+    I'm not super sold on this lazy-image-loading thing I''m doing
+    in here for a few reasons. I think I'd rather do this somewhere
+    else and not display the `CardView` at all until it actually has
+    its image data fetched.
+
+    But that's a change I'll have to make later. :)
+
+ */
+
 class CardView: UIView {
     var imageView: UIImageView!
     var titleLabel: UILabel!
@@ -18,14 +32,6 @@ class CardView: UIView {
     var card: Card? {
         didSet {
             updateView(for: card)
-        }
-    }
-
-    func updateView(for card: Card?) {
-        if let card = card {
-            titleLabel.text = card.title
-            distanceLabel.text = card.distance
-            fetchImage(url: card.url)
         }
     }
 
@@ -40,6 +46,14 @@ class CardView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func updateView(for card: Card?) {
+        if let card = card {
+            titleLabel.text = card.title
+            distanceLabel.text = card.distance
+            fetchImage(url: card.url)
+        }
     }
 
     private func customizeAppearance() {

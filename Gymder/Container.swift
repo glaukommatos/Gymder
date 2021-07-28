@@ -31,6 +31,9 @@ import Foundation
    the dependencies are misconfigured.
  - I conceed that there may be good reasons to change this
    behavior in the future that I haven't considered yet.
+ - Ideally I could update this to make sure everything is setup
+   correctly at compile-time, but I haven't done so yet. Hopefully
+   the interface can stay the same. :)
 
  */
 

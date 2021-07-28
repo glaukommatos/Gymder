@@ -9,8 +9,19 @@ import Foundation
 import CoreLocation
 import Combine
 
+/**
+    Grabs the "partners" from the API and maps them into
+    `Gym`s.
+
+    Decided to have this return `Result`s because I think
+    it's kidna nice. In the future they play really well with
+    Combine, which sadly doesn't have nearly as many
+    fancy `Publisher`s when I'm targetting iOS 11.
+
+ */
+
 struct GymRepository: GymRepositoryProtocol {
-    let urlSessionWrapper: DataProviderProtocol
+    let dataProvider: DataProviderProtocol
     let partnersResponseMapper: PartnersResponseMapperProtocol
     let apiUrl = URL(string: "https://api.one.fit/v2/en-nl/partners/city/UTR")!
 
@@ -18,12 +29,12 @@ struct GymRepository: GymRepositoryProtocol {
         urlSessionWrapper: DataProviderProtocol,
         partnersResponseMapper: PartnersResponseMapperProtocol
     ) {
-        self.urlSessionWrapper = urlSessionWrapper
+        self.dataProvider = urlSessionWrapper
         self.partnersResponseMapper = partnersResponseMapper
     }
 
     func getGyms(completion: @escaping (Result<[Gym], GymRepositoryError>) -> Void) {
-        urlSessionWrapper.download(url: apiUrl, withUserAgent: "OneFit/1.19.0") { result in
+        dataProvider.download(url: apiUrl, withUserAgent: "OneFit/1.19.0") { result in
             switch result {
             case .success(let data):
                 if let partnersResponse = try? Serialization.decoder.decode(PartnersResponse.self, from: data) {
@@ -36,5 +47,4 @@ struct GymRepository: GymRepositoryProtocol {
             }
         }
     }
-
 }

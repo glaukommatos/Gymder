@@ -7,6 +7,13 @@
 
 import Foundation
 
+/**
+
+ Implement this if you'd like to listen to updates from the
+ `CardPileViewModel`.
+
+ */
+
 protocol CardPileViewModelDelegate: AnyObject {
     func update(error: GymRepositoryError?)
 }

@@ -8,6 +8,18 @@
 import Foundation
 import CoreLocation
 
+/**
+
+    This one was pretty fun. The ViewController can setup this
+    view model with a delegate and then that delgate will get
+    updated when there are new `Cards` waiting.
+
+    It also implements `CardDataSourceProtocol` so that
+    the `CardPileView` can query it for additional cards which
+    can then be swiped by the user.
+
+ */
+
 class CardPileViewModel: CardDataSourceProtocol {
     private let gymRepository: GymRepositoryProtocol
     private let locationProvider: LocationProvider
