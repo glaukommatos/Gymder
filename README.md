@@ -33,3 +33,7 @@ There's a few things I just haven't done because of time:
   previously were not, specifically), then you'll have to kill and relaunch the app in order
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
+
+- I'm still working on the `CardView`'s layout code and apperance because I still am not
+  satisfied with either. However, I want to submit on Thursday like I said I would, so I'll let
+  you see it as-is warts and all. :)

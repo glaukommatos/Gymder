@@ -40,10 +40,7 @@ class CardPileView: UIView {
         super.init(frame: frame)
         backgroundColor = .white
 
-        let loading = UIActivityIndicatorView(style: .gray)
-        loading.startAnimating()
-
-        addSubview(loading)
+        addLoadingIndicator()
     }
 
     override func layoutSubviews() {
@@ -56,6 +53,13 @@ class CardPileView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func addLoadingIndicator() {
+        let loading = UIActivityIndicatorView(style: .gray)
+        loading.startAnimating()
+
+        addSubview(loading)
     }
 
     func reload() {

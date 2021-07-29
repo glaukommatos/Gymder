@@ -35,16 +35,21 @@ class CardView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        accessibilityIdentifier = "card"
 
-        customizeAppearance()
+        customizeViewAndLayerProperties()
         addImage()
         addTitleLabel()
         addDistanceLabel()
     }
 
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func layoutSubviews() {
         super.layoutSubviews()
+
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
 
         let margins: CGFloat = 10
         let contentWidth = bounds.width - margins
@@ -74,23 +79,10 @@ class CardView: UIView {
             origin: CGPoint(x: margins, y: distanceY),
             size: CGSize(width: contentWidth - margins, height: distanceHeight)
         )
-
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func updateView(for card: Card?) {
-        if let card = card {
-            titleLabel.text = card.title
-            distanceLabel.text = card.distance
-            fetchImage(url: card.url)
-        }
-    }
-
-    private func customizeAppearance() {
+    private func customizeViewAndLayerProperties() {
+        accessibilityIdentifier = "card"
         backgroundColor = .white
         layer.cornerRadius = 5
         layer.shadowColor = UIColor.black.cgColor
@@ -110,17 +102,6 @@ class CardView: UIView {
         addSubview(imageView)
     }
 
-    private func fetchImage(url: URL) {
-        DispatchQueue.global().async {
-            guard let data = try? Data(contentsOf: url) else { return }
-            let image = UIImage(data: data)
-
-            DispatchQueue.main.async { [weak self] in
-                self?.imageView.image = image
-            }
-        }
-    }
-
     private func addTitleLabel() {
         titleLabel = UILabel()
         titleLabel.accessibilityIdentifier = "titleLabel"
@@ -137,5 +118,24 @@ class CardView: UIView {
         distanceLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
 
         addSubview(distanceLabel)
+    }
+
+    private func updateView(for card: Card?) {
+        if let card = card {
+            titleLabel.text = card.title
+            distanceLabel.text = card.distance
+            fetchImage(url: card.url)
+        }
+    }
+
+    private func fetchImage(url: URL) {
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else { return }
+            let image = UIImage(data: data)
+
+            DispatchQueue.main.async { [weak self] in
+                self?.imageView.image = image
+            }
+        }
     }
 }
