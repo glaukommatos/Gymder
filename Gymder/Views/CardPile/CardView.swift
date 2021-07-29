@@ -101,6 +101,7 @@ class CardView: UIView {
         imageView.clipsToBounds = true
         imageView.backgroundColor = .darkGray
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 2
 
         addSubview(imageView)
     }
