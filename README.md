@@ -16,7 +16,10 @@ You can either run the tests via Xcode's testing UI or on the command line via a
 
 This was a fun toy to make and a great opportunity to practice some view programming and trying
 out some design patterns. If you want to know more of my thoughts, I've included a lot of information
-in comments at the top of most files.
+in comments at the top of most files. Also, if you're reading this, I'm still working on the view code.
+I'm sorry it's still a little bit ugly. :)
+
+(I'm too used to using Interface Builder, so I wanted to take this as an opportunity to practice *not* using it!)
 
 ## Caveats
 
