@@ -34,6 +34,7 @@ There's a few things I just haven't done because of time:
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
 
-- I'm still working on the `CardView`'s layout code and apperance because I still am not
+- I'm still working on the `CardView`'s layout code and appearance because I still am not
   satisfied with either. However, I want to submit on Thursday like I said I would, so I'll let
-  you see it as-is warts and all. :)
+  you see it as-is warts and all. Sorry, I'm used to using IB so I've spent more time on this
+  part than I intended to because I was still learning. :)
