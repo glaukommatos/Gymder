@@ -51,33 +51,38 @@ class CardView: UIView {
 
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
 
-        let insetMargin: CGFloat = 10
+        let insetBounds = bounds.insetBy(dx: 10, dy: 10)
         let interItemSpacing: CGFloat = 5
 
-        titleLabel.preferredMaxLayoutWidth = bounds.width - insetMargin * 2
+        titleLabel.preferredMaxLayoutWidth = insetBounds.width
 
         let intrinsicTitleHeight = titleLabel.intrinsicContentSize.height
         let intrinsicDistanceHeight = distanceLabel.intrinsicContentSize.height
-        let remainingHeightForImage = bounds.height
+        let remainingHeightForImage = insetBounds.height
                                         - intrinsicTitleHeight - intrinsicDistanceHeight
-                                        - interItemSpacing * 2 - insetMargin * 2
+                                        - interItemSpacing * 2
 
         imageView.frame = CGRect(
-            origin: CGPoint(x: insetMargin, y: insetMargin),
-            size: CGSize(width: bounds.width - insetMargin * 2, height: remainingHeightForImage)
+            origin: CGPoint(x: insetBounds.origin.x, y: insetBounds.origin.y),
+            size: CGSize(width: insetBounds.width, height: remainingHeightForImage)
         )
 
+        titleLabel.backgroundColor = .systemPink
         titleLabel.frame = CGRect(
-            origin: CGPoint(x: insetMargin, y: remainingHeightForImage + insetMargin + interItemSpacing),
-            size: CGSize(width: bounds.width - insetMargin * 2, height: intrinsicTitleHeight)
+            origin: CGPoint(
+                x: insetBounds.origin.x,
+                y: insetBounds.origin.y + remainingHeightForImage + interItemSpacing
+            ),
+            size: CGSize(width: insetBounds.width, height: intrinsicTitleHeight)
         )
 
+        distanceLabel.backgroundColor = .systemTeal
         distanceLabel.frame = CGRect(
             origin: CGPoint(
-                x: insetMargin,
-                y: intrinsicTitleHeight + remainingHeightForImage + insetMargin + interItemSpacing * 2
+                x: insetBounds.origin.x,
+                y: insetBounds.origin.y + intrinsicTitleHeight + remainingHeightForImage + interItemSpacing * 2
             ),
-            size: CGSize(width: bounds.width - insetMargin * 2, height: intrinsicDistanceHeight)
+            size: CGSize(width: insetBounds.width, height: intrinsicDistanceHeight)
         )
     }
 
