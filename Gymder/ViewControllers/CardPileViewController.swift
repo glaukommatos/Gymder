@@ -64,7 +64,10 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
         matchViewController.closeHandler = { [weak self] in
             self?.dismiss(animated: true, completion: nil)
         }
+    }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.load()
     }
 

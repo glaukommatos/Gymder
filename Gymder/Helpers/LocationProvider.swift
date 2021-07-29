@@ -58,7 +58,7 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.requestLocation()
-        case .denied:
+        case .denied, .restricted:
             callback?(nil)
         default:
             return

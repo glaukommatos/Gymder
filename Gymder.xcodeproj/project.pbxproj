@@ -271,9 +271,9 @@
 		76EF507126AC29B900A8EAC3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				76EF506826AC218B00A8EAC3 /* LocationProvider.swift */,
 				272224C526B1B0EF0080A992 /* DataProvider.swift */,
 				272224C826B1C69C0080A992 /* DataProviderProtocol.swift */,
+				76EF506826AC218B00A8EAC3 /* LocationProvider.swift */,
 				272224BC26B1A5600080A992 /* Serialization.swift */,
 			);
 			path = Helpers;

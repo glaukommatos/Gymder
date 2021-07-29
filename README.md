@@ -33,3 +33,8 @@ There's a few things I just haven't done because of time:
   previously were not, specifically), then you'll have to kill and relaunch the app in order
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
+  
+- Also, regarding the `LocationProvider`– it would be clever to set a timer when requesting
+  location data. I have noticed, especially while testing on a real device, that getting the location
+  can take a fairly long time– even when only requesting `kCLLocationAccuracyHundredMeters`.
+  This way the user can choose to continue to try to get location information or to continue without.
