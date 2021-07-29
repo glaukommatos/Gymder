@@ -29,7 +29,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func registerDependencies() {
         Container.shared.register(for: CardPileViewController.self) { container in
-            CardPileViewController(viewModel: container.get(instanceOf: CardPileViewModel.self))
+            CardPileViewController(
+                viewModel: container.get(instanceOf: CardPileViewModel.self),
+                errorViewController: container.get(instanceOf: ErrorViewController.self),
+                matchViewController: container.get(instanceOf: MatchViewController.self)
+            )
+        }
+
+        Container.shared.register(for: ErrorViewController.self) { _ in
+            ErrorViewController()
+        }
+
+        Container.shared.register(for: MatchViewController.self) { _ in
+            MatchViewController()
         }
 
         Container.shared.register(for: LocationProvider.self) { _ in

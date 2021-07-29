@@ -47,6 +47,11 @@ class MatchView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func updateBalls() {
+        ball1.text = balls.randomElement()
+        ball2.text = balls.randomElement()
+    }
+
     private func addStackView() {
         stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false

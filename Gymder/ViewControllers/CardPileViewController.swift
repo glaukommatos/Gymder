@@ -25,26 +25,20 @@ import CoreLocation
  */
 
 class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileViewModelDelegate {
-    var cardPileView: CardPileView!
-    let viewModel: CardPileViewModel
+    private var cardPileView: CardPileView!
+    private let errorViewController: ErrorViewController
+    private let viewModel: CardPileViewModel
+    private let matchViewController: MatchViewController
 
-    private var errorViewController: ErrorViewController {
-        let errorViewController = ErrorViewController()
-        errorViewController.retryHandler = { [weak self] in
-            self?.dismiss(animated: true)
-            self?.viewModel.load()
-        }
-        return errorViewController
-    }
-
-    private var matchViewController: MatchViewController {
-        MatchViewController()
-    }
-
-    init(viewModel: CardPileViewModel) {
+    init(
+        viewModel: CardPileViewModel,
+        errorViewController: ErrorViewController,
+        matchViewController: MatchViewController
+    ) {
         self.viewModel = viewModel
+        self.errorViewController = errorViewController
+        self.matchViewController = matchViewController
         super.init(nibName: nil, bundle: nil)
-        title = "Gymber"
     }
 
     required init?(coder: NSCoder) {
@@ -59,9 +53,17 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel.delegate = self
         cardPileView.cardChoiceDelegate = self
         cardPileView.cardDataSource = viewModel
-        viewModel.delegate = self
+        errorViewController.retryHandler = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+            self?.viewModel.load()
+        }
+
+        matchViewController.closeHandler = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
 
         viewModel.load()
     }
@@ -69,13 +71,11 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
     // MARK: CardPileViewModelDelegate
 
     func update(error: GymRepositoryError?) {
-        if error == nil {
-            DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if error == nil {
                 self.cardPileView.reload()
-            }
-        } else {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+            } else {
                 self.present(self.errorViewController, animated: true, completion: nil)
             }
         }

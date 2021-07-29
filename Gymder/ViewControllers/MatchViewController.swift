@@ -16,6 +16,7 @@ import UIKit
 
 class MatchViewController: UIViewController {
     private var matchView: MatchView!
+    var closeHandler: (() -> Void)?
 
     override func loadView() {
         matchView = MatchView()
@@ -23,12 +24,11 @@ class MatchViewController: UIViewController {
     }
 
     override func viewDidLoad() {
-        setCloseHandler()
+        super.viewDidLoad()
+        matchView.closeHandler = closeHandler
     }
 
-    private func setCloseHandler() {
-        matchView.closeHandler = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        matchView.updateBalls()
     }
 }
