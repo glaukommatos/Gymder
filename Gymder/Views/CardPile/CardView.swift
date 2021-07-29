@@ -67,7 +67,6 @@ class CardView: UIView {
             size: CGSize(width: insetBounds.width, height: remainingHeightForImage)
         )
 
-        titleLabel.backgroundColor = .systemPink
         titleLabel.frame = CGRect(
             origin: CGPoint(
                 x: insetBounds.origin.x,
@@ -76,7 +75,6 @@ class CardView: UIView {
             size: CGSize(width: insetBounds.width, height: intrinsicTitleHeight)
         )
 
-        distanceLabel.backgroundColor = .systemTeal
         distanceLabel.frame = CGRect(
             origin: CGPoint(
                 x: insetBounds.origin.x,
