@@ -47,12 +47,21 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
             completion(cachedLocation)
         } else {
             self.callback = completion
-            locationManager.requestWhenInUseAuthorization()
+
+            switch CLLocationManager.authorizationStatus() {
+            case .authorizedAlways, .authorizedWhenInUse:
+                locationManager.requestLocation()
+            case .denied, .restricted:
+                completion(nil)
+            default:
+                locationManager.requestWhenInUseAuthorization()
+            }
+
             attemptAlreadyMade = true
         }
     }
 
-    // MARK: - CLLocationManagerDelegate
+    // MARK: CLLocationManagerDelegate
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
