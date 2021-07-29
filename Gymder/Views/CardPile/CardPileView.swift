@@ -42,9 +42,16 @@ class CardPileView: UIView {
 
         let loading = UIActivityIndicatorView(style: .gray)
         loading.startAnimating()
-        loading.center = center
 
         addSubview(loading)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        for subview in subviews {
+            subview.bounds = CGRect(origin: .zero, size: cardSize)
+            subview.center = center
+        }
     }
 
     required init?(coder: NSCoder) {
@@ -63,7 +70,7 @@ class CardPileView: UIView {
 
     private func addNextCard() {
         if let card = cardDataSource?.next() {
-            let nextCardView = CardView(frame: cardRect)
+            let nextCardView = CardView()
             nextCardView.card = card
             insertSubview(nextCardView, at: 0)
             positionCard(nextCardView)
@@ -73,7 +80,7 @@ class CardPileView: UIView {
     }
 
     private func positionCard(_ view: CardView) {
-        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -3..<3))
+        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -2..<2))
         view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
     }
 
@@ -121,14 +128,12 @@ class CardPileView: UIView {
         }
     }
 
-    private var cardRect: CGRect {
-        let cardWidth = bounds.width * 0.9
-        let cardHeight = bounds.width + (cardWidth / 10)
-        let xMargin = bounds.width - cardWidth
-        let yMargin = bounds.height - cardHeight
+    private var cardSize: CGSize {
+        let margin: CGFloat = bounds.height < bounds.width ? 20 : 0
+        let leastBound = min(bounds.height, bounds.width)
+        let cardHeight = leastBound - margin
+        let cardWidth = cardHeight * (7/8)
 
-        let origin = CGPoint(x: xMargin / 2, y: yMargin / 2)
-        let size = CGSize(width: cardWidth, height: cardHeight)
-        return CGRect(origin: origin, size: size)
+        return CGSize(width: cardWidth, height: cardHeight)
     }
 }

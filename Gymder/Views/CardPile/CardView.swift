@@ -5,8 +5,6 @@
 //  Created by Kyle Pointer on 23.07.21.
 //
 
-// swiftlint:disable identifier_name
-
 import UIKit
 import CoreLocation
 
@@ -37,11 +35,47 @@ class CardView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        accessibilityIdentifier = "card"
 
         customizeAppearance()
         addImage()
         addTitleLabel()
         addDistanceLabel()
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let margins: CGFloat = 10
+        let contentWidth = bounds.width - margins
+        let contentHeight = bounds.height - margins
+        let imageHeight = contentWidth - margins
+        let remainingHeight = contentHeight - imageHeight - margins
+
+        let imageY = margins
+        let titleY = imageHeight + margins
+
+        imageView.frame = CGRect(
+            origin: CGPoint(x: margins, y: imageY),
+            size: CGSize(width: imageHeight, height: imageHeight)
+        )
+
+        let titleHeight = remainingHeight * (2/3)
+        let distanceHeight = remainingHeight * (1/3)
+
+        titleLabel.frame = CGRect(
+            origin: CGPoint(x: margins, y: titleY),
+            size: CGSize(width: contentWidth - margins, height: titleHeight)
+        )
+
+        let distanceY = imageHeight + titleHeight + margins
+
+        distanceLabel.frame = CGRect(
+            origin: CGPoint(x: margins, y: distanceY),
+            size: CGSize(width: contentWidth - margins, height: distanceHeight)
+        )
+
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
     }
 
     required init?(coder: NSCoder) {
@@ -57,23 +91,18 @@ class CardView: UIView {
     }
 
     private func customizeAppearance() {
-        accessibilityIdentifier = "card"
         backgroundColor = .white
         layer.cornerRadius = 5
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowRadius = 2
         layer.shadowOpacity = 0.5
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
         layer.shadowOffset = CGSize(width: 0, height: 2)
         layer.shouldRasterize = true
         layer.rasterizationScale = UIScreen.main.scale
     }
 
     private func addImage() {
-        let contentWidth = bounds.width - 20
-
-        imageView = UIImageView(frame: CGRect(x: 10, y: 10, width: contentWidth, height: contentWidth))
-
+        imageView = UIImageView()
         imageView.clipsToBounds = true
         imageView.backgroundColor = .darkGray
         imageView.contentMode = .scaleAspectFill
@@ -93,25 +122,19 @@ class CardView: UIView {
     }
 
     private func addTitleLabel() {
-        let remainingHeight = bounds.height - imageView.frame.height - 20
-        let y = imageView.frame.height + 10
-
-        titleLabel = UILabel(frame: CGRect(x: 10, y: y, width: bounds.width - 20, height: remainingHeight * (2/3)))
-        titleLabel.font = UIFont.boldSystemFont(ofSize: remainingHeight * (2/3) - 5)
-        titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.minimumScaleFactor = 0.1
+        titleLabel = UILabel()
         titleLabel.accessibilityIdentifier = "titleLabel"
+        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.systemFont(ofSize: 30)
 
         addSubview(titleLabel)
     }
 
     private func addDistanceLabel() {
-        let remainingHeight = bounds.height - imageView.frame.height - 20
-        let y = imageView.frame.height + titleLabel.frame.height + 10
-
-        distanceLabel = UILabel(frame: CGRect(x: 10, y: y, width: bounds.width - 20, height: remainingHeight * (1/3)))
-        distanceLabel.font = UIFont.systemFont(ofSize: remainingHeight * (1/3) - 5, weight: .light)
+        distanceLabel = UILabel()
         distanceLabel.accessibilityIdentifier = "distanceLabel"
+        distanceLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
 
         addSubview(distanceLabel)
     }
