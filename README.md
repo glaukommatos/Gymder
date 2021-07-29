@@ -16,10 +16,7 @@ You can either run the tests via Xcode's testing UI or on the command line via a
 
 This was a fun toy to make and a great opportunity to practice some view programming and trying
 out some design patterns. If you want to know more of my thoughts, I've included a lot of information
-in comments at the top of most files. Also, if you're reading this, I'm still working on the view code.
-I'm sorry it's still a little bit ugly. :)
-
-(I'm too used to using Interface Builder, so I wanted to take this as an opportunity to practice *not* using it!)
+in comments at the top of most files.
 
 ## Caveats
 
@@ -36,8 +33,3 @@ There's a few things I just haven't done because of time:
   previously were not, specifically), then you'll have to kill and relaunch the app in order
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
-
-- I'm still working on the `CardView`'s layout code and appearance because I still am not
-  satisfied with either. However, I want to submit on Thursday like I said I would, so I'll let
-  you see it as-is warts and all. Sorry, I'm used to using IB so I've spent more time on this
-  part than I intended to because I was still learning. :)
