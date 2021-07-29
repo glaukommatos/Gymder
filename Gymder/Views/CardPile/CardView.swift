@@ -51,33 +51,33 @@ class CardView: UIView {
 
         layer.shadowPath = UIBezierPath(rect: bounds).cgPath
 
-        let margins: CGFloat = 10
-        let contentWidth = bounds.width - margins
-        let contentHeight = bounds.height - margins
-        let imageHeight = contentWidth - margins
-        let remainingHeight = contentHeight - imageHeight - margins
+        let insetMargin: CGFloat = 10
+        let interItemSpacing: CGFloat = 5
 
-        let imageY = margins
-        let titleY = imageHeight + margins
+        titleLabel.preferredMaxLayoutWidth = bounds.width - insetMargin * 2
+
+        let intrinsicTitleHeight = titleLabel.intrinsicContentSize.height
+        let intrinsicDistanceHeight = distanceLabel.intrinsicContentSize.height
+        let remainingHeightForImage = bounds.height
+                                        - intrinsicTitleHeight - intrinsicDistanceHeight
+                                        - interItemSpacing * 2 - insetMargin * 2
 
         imageView.frame = CGRect(
-            origin: CGPoint(x: margins, y: imageY),
-            size: CGSize(width: imageHeight, height: imageHeight)
+            origin: CGPoint(x: insetMargin, y: insetMargin),
+            size: CGSize(width: bounds.width - insetMargin * 2, height: remainingHeightForImage)
         )
-
-        let titleHeight = remainingHeight * (2/3)
-        let distanceHeight = remainingHeight * (1/3)
 
         titleLabel.frame = CGRect(
-            origin: CGPoint(x: margins, y: titleY),
-            size: CGSize(width: contentWidth - margins, height: titleHeight)
+            origin: CGPoint(x: insetMargin, y: remainingHeightForImage + insetMargin + interItemSpacing),
+            size: CGSize(width: bounds.width - insetMargin * 2, height: intrinsicTitleHeight)
         )
 
-        let distanceY = imageHeight + titleHeight + margins
-
         distanceLabel.frame = CGRect(
-            origin: CGPoint(x: margins, y: distanceY),
-            size: CGSize(width: contentWidth - margins, height: distanceHeight)
+            origin: CGPoint(
+                x: insetMargin,
+                y: intrinsicTitleHeight + remainingHeightForImage + insetMargin + interItemSpacing * 2
+            ),
+            size: CGSize(width: bounds.width - insetMargin * 2, height: intrinsicDistanceHeight)
         )
     }
 
@@ -105,9 +105,11 @@ class CardView: UIView {
     private func addTitleLabel() {
         titleLabel = UILabel()
         titleLabel.accessibilityIdentifier = "titleLabel"
+        titleLabel.numberOfLines = 2
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.numberOfLines = 0
-        titleLabel.font = UIFont.systemFont(ofSize: 30)
+        titleLabel.allowsDefaultTighteningForTruncation = true
+        titleLabel.minimumScaleFactor = 0.8
+        titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
 
         addSubview(titleLabel)
     }
@@ -115,7 +117,7 @@ class CardView: UIView {
     private func addDistanceLabel() {
         distanceLabel = UILabel()
         distanceLabel.accessibilityIdentifier = "distanceLabel"
-        distanceLabel.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        distanceLabel.font = UIFont.preferredFont(forTextStyle: .body)
 
         addSubview(distanceLabel)
     }

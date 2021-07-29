@@ -133,9 +133,9 @@ class CardPileView: UIView {
     }
 
     private var cardSize: CGSize {
-        let margin: CGFloat = bounds.height < bounds.width ? 20 : 0
+        let extraMargin = UIDevice.current.orientation.isLandscape ? self.safeAreaInsets.bottom + 50 : 0
         let leastBound = min(bounds.height, bounds.width)
-        let cardHeight = leastBound - margin
+        let cardHeight = leastBound - extraMargin
         let cardWidth = cardHeight * (7/8)
 
         return CGSize(width: cardWidth, height: cardHeight)
