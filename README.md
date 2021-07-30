@@ -1,7 +1,5 @@
 #  Gymder
 
-![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.gif "Screenshot")
-
 ## Building & Running
 
 Build the `Gymder` target in Xcode to run either on a simulator or a connected iOS device.
@@ -34,3 +32,6 @@ There's a few things I just haven't done because of time:
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
   
+## Screenshot 
+
+![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.gif "Screenshot")
