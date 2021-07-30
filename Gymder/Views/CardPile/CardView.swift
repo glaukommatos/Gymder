@@ -49,7 +49,7 @@ class CardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        updateShadowPath()
 
         let insetBounds = bounds.insetBy(dx: 10, dy: 10)
         let interItemSpacing: CGFloat = 5
@@ -143,5 +143,24 @@ class CardView: UIView {
                 self?.imageView.image = image
             }
         }
+    }
+
+    private func updateShadowPath() {
+        let oldShadowPath = layer.shadowPath
+        let newShadowPath = CGPath(rect: bounds, transform: nil)
+
+        if let boundsAnimation = layer.animation(forKey: "bounds.size") as? CABasicAnimation {
+            let shadowPathAnimation = CABasicAnimation(keyPath: "shadowPath")
+
+            shadowPathAnimation.duration = boundsAnimation.duration
+            shadowPathAnimation.timingFunction = boundsAnimation.timingFunction
+
+            shadowPathAnimation.fromValue = oldShadowPath
+            shadowPathAnimation.toValue = newShadowPath
+
+            layer.add(shadowPathAnimation, forKey: "shadowPath")
+        }
+
+        layer.shadowPath = newShadowPath
     }
 }
