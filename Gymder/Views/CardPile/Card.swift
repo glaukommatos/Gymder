@@ -16,5 +16,5 @@ import Foundation
 struct Card {
     let title: String
     let distance: String
-    let url: URL
+    let imageData: Data?
 }

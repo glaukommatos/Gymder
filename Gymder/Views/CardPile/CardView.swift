@@ -10,15 +10,8 @@ import CoreLocation
 
 /**
 
-    Might not be the prettiest view, but is sure knows how to draw
-    rectangular regions on the screen.
-
-    I'm not super sold on this lazy-image-loading thing I''m doing
-    in here for a few reasons. I think I'd rather do this somewhere
-    else and not display the `CardView` at all until it actually has
-    its image data fetched.
-
-    But that's a change I'll have to make later. :)
+    This view lays out two `UILabel`s allowing them to take up as much space
+    as they would like to. Then it fills up the remaining space with a `UIImage`.
 
  */
 
@@ -130,17 +123,8 @@ class CardView: UIView {
         if let card = card {
             titleLabel.text = card.title
             distanceLabel.text = card.distance
-            fetchImage(url: card.url)
-        }
-    }
-
-    private func fetchImage(url: URL) {
-        DispatchQueue.global().async {
-            guard let data = try? Data(contentsOf: url) else { return }
-            let image = UIImage(data: data)
-
-            DispatchQueue.main.async { [weak self] in
-                self?.imageView.image = image
+            if let imageData = card.imageData {
+                imageView.image = UIImage(data: imageData)
             }
         }
     }

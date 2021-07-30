@@ -11,18 +11,13 @@ import XCTest
 class CardViewTests: XCTestCase {
 
     func testAddsLabels() throws {
-        let card = Card(title: "Title", distance: "x km", url: URL(string: "http://valid.url.com/")!)
+        let exampleImage = UIImage(systemName: "flame")
+        let card = Card(title: "Title", distance: "x km", imageData: exampleImage?.pngData())
         let view = CardView(frame: .zero)
         view.card = card
 
-        XCTAssertTrue(view.subviews.contains { view in
-            guard let label = view as? UILabel else { return false }
-            return label.text == "Title"
-        })
-
-        XCTAssertTrue(view.subviews.contains { view in
-            guard let label = view as? UILabel else { return false }
-            return label.text == "x km"
-        })
+        XCTAssertEqual(view.titleLabel.text, "Title")
+        XCTAssertEqual(view.distanceLabel.text, "x km")
+        XCTAssertNotNil(view.imageView.image)
     }
 }

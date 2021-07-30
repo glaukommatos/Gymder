@@ -10,55 +10,75 @@ import CoreLocation
 
 /**
 
-    This one was pretty fun. The ViewController can setup this
-    view model with a delegate and then that delgate will get
-    updated when there are new `Cards` waiting.
+ This one was pretty fun. The ViewController can setup this
+ view model with a delegate and then that delgate will get
+ updated when there are new `Cards` waiting.
 
-    It also implements `CardDataSourceProtocol` so that
-    the `CardPileView` can query it for additional cards which
-    can then be swiped by the user.
+ It also implements `CardDataSourceProtocol` so that
+ the `CardPileView` can query it for additional cards which
+ can then be swiped by the user.
 
  */
 
 class CardPileViewModel: CardDataSourceProtocol {
     private let gymRepository: GymRepositoryProtocol
     private let locationProvider: LocationProvider
+    private let dataProvider: DataProviderProtocol
+    private var currentLocation: CLLocation?
+    private var gyms = [Gym]()
+    private var lock = NSLock()
 
     weak var delegate: CardPileViewModelDelegate?
 
-    private var cards = [Card]()
-
-    init(gymRepository: GymRepositoryProtocol, locationProvider: LocationProvider) {
+    init(
+        gymRepository: GymRepositoryProtocol,
+        locationProvider: LocationProvider,
+        dataProvider: DataProviderProtocol
+    ) {
         self.gymRepository = gymRepository
         self.locationProvider = locationProvider
+        self.dataProvider = dataProvider
     }
 
     func load() {
         locationProvider.getCurrentLocation { [weak self] location in
-            guard let self = self else { return }
-            self.gymRepository.getGyms { result in
+            self?.currentLocation = location
+
+            self?.gymRepository.getGyms { result in
                 switch result {
                 case .success(let gyms):
-                    self.cards = gyms.shuffled().map({ self.map(gym: $0, withUserLocation: location) })
-                    self.delegate?.update(error: nil)
+                    self?.gyms = gyms.shuffled()
+                    self?.delegate?.update(error: nil)
                 case .failure(let error):
-                    self.delegate?.update(error: error)
+                    self?.delegate?.update(error: error)
                 }
             }
         }
     }
 
-    func next() -> Card? {
-        cards.popLast()
-    }
+    func next(completion: @escaping (Card?) -> Void) {
+        lock.lock()
+        let gym = gyms.popLast()
+        lock.unlock()
 
-    private func map(gym: Gym, withUserLocation userLocation: CLLocation?) -> Card {
-        if let userLocation = userLocation {
-            let gymLocation = CLLocation(latitude: gym.latitude, longitude: gym.longitude)
-            let distance = gymLocation.formattedDistanceTo(userLocation)
-            return Card(title: gym.name, distance: distance, url: gym.imageUrl)
+        if let gym = gym {
+            dataProvider.download(url: gym.imageUrl) { [weak self] result in
+                let imageData: Data?
+
+                switch result {
+                case .success(let data):
+                    imageData = data
+                case .failure:
+                    imageData = nil
+                }
+
+                let gymLocation = CLLocation(latitude: gym.latitude, longitude: gym.longitude)
+                let distance = gymLocation.formattedDistanceTo(self?.currentLocation)
+                let card = Card(title: gym.name, distance: distance, imageData: imageData)
+                completion(card)
+            }
         } else {
-            return Card(title: gym.name, distance: "...", url: gym.imageUrl)
+            completion(nil)
         }
     }
 }

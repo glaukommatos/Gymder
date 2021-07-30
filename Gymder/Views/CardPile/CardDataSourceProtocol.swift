@@ -17,5 +17,5 @@ import Foundation
  */
 
 protocol CardDataSourceProtocol: AnyObject {
-    func next() -> Card?
+    func next(completion: @escaping (Card?) -> Void)
 }

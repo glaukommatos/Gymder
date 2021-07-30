@@ -9,7 +9,9 @@ import Foundation
 import CoreLocation
 
 extension CLLocation {
-    func formattedDistanceTo(_ location: CLLocation) -> String {
+    func formattedDistanceTo(_ location: CLLocation?) -> String {
+        guard let location = location else { return "..." }
+
         let distance = self.distance(from: location)
         let formatter = MeasurementFormatter()
         formatter.unitStyle = .long

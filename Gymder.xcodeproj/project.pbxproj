@@ -17,6 +17,9 @@
 		272224D126B1CDED0080A992 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D026B1CDED0080A992 /* Card.swift */; };
 		272224D526B1DFB60080A992 /* CardPileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D426B1DFB60080A992 /* CardPileViewModel.swift */; };
 		272224D726B1DFCF0080A992 /* CardPileViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D626B1DFCF0080A992 /* CardPileViewModelDelegate.swift */; };
+		272224DB26B4445C0080A992 /* MockCardChoiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DA26B4445C0080A992 /* MockCardChoiceDelegate.swift */; };
+		272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DC26B444880080A992 /* MockCardDataSource.swift */; };
+		272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */; };
 		76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */; };
 		76EF501126AAAD3200A8EAC3 /* CardPileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
@@ -73,6 +76,9 @@
 		272224D426B1DFB60080A992 /* CardPileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModel.swift; sourceTree = "<group>"; };
 		272224D626B1DFCF0080A992 /* CardPileViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModelDelegate.swift; sourceTree = "<group>"; };
 		272224D826B205B20080A992 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		272224DA26B4445C0080A992 /* MockCardChoiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardChoiceDelegate.swift; sourceTree = "<group>"; };
+		272224DC26B444880080A992 /* MockCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardDataSource.swift; sourceTree = "<group>"; };
+		272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +184,13 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		272224D926B422160080A992 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		76EF500026AAAD3200A8EAC3 = {
 			isa = PBXGroup;
 			children = (
@@ -220,6 +233,7 @@
 		76EF502226AAAD3600A8EAC3 /* GymderTests */ = {
 			isa = PBXGroup;
 			children = (
+				272224D926B422160080A992 /* Resources */,
 				76EF502526AAAD3600A8EAC3 /* Info.plist */,
 				76EF508326AC44FF00A8EAC3 /* Mappers */,
 				76EF508026AC44E000A8EAC3 /* Mocks */,
@@ -300,7 +314,10 @@
 		76EF508026AC44E000A8EAC3 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */,
 				76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */,
+				272224DA26B4445C0080A992 /* MockCardChoiceDelegate.swift */,
+				272224DC26B444880080A992 /* MockCardDataSource.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -514,11 +531,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				76EF506226AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift in Sources */,
+				272224DB26B4445C0080A992 /* MockCardChoiceDelegate.swift in Sources */,
 				76EF504F26AB575E00A8EAC3 /* MatchViewTests.swift in Sources */,
 				76EF505726AB5DF000A8EAC3 /* GymRepositoryTests.swift in Sources */,
+				272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */,
 				76EF505D26AB5FFB00A8EAC3 /* MockDataProvider.swift in Sources */,
 				272224BB26B1A2A20080A992 /* ContainerTests.swift in Sources */,
 				76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */,
+				272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */,
 				76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

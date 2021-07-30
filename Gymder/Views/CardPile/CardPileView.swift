@@ -36,6 +36,9 @@ class CardPileView: UIView {
     weak var cardChoiceDelegate: CardChoiceDelegate?
     weak var cardDataSource: CardDataSourceProtocol?
 
+    var spinner: UIActivityIndicatorView!
+    var firstCardLoaded = false
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .white
@@ -56,31 +59,41 @@ class CardPileView: UIView {
     }
 
     func addLoadingIndicator() {
-        let loading = UIActivityIndicatorView(style: .gray)
-        loading.startAnimating()
+        spinner = UIActivityIndicatorView(style: .gray)
+        spinner.startAnimating()
 
-        addSubview(loading)
+        addSubview(spinner)
     }
 
-    func reload() {
-        for view in subviews {
-            view.removeFromSuperview()
-        }
-
-        for _ in 0..<3 {
+    func load(count: Int) {
+        for _ in 0..<count {
             addNextCard()
         }
     }
 
     private func addNextCard() {
-        if let card = cardDataSource?.next() {
-            let nextCardView = CardView()
-            nextCardView.card = card
-            insertSubview(nextCardView, at: 0)
-            positionCard(nextCardView)
-        }
+        cardDataSource?.next(completion: { [weak self] card in
+            guard let card = card else { return }
+            DispatchQueue.main.async {
+                let nextCardView = CardView()
+                nextCardView.card = card
+                nextCardView.layer.opacity = 0
 
-        addGestureRecognizerToTopmostCard()
+                UIView.animate(withDuration: 0.2) {
+                    nextCardView.layer.opacity = 1
+                }
+
+                self?.addGestureRecognizer(to: nextCardView)
+                self?.positionCard(nextCardView)
+                if let spinner = self?.spinner {
+                    self?.insertSubview(nextCardView, aboveSubview: spinner)
+                    if self?.firstCardLoaded == false {
+                        self?.firstCardLoaded = true
+                        spinner.stopAnimating()
+                    }
+                }
+            }
+        })
     }
 
     private func positionCard(_ view: CardView) {
@@ -88,15 +101,19 @@ class CardPileView: UIView {
         view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
     }
 
-    private func addGestureRecognizerToTopmostCard() {
-        if let topCard = subviews.last {
-            let gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(pan(sender:)))
-            topCard.addGestureRecognizer(gestureRecognizer)
-        }
+    private func addGestureRecognizer(to card: CardView) {
+        let gestureRecognizer = UIPanGestureRecognizer(
+            target: self, action: #selector(pan(sender:))
+        )
+
+        card.addGestureRecognizer(gestureRecognizer)
     }
 
     @objc func pan(sender: UIPanGestureRecognizer) {
-        guard let card = sender.view as? CardView else { return }
+        guard let card = sender.view as? CardView,
+              let cardIndex = subviews.firstIndex(of: card),
+              cardIndex == subviews.count - 1 else { return }
+
         let translation = sender.translation(in: self)
 
         switch sender.state {

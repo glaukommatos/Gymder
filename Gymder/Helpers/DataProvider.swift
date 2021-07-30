@@ -19,7 +19,16 @@ import Foundation
 
  */
 
-struct DataProvider: DataProviderProtocol {
+class DataProvider: DataProviderProtocol {
+    private var urlSessionConfiguration: URLSessionConfiguration = {
+        let urlSessionConfiguration = URLSessionConfiguration.default
+        urlSessionConfiguration.timeoutIntervalForResource = 10
+        return urlSessionConfiguration
+    }()
+
+    private lazy var urlSession: URLSession = {
+        URLSession(configuration: urlSessionConfiguration)
+    }()
 
     func download(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         download(url: url, withUserAgent: nil, completion: completion)
@@ -32,7 +41,7 @@ struct DataProvider: DataProviderProtocol {
             urlRequest.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         }
 
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        urlSession.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 completion(Result.failure(error))
                 return

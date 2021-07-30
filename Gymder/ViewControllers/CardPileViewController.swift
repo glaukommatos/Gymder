@@ -77,7 +77,7 @@ class CardPileViewController: UIViewController, CardChoiceDelegate, CardPileView
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             if error == nil {
-                self.cardPileView.reload()
+                self.cardPileView.load(count: 3)
             } else {
                 self.present(self.errorViewController, animated: true, completion: nil)
             }

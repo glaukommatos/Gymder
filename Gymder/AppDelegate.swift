@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Container.shared.register(for: CardPileViewModel.self) { container in
             CardPileViewModel(
                 gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
-                locationProvider: container.get(instanceOf: LocationProvider.self))
+                locationProvider: container.get(instanceOf: LocationProvider.self),
+                dataProvider: container.get(instanceOf: DataProviderProtocol.self)
+            )
         }
 
         Container.shared.register(for: GymRepositoryProtocol.self) { container in
@@ -67,10 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Container.shared.register(for: PartnersResponseMapperProtocol.self) { _ in
             PartnersResponseMapper()
-        }
-
-        Container.shared.register(for: LocationProvider.self) { _ in
-            LocationProvider()
         }
     }
 }
