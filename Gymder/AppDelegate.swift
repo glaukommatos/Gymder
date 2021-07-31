@@ -23,16 +23,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func createRootVC() {
         window = UIWindow()
-        window?.rootViewController = Container.shared.get(instanceOf: CardPileViewController.self)
+        window?.rootViewController = Container.shared.get(instanceOf: MainViewController.self)
         window?.makeKeyAndVisible()
     }
 
     private func registerDependencies() {
+        Container.shared.register(for: MainViewController.self) { container in
+            MainViewController(
+                cardPileViewController: container.get(instanceOf: CardPileViewController.self),
+                choiceBarViewController: container.get(instanceOf: ChoiceBarController.self)
+            )
+        }
+
+        Container.shared.register(for: ChoiceBarController.self) { _ in
+            ChoiceBarController()
+        }
+
         Container.shared.register(for: CardPileViewController.self) { container in
             CardPileViewController(
                 viewModel: container.get(instanceOf: CardPileViewModel.self),
                 errorViewController: container.get(instanceOf: ErrorViewController.self),
                 matchViewController: container.get(instanceOf: MatchViewController.self)
+            )
+        }
+
+        Container.shared.register(for: CardPileViewModel.self) { container in
+            CardPileViewModel(
+                gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
+                locationProvider: container.get(instanceOf: LocationProvider.self),
+                dataProvider: container.get(instanceOf: DataProviderProtocol.self)
             )
         }
 
@@ -46,14 +65,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Container.shared.register(for: LocationProvider.self) { _ in
             LocationProvider()
-        }
-
-        Container.shared.register(for: CardPileViewModel.self) { container in
-            CardPileViewModel(
-                gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
-                locationProvider: container.get(instanceOf: LocationProvider.self),
-                dataProvider: container.get(instanceOf: DataProviderProtocol.self)
-            )
         }
 
         Container.shared.register(for: GymRepositoryProtocol.self) { container in

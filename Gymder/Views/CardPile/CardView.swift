@@ -42,8 +42,6 @@ class CardView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        updateShadowPath()
-
         let insetBounds = bounds.insetBy(dx: 10, dy: 10)
         let interItemSpacing: CGFloat = 5
 
@@ -56,8 +54,8 @@ class CardView: UIView {
                                         - interItemSpacing * 2
 
         imageView.frame = CGRect(
-            origin: CGPoint(x: insetBounds.origin.x, y: insetBounds.origin.y),
-            size: CGSize(width: insetBounds.width, height: remainingHeightForImage)
+            origin: CGPoint(x: bounds.origin.x, y: bounds.origin.y),
+            size: CGSize(width: bounds.width, height: remainingHeightForImage + 10)
         )
 
         titleLabel.frame = CGRect(
@@ -80,21 +78,18 @@ class CardView: UIView {
     private func customizeViewAndLayerProperties() {
         accessibilityIdentifier = "card"
         backgroundColor = .white
-        layer.cornerRadius = 5
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowRadius = 2
-        layer.shadowOpacity = 0.5
-        layer.shadowOffset = CGSize(width: 0, height: 2)
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = #colorLiteral(red: 0.8509055972, green: 0.851028502, blue: 0.8508786559, alpha: 1)
     }
 
     private func addImage() {
         imageView = UIImageView()
+        imageView.layer.cornerRadius = 15
+        imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         imageView.clipsToBounds = true
         imageView.backgroundColor = .darkGray
         imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 2
 
         addSubview(imageView)
     }
@@ -107,6 +102,7 @@ class CardView: UIView {
         titleLabel.allowsDefaultTighteningForTruncation = true
         titleLabel.minimumScaleFactor = 0.8
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
+        titleLabel.textColor = #colorLiteral(red: 0.2391913533, green: 0.2392312586, blue: 0.2391825914, alpha: 1)
 
         addSubview(titleLabel)
     }
@@ -115,6 +111,7 @@ class CardView: UIView {
         distanceLabel = UILabel()
         distanceLabel.accessibilityIdentifier = "distanceLabel"
         distanceLabel.font = UIFont.preferredFont(forTextStyle: .body)
+        distanceLabel.textColor = #colorLiteral(red: 0.2391913533, green: 0.2392312586, blue: 0.2391825914, alpha: 1)
 
         addSubview(distanceLabel)
     }
@@ -127,24 +124,5 @@ class CardView: UIView {
                 imageView.image = UIImage(data: imageData)
             }
         }
-    }
-
-    private func updateShadowPath() {
-        let oldShadowPath = layer.shadowPath
-        let newShadowPath = CGPath(rect: bounds, transform: nil)
-
-        if let boundsAnimation = layer.animation(forKey: "bounds.size") as? CABasicAnimation {
-            let shadowPathAnimation = CABasicAnimation(keyPath: "shadowPath")
-
-            shadowPathAnimation.duration = boundsAnimation.duration
-            shadowPathAnimation.timingFunction = boundsAnimation.timingFunction
-
-            shadowPathAnimation.fromValue = oldShadowPath
-            shadowPathAnimation.toValue = newShadowPath
-
-            layer.add(shadowPathAnimation, forKey: "shadowPath")
-        }
-
-        layer.shadowPath = newShadowPath
     }
 }

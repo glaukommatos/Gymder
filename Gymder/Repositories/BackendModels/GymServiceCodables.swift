@@ -33,7 +33,7 @@ struct PartnersResponse: Codable, Equatable {
         let locations: [Location]
 
         struct Image: Codable, Equatable {
-            let mobile: URL
+            let xxhdpi: URL
         }
 
         struct Location: Codable, Equatable {

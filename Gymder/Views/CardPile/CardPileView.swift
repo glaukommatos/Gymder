@@ -18,7 +18,7 @@ import UIKit
     card data source.
 
     The cards are wiggled around a bit so that they look cute and a
-    `UIPanGestureRecognizer` is added to the topmost card
+    `UIPanGestureRecognizer` is added to each card
     to allow the user to swipe left and right on the `CardView`s.
 
     Upon the initial load, there's also a little loading indicator, but
@@ -36,69 +36,84 @@ class CardPileView: UIView {
     weak var cardChoiceDelegate: CardChoiceDelegate?
     weak var cardDataSource: CardDataSourceProtocol?
 
-    var spinner: UIActivityIndicatorView!
-    var firstCardLoaded = false
+    let backFake = CardView()
+    let frontFake = CardView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
+        addSubview(backFake)
+        addSubview(frontFake)
 
-        addLoadingIndicator()
-    }
-
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        for subview in subviews {
-            subview.bounds = CGRect(origin: .zero, size: cardSize)
-            subview.center = center
-        }
+        backFake.alpha = 0
+        frontFake.alpha = 0
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func addLoadingIndicator() {
-        spinner = UIActivityIndicatorView(style: .gray)
-        spinner.startAnimating()
+    override func layoutSubviews() {
+        super.layoutSubviews()
 
-        addSubview(spinner)
+        for subview in subviews {
+            subview.bounds = bounds.insetBy(dx: 20, dy: 20)
+            subview.center = CGPoint(x: bounds.midX, y: bounds.midY)
+        }
+
+        backFake.bounds = bounds.insetBy(dx: 28, dy: 20)
+        backFake.center = CGPoint(x: bounds.midX, y: bounds.midY + 8)
+
+        frontFake.bounds = bounds.insetBy(dx: 24, dy: 20)
+        frontFake.center = CGPoint(x: bounds.midX, y: bounds.midY + 4)
     }
 
-    func load(count: Int) {
-        for _ in 0..<count {
+    func load() {
+        for _ in 0..<4 {
             addNextCard()
         }
     }
 
-    private func addNextCard() {
-        cardDataSource?.next(completion: { [weak self] card in
-            guard let card = card else { return }
-            DispatchQueue.main.async {
-                let nextCardView = CardView()
-                nextCardView.card = card
-                nextCardView.layer.opacity = 0
-
+    var currentCards = 0
+    private func updatePlaceholderVisibility() {
+        DispatchQueue.main.async { [weak self] in
+            switch self?.currentCards {
+            case 2:
                 UIView.animate(withDuration: 0.2) {
-                    nextCardView.layer.opacity = 1
+                    self?.backFake.alpha = 0
+                    self?.frontFake.alpha = 1
                 }
-
-                self?.addGestureRecognizer(to: nextCardView)
-                self?.positionCard(nextCardView)
-                if let spinner = self?.spinner {
-                    self?.insertSubview(nextCardView, aboveSubview: spinner)
-                    if self?.firstCardLoaded == false {
-                        self?.firstCardLoaded = true
-                        spinner.stopAnimating()
-                    }
+            case 1, 0:
+                UIView.animate(withDuration: 0.2) {
+                    self?.backFake.alpha = 0
+                    self?.frontFake.alpha = 0
+                }
+            default:
+                UIView.animate(withDuration: 0.2) {
+                    self?.backFake.alpha = 1
+                    self?.frontFake.alpha = 1
                 }
             }
-        })
+        }
     }
 
-    private func positionCard(_ view: CardView) {
-        let angleOfWiggle = CGFloat(radiansFrom: .random(in: -2..<2))
-        view.transform = CGAffineTransform(rotationAngle: angleOfWiggle)
+    private func addNextCard() {
+        updatePlaceholderVisibility()
+
+        cardDataSource?.next(completion: { [weak self] card in
+            guard let card = card else { return }
+
+            self?.currentCards += 1
+            self?.updatePlaceholderVisibility()
+
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                let nextCardView = CardView()
+                nextCardView.card = card
+
+                self.addGestureRecognizer(to: nextCardView)
+                self.insertSubview(nextCardView, aboveSubview: self.frontFake)
+            }
+        })
     }
 
     private func addGestureRecognizer(to card: CardView) {
@@ -109,6 +124,7 @@ class CardPileView: UIView {
         card.addGestureRecognizer(gestureRecognizer)
     }
 
+    var panPercentage: CGFloat = 0.0
     @objc func pan(sender: UIPanGestureRecognizer) {
         guard let card = sender.view as? CardView,
               let cardIndex = subviews.firstIndex(of: card),
@@ -119,7 +135,9 @@ class CardPileView: UIView {
         switch sender.state {
         case .began, .changed:
             card.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
+            panPercentage = min(1.0, abs(translation.x) / 100.0)
         case .ended:
+            panPercentage = 0
             if abs(translation.x) > 100 {
                 removeSwipedCardAndAddAnother(card, translation)
 
@@ -139,6 +157,8 @@ class CardPileView: UIView {
             card.transform = CGAffineTransform(translationX: translation.x * 5, y: translation.y)
         } completion: { [weak self] _ in
             card.removeFromSuperview()
+            self?.currentCards -= 1
+            self?.updatePlaceholderVisibility()
             self?.addNextCard()
         }
     }
@@ -150,9 +170,8 @@ class CardPileView: UIView {
     }
 
     private var cardSize: CGSize {
-        let extraMargin = UIDevice.current.orientation.isLandscape ? self.safeAreaInsets.bottom + 50 : 0
         let leastBound = min(bounds.height, bounds.width)
-        let cardHeight = leastBound - extraMargin
+        let cardHeight = leastBound
         let cardWidth = cardHeight * (7/8)
 
         return CGSize(width: cardWidth, height: cardHeight)

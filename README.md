@@ -34,4 +34,9 @@ There's a few things I just haven't done because of time:
   
 ## Screenshot 
 
-![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.gif "Screenshot")
+![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")
+
+
+## Credits
+
+Icons made by [Pixel Perfect](https://icon54.com/) from [Flaticon](https://www.flaticon.com)

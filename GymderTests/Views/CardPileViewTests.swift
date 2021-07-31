@@ -24,31 +24,32 @@ class CardPileViewTests: XCTestCase {
         view.cardDataSource = mockDataSource
     }
 
-    func testDisplaysAndMaintainsThreeCardsWhilePossible() throws {
+    func testDisplaysAndMaintainsFourCardsAndTwoPlaceholdersWhilePossible() throws {
         let cards = [
             Card(title: "Card 1", distance: "Distance 1", imageData: nil),
             Card(title: "Card 2", distance: "Distance 2", imageData: nil),
             Card(title: "Card 3", distance: "Distance 3", imageData: nil),
-            Card(title: "Card 4", distance: "Distance 4", imageData: nil)
+            Card(title: "Card 4", distance: "Distance 4", imageData: nil),
+            Card(title: "Card 5", distance: "Distance 5", imageData: nil)
         ]
 
         mockDataSource.cards = cards
-        view.load(count: 3)
+        view.load()
 
         let expectation = XCTestExpectation()
 
         DispatchQueue.main.async { [weak self] in
-            XCTAssertEqual(self?.cardViews.count, 3)
+            XCTAssertEqual(self?.visibleCardViews.count, 6)
 
             self?.rightSwipe()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                XCTAssertEqual(self?.cardViews.count, 3)
+                XCTAssertEqual(self?.visibleCardViews.count, 6)
 
                 self?.rightSwipe()
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    XCTAssertEqual(self?.cardViews.count, 2)
+                    XCTAssertEqual(self?.visibleCardViews.count, 5)
                     XCTAssertEqual(self?.topCard?.gestureRecognizers?.count, 1)
                     expectation.fulfill()
                 }
@@ -64,7 +65,7 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        view.load(count: 3)
+        view.load()
 
         let expectation = XCTestExpectation()
 
@@ -72,7 +73,7 @@ class CardPileViewTests: XCTestCase {
             self?.swipeLeft()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                XCTAssertEqual(self?.cardViews.count, 0)
+                XCTAssertEqual(self?.visibleCardViews.count, 0)
                 expectation.fulfill()
             }
         }
@@ -86,7 +87,7 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        view.load(count: 3)
+        view.load()
 
         let expectation = XCTestExpectation()
 
@@ -108,7 +109,7 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        view.load(count: 3)
+        view.load()
 
         DispatchQueue.main.async { [weak self] in
             self?.dragAndHold()
@@ -123,7 +124,7 @@ class CardPileViewTests: XCTestCase {
         ]
 
         mockDataSource.cards = cards
-        view.load(count: 3)
+        view.load()
 
         DispatchQueue.main.async { [weak self] in
             self?.rightSwipe()
@@ -165,12 +166,15 @@ class CardPileViewTests: XCTestCase {
         view.pan(sender: gesture)
     }
 
-    private var cardViews: [CardView] {
-        view.subviews.filter { $0 is CardView } as! [CardView]
+    private var visibleCardViews: [CardView] {
+        view.subviews.filter { cardView in
+            guard let cardView = cardView as? CardView else { return false }
+            return cardView.alpha != 0
+        } as! [CardView]
     }
 
     private var topCard: CardView? {
-        guard let topCard = cardViews.last else {
+        guard let topCard = visibleCardViews.last else {
             XCTFail("No Card Found")
             return nil
         }

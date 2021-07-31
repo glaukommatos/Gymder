@@ -19,7 +19,7 @@ class PartnersResponseMapper: PartnersResponseMapperProtocol {
                 Gym(name: partner.name,
                     latitude: location.latitude,
                     longitude: location.longitude,
-                    imageUrl: partner.headerImage.mobile)
+                    imageUrl: partner.headerImage.xxhdpi)
             }
         }
     }

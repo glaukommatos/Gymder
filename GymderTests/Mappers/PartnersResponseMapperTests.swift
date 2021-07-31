@@ -15,7 +15,7 @@ class PartnersResponseMapperTests: XCTestCase {
             data: [
                 PartnersResponse.Data(
                     name: "Gym 1",
-                    headerImage: PartnersResponse.Data.Image(mobile: URL(string: "https://valid.url.com/")!),
+                    headerImage: PartnersResponse.Data.Image(xxhdpi: URL(string: "https://valid.url.com/")!),
                     locations: [
                         PartnersResponse.Data.Location(latitude: 12.32, longitude: 43.34)
                     ]

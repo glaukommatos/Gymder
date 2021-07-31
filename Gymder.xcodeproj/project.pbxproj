@@ -20,6 +20,9 @@
 		272224DB26B4445C0080A992 /* MockCardChoiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DA26B4445C0080A992 /* MockCardChoiceDelegate.swift */; };
 		272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DC26B444880080A992 /* MockCardDataSource.swift */; };
 		272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */; };
+		272224E126B54AED0080A992 /* ChoiceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E026B54AED0080A992 /* ChoiceBar.swift */; };
+		272224E326B54B520080A992 /* ChoiceBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E226B54B520080A992 /* ChoiceBarController.swift */; };
+		272224E526B54C730080A992 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E426B54C730080A992 /* MainViewController.swift */; };
 		76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */; };
 		76EF501126AAAD3200A8EAC3 /* CardPileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
@@ -79,6 +82,9 @@
 		272224DA26B4445C0080A992 /* MockCardChoiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardChoiceDelegate.swift; sourceTree = "<group>"; };
 		272224DC26B444880080A992 /* MockCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardDataSource.swift; sourceTree = "<group>"; };
 		272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIPanGestureRecognizer.swift; sourceTree = "<group>"; };
+		272224E026B54AED0080A992 /* ChoiceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBar.swift; sourceTree = "<group>"; };
+		272224E226B54B520080A992 /* ChoiceBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBarController.swift; sourceTree = "<group>"; };
+		272224E426B54C730080A992 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewController.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 				76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */,
 				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
 				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
+				272224E026B54AED0080A992 /* ChoiceBar.swift */,
 			);
 			path = CardPile;
 			sourceTree = "<group>";
@@ -257,8 +264,10 @@
 			isa = PBXGroup;
 			children = (
 				76EF501026AAAD3200A8EAC3 /* CardPileViewController.swift */,
+				272224E426B54C730080A992 /* MainViewController.swift */,
 				76EF504826AAFDE600A8EAC3 /* MatchViewController.swift */,
 				272224CA26B1CAA90080A992 /* ErrorViewController.swift */,
+				272224E226B54B520080A992 /* ChoiceBarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -505,6 +514,7 @@
 				76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */,
 				76EF501126AAAD3200A8EAC3 /* CardPileViewController.swift in Sources */,
 				76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */,
+				272224E526B54C730080A992 /* MainViewController.swift in Sources */,
 				76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */,
 				76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */,
 				272224D126B1CDED0080A992 /* Card.swift in Sources */,
@@ -518,10 +528,12 @@
 				272224CB26B1CAA90080A992 /* ErrorViewController.swift in Sources */,
 				272224BD26B1A5600080A992 /* Serialization.swift in Sources */,
 				272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */,
+				272224E126B54AED0080A992 /* ChoiceBar.swift in Sources */,
 				76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */,
 				272224B926B1A2830080A992 /* Container.swift in Sources */,
 				76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */,
 				272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */,
+				272224E326B54B520080A992 /* ChoiceBarController.swift in Sources */,
 				76EF503D26AAAFBC00A8EAC3 /* CardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
