@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CardPileReadinessDelegate: AnyObject {
-    func ready(cardPileView: CardPileView, isReady: Bool)
+    func cardPileView(_ cardPileView: CardPileView, didChangeReadiness ready: Bool)
 }

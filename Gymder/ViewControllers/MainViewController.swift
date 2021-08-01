@@ -65,7 +65,7 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         } else {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.present(self.errorViewController, animated: true, completion: nil)
+                self.present(self.errorViewController, animated: true)
             }
         }
     }

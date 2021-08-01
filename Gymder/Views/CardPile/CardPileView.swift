@@ -20,18 +20,18 @@ class CardPileView: UIView {
     weak var cardDataSource: CardDataSourceProtocol?
     weak var cardPileReadinessDelegate: CardPileReadinessDelegate?
 
-    private let backFake = CardView()
-    private let frontFake = CardView()
+    private let backPlaceholderCard = CardView()
+    private let frontPlaceholderCard = CardView()
     private var currentCardCount = 0
     private var busySwiping = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(backFake)
-        addSubview(frontFake)
+        addSubview(backPlaceholderCard)
+        addSubview(frontPlaceholderCard)
 
-        backFake.alpha = 0
-        frontFake.alpha = 0
+        backPlaceholderCard.alpha = 0
+        frontPlaceholderCard.alpha = 0
     }
 
     required init?(coder: NSCoder) {
@@ -46,11 +46,11 @@ class CardPileView: UIView {
             subview.center = CGPoint(x: bounds.midX, y: bounds.midY)
         }
 
-        backFake.bounds = bounds.insetBy(dx: 28, dy: 20)
-        backFake.center = CGPoint(x: bounds.midX, y: bounds.midY + 8)
+        backPlaceholderCard.bounds = bounds.insetBy(dx: 28, dy: 20)
+        backPlaceholderCard.center = CGPoint(x: bounds.midX, y: bounds.midY + 8)
 
-        frontFake.bounds = bounds.insetBy(dx: 24, dy: 20)
-        frontFake.center = CGPoint(x: bounds.midX, y: bounds.midY + 4)
+        frontPlaceholderCard.bounds = bounds.insetBy(dx: 24, dy: 20)
+        frontPlaceholderCard.center = CGPoint(x: bounds.midX, y: bounds.midY + 4)
     }
 
     func load() {
@@ -59,67 +59,66 @@ class CardPileView: UIView {
         }
     }
 
-    @discardableResult
-    func swipeTopCard(direction: SwipeDirection) -> Bool {
-        guard let card = subviews.last as? CardView,
-              card.alpha == 1 else { return false }
-
-        if busySwiping {
-            return false
-        }
+    func swipeTopCard(direction: SwipeDirection) {
+        guard !busySwiping,
+              let card = subviews.last as? CardView,
+              card.alpha == 1 else { return }
 
         busySwiping = true
 
+        UIView.animate(withDuration: CardPileView.animationDuration) { [weak self] in
+            self?.moveOffscreen(view: card, inDirection: direction)
+        } completion: { [weak self] _ in
+            guard let self = self else { return }
+
+            card.removeFromSuperview()
+
+            self.currentCardCount -= 1
+            self.busySwiping = false
+            self.updateReadinessAndPlaceholderViews()
+            self.updateCardChoiceDelegate(with: direction)
+            self.addNextCard()
+        }
+    }
+
+    private func updateCardChoiceDelegate(with direction: SwipeDirection) {
+        switch direction {
+        case .left:
+            self.cardChoiceDelegate?.cardPile(self, didChoose: .reject)
+        case .right:
+            self.cardChoiceDelegate?.cardPile(self, didChoose: .accept)
+        }
+    }
+
+    private func moveOffscreen(view: UIView, inDirection direction: SwipeDirection) {
         let translation: CGFloat
         switch direction {
         case .left:
-            translation = -bounds.width * 2
+            translation = -self.bounds.width * 2
         case .right:
-            translation = bounds.width * 2
+            translation = self.bounds.width * 2
         }
 
-        UIView.animate(withDuration: CardPileView.animationDuration) {
-            card.transform = CGAffineTransform(
-                translationX: translation, y: 0
-            )
-        } completion: { [weak self] _ in
-            guard let self = self else { return }
-            card.removeFromSuperview()
-            self.currentCardCount -= 1
-            self.busySwiping = false
-            self.updatePlaceholderVisibility()
-            self.addNextCard()
-
-            switch direction {
-            case .left:
-                self.cardChoiceDelegate?.cardPile(self, didChoose: .reject)
-            case .right:
-                self.cardChoiceDelegate?.cardPile(self, didChoose: .accept)
-            }
-        }
-
-        return true
+        view.transform = CGAffineTransform(translationX: translation, y: 0)
     }
 
-    private func updatePlaceholderVisibility() {
-        let currentCardCount = self.currentCardCount
-        cardPileReadinessDelegate?.ready(cardPileView: self, isReady: currentCardCount > 0)
+    private func updateReadinessAndPlaceholderViews() {
+        cardPileReadinessDelegate?.cardPileView(self, didChangeReadiness: currentCardCount > 0)
 
         UIView.animate(withDuration: CardPileView.animationDuration) { [weak self] in
             guard let self = self else { return }
-
-            switch currentCardCount {
+            switch self.currentCardCount {
             case 1, 0:
-                self.backFake.alpha = 0
-                self.frontFake.alpha = 0
+                self.backPlaceholderCard.alpha = 0
+                self.frontPlaceholderCard.alpha = 0
             case 2:
-                self.backFake.alpha = 0
-                self.frontFake.alpha = 1
+                self.backPlaceholderCard.alpha = 0
+                self.frontPlaceholderCard.alpha = 1
             case 3...CardPileView.cardCount:
-                self.backFake.alpha = 1
-                self.frontFake.alpha = 1
+                self.backPlaceholderCard.alpha = 1
+                self.frontPlaceholderCard.alpha = 1
             default:
-                preconditionFailure("Big Nope: currentCardCount not in 0..<CardPileView.cardCount")
+                assertionFailure("Big Nope: currentCardCount not in 0..<CardPileView.cardCount")
             }
         }
     }
@@ -133,9 +132,9 @@ class CardPileView: UIView {
                 nextCardView.card = card
 
                 self.addGestureRecognizer(to: nextCardView)
-                self.insertSubview(nextCardView, aboveSubview: self.frontFake)
+                self.insertSubview(nextCardView, aboveSubview: self.frontPlaceholderCard)
                 self.currentCardCount += 1
-                self.updatePlaceholderVisibility()
+                self.updateReadinessAndPlaceholderViews()
             }
         })
     }

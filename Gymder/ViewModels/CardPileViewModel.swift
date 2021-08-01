@@ -57,8 +57,8 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
         }
     }
 
-    func ready(cardPileView: CardPileView, isReady: Bool) {
-        delegate?.cardPileViewModel(self, didChangeReadiness: isReady)
+    func cardPileView(_ cardPileView: CardPileView, didChangeReadiness ready: Bool) {
+        delegate?.cardPileViewModel(self, didChangeReadiness: ready)
     }
 
     func next(completion: @escaping (Card?) -> Void) {
