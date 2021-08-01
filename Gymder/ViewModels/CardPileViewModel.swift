@@ -40,24 +40,25 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
     }
 
     func load() {
-        delegate?.ready(false)
+        delegate?.cardPileViewModel(self, didChangeReadiness: false)
         locationProvider.getCurrentLocation { [weak self] location in
-            self?.currentLocation = location
+            guard let self = self else { return }
+            self.currentLocation = location
 
-            self?.gymRepository.getGyms { result in
+            self.gymRepository.getGyms { result in
                 switch result {
                 case .success(let gyms):
-                    self?.gyms = gyms.shuffled()
-                    self?.delegate?.finishedLoading(error: nil)
+                    self.gyms = gyms.shuffled()
+                    self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: nil)
                 case .failure(let error):
-                    self?.delegate?.finishedLoading(error: error)
+                    self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: error)
                 }
             }
         }
     }
 
     func ready(cardPileView: CardPileView, isReady: Bool) {
-        delegate?.ready(isReady)
+        delegate?.cardPileViewModel(self, didChangeReadiness: isReady)
     }
 
     func next(completion: @escaping (Card?) -> Void) {

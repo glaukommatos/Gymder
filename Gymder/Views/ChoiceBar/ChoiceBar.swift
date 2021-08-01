@@ -9,46 +9,27 @@ import Foundation
 import UIKit
 
 class ChoiceBar: UIView {
-    var buttonContainer: ButtonContainer!
+    private var buttonContainer: UIView!
+    private var leftButton: RoundButton!
+    private var rightButton: RoundButton!
+
     weak var delegate: ChoiceBarDelegate?
 
+    var isEnabled: Bool {
+        get {
+            leftButton.isEnabled && rightButton.isEnabled
+        }
+        set {
+            leftButton.isEnabled = newValue
+            rightButton.isEnabled = newValue
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        buttonContainer = ButtonContainer()
+        buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
-        buttonContainer.choiceBar = self
-
-        addSubview(buttonContainer)
-
-        NSLayoutConstraint.activate([
-            buttonContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            buttonContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
-            buttonContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9)
-        ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func accept() {
-        delegate?.accept(choiceBar: self)
-    }
-
-    func reject() {
-        delegate?.reject(choiceBar: self)
-    }
-}
-
-class ButtonContainer: UIView {
-    var leftButton: RoundButton!
-    var rightButton: RoundButton!
-
-    weak var choiceBar: ChoiceBar?
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
 
         leftButton = RoundButton(type: .system)
         leftButton.translatesAutoresizingMaskIntoConstraints = false
@@ -64,61 +45,33 @@ class ButtonContainer: UIView {
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         rightButton.addTarget(self, action: #selector(accept), for: .touchUpInside)
 
-        addSubview(leftButton)
-        addSubview(rightButton)
+        buttonContainer.addSubview(leftButton)
+        buttonContainer.addSubview(rightButton)
+        addSubview(buttonContainer)
 
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalTo: leftButton.heightAnchor),
-            heightAnchor.constraint(equalTo: rightButton.heightAnchor),
-            centerYAnchor.constraint(equalTo: leftButton.centerYAnchor),
-            centerYAnchor.constraint(equalTo: rightButton.centerYAnchor),
-            leftButton.leftAnchor.constraint(equalTo: leftAnchor),
-            rightButton.rightAnchor.constraint(equalTo: rightAnchor),
+            buttonContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            buttonContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buttonContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 0.9),
+            buttonContainer.heightAnchor.constraint(equalTo: leftButton.heightAnchor),
+            buttonContainer.heightAnchor.constraint(equalTo: rightButton.heightAnchor),
+            buttonContainer.centerYAnchor.constraint(equalTo: leftButton.centerYAnchor),
+            buttonContainer.centerYAnchor.constraint(equalTo: rightButton.centerYAnchor),
+            leftButton.leftAnchor.constraint(equalTo: buttonContainer.leftAnchor),
+            rightButton.rightAnchor.constraint(equalTo: buttonContainer.rightAnchor),
             leftButton.rightAnchor.constraint(equalTo: rightButton.leftAnchor, constant: 15)
         ])
     }
 
     @objc func accept() {
-        choiceBar?.accept()
+        delegate?.choiceBar(self, didChoose: .accept)
     }
 
     @objc func reject() {
-        choiceBar?.reject()
+        delegate?.choiceBar(self, didChoose: .reject)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-class RoundButton: UIButton {
-    let height: CGFloat = 150
-    var margin: CGFloat = 50
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        backgroundColor = .white
-
-        imageEdgeInsets = UIEdgeInsets(
-            top: margin, left: margin, bottom: margin, right: margin
-        )
-
-        layer.cornerRadius = height / 2
-        layer.borderWidth = 15
-        layer.borderColor = #colorLiteral(red: 0.9646214843, green: 0.9647598863, blue: 0.9645913243, alpha: 1)
-
-        NSLayoutConstraint.activate([
-            widthAnchor.constraint(equalToConstant: height),
-            heightAnchor.constraint(equalToConstant: height)
-        ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: height, height: height)
     }
 }

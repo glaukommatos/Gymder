@@ -8,6 +8,5 @@
 import Foundation
 
 protocol ChoiceBarDelegate: AnyObject {
-    func accept(choiceBar: ChoiceBar)
-    func reject(choiceBar: ChoiceBar)
+    func choiceBar(_ choiceBar: ChoiceBar, didChoose choice: Choice)
 }

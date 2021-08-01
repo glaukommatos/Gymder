@@ -8,11 +8,11 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController, CardChoiceDelegate, CardPileViewModelDelegate, ChoiceBarDelegate {
-    let mainView = MainView()
-    let viewModel: CardPileViewModel
-    let matchViewController: MatchViewController
-    let errorViewController: ErrorViewController
+class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileChoiceDelegate, ChoiceBarDelegate {
+    private lazy var mainView = MainView()
+    private let viewModel: CardPileViewModel
+    private let matchViewController: MatchViewController
+    private let errorViewController: ErrorViewController
 
     init(
         matchViewController: MatchViewController,
@@ -36,6 +36,7 @@ class MainViewController: UIViewController, CardChoiceDelegate, CardPileViewMode
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        viewModel.delegate = self
         mainView.choiceBar.delegate = self
         mainView.cardPileView.cardChoiceDelegate = self
         mainView.cardPileView.cardDataSource = viewModel
@@ -50,8 +51,6 @@ class MainViewController: UIViewController, CardChoiceDelegate, CardPileViewMode
                 self?.viewModel.load()
             }
         }
-
-        viewModel.delegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -60,41 +59,44 @@ class MainViewController: UIViewController, CardChoiceDelegate, CardPileViewMode
 
     // MARK: CardPileViewModelDelegate
 
-    func finishedLoading(error: GymRepositoryError?) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            if error == nil {
-                self.mainView.cardPileView.load()
-            } else {
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError error: Error?) {
+        if error == nil {
+            self.mainView.cardPileView.load()
+        } else {
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
                 self.present(self.errorViewController, animated: true, completion: nil)
             }
         }
     }
 
-    func ready(_ isReady: Bool) {
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool) {
         DispatchQueue.main.async { [weak self] in
-            self?.mainView.choiceBar.buttonContainer.leftButton.isEnabled = isReady
-            self?.mainView.choiceBar.buttonContainer.rightButton.isEnabled = isReady
+            self?.mainView.choiceBar.isEnabled = ready
         }
     }
 
     // MARK: ChoiceBarDelegate
 
-    func accept(choiceBar: ChoiceBar) {
-        mainView.cardPileView.swipeTopCard(direction: .right)
-    }
-
-    func reject(choiceBar: ChoiceBar) {
-        mainView.cardPileView.swipeTopCard(direction: .left)
+    func choiceBar(_ choiceBar: ChoiceBar, didChoose choice: Choice) {
+        switch choice {
+        case .accept:
+            mainView.cardPileView.swipeTopCard(direction: .right)
+        case .reject:
+            mainView.cardPileView.swipeTopCard(direction: .left)
+        }
     }
 
     // MARK: CardChoiceDelegate
 
-    func accept() {
-        if Int.random(in: 0..<20) == 0 {
-            present(matchViewController, animated: true, completion: nil)
+    func cardPile(_ cardPileView: CardPileView, didChoose choice: Choice) {
+        switch choice {
+        case .accept:
+            if Int.random(in: 0..<20) == 0 {
+                present(matchViewController, animated: true, completion: nil)
+            }
+        case .reject:
+            return
         }
     }
-
-    func reject() {}
 }

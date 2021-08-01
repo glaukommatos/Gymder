@@ -14,11 +14,11 @@ import XCTest
 class CardPileViewTests: XCTestCase {
     private var view: CardPileView!
     private var mockDataSource: MockCardDataSource!
-    private var mockDelegate: MockCardChoiceDelegate!
+    private var mockDelegate: CardChoiceSpy!
 
     override func setUp() {
         view = CardPileView()
-        mockDelegate = MockCardChoiceDelegate()
+        mockDelegate = CardChoiceSpy()
         mockDataSource = MockCardDataSource()
         view.cardChoiceDelegate = mockDelegate
         view.cardDataSource = mockDataSource

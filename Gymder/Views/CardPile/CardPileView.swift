@@ -7,26 +7,23 @@
 
 import UIKit
 
-protocol CardPileReadinessDelegate: AnyObject {
-    func ready(cardPileView: CardPileView, isReady: Bool)
-}
-
 class CardPileView: UIView {
     enum SwipeDirection {
         case left
         case right
     }
 
-    static let animationDuration = 0.2
-    static let cardCount = 4
+    private static let animationDuration = 0.2
+    private static let cardCount = 4
 
-    weak var cardChoiceDelegate: CardChoiceDelegate?
+    weak var cardChoiceDelegate: CardPileChoiceDelegate?
     weak var cardDataSource: CardDataSourceProtocol?
     weak var cardPileReadinessDelegate: CardPileReadinessDelegate?
 
     private let backFake = CardView()
     private let frontFake = CardView()
     private var currentCardCount = 0
+    private var busySwiping = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,8 +59,6 @@ class CardPileView: UIView {
         }
     }
 
-    var busySwiping = false
-
     @discardableResult
     func swipeTopCard(direction: SwipeDirection) -> Bool {
         guard let card = subviews.last as? CardView,
@@ -78,9 +73,9 @@ class CardPileView: UIView {
         let translation: CGFloat
         switch direction {
         case .left:
-            translation = -500
+            translation = -bounds.width * 2
         case .right:
-            translation = 500
+            translation = bounds.width * 2
         }
 
         UIView.animate(withDuration: CardPileView.animationDuration) {
@@ -97,9 +92,9 @@ class CardPileView: UIView {
 
             switch direction {
             case .left:
-                self.cardChoiceDelegate?.reject()
+                self.cardChoiceDelegate?.cardPile(self, didChoose: .reject)
             case .right:
-                self.cardChoiceDelegate?.accept()
+                self.cardChoiceDelegate?.cardPile(self, didChoose: .accept)
             }
         }
 
