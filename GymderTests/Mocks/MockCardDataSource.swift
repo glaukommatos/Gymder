@@ -10,8 +10,14 @@ import Foundation
 
 class MockCardDataSource: CardDataSourceProtocol {
     var cards = [Card]()
+    var cardsLock = NSLock()
 
     func next(completion: @escaping (Card?) -> Void) {
-        completion(cards.popLast())
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            self.cardsLock.lock()
+            completion(self.cards.popLast())
+            self.cardsLock.unlock()
+        }
     }
 }

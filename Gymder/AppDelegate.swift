@@ -30,21 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func registerDependencies() {
         Container.shared.register(for: MainViewController.self) { container in
             MainViewController(
-                cardPileViewController: container.get(instanceOf: CardPileViewController.self),
-                choiceBarViewController: container.get(instanceOf: ChoiceBarController.self)
-            )
-        }
-
-        Container.shared.register(for: ChoiceBarController.self) { _ in
-            ChoiceBarController()
-        }
-
-        Container.shared.register(for: CardPileViewController.self) { container in
-            CardPileViewController(
-                viewModel: container.get(instanceOf: CardPileViewModel.self),
+                matchViewController: container.get(instanceOf: MatchViewController.self),
                 errorViewController: container.get(instanceOf: ErrorViewController.self),
-                matchViewController: container.get(instanceOf: MatchViewController.self)
-            )
+                viewModel: container.get(instanceOf: CardPileViewModel.self))
         }
 
         Container.shared.register(for: CardPileViewModel.self) { container in

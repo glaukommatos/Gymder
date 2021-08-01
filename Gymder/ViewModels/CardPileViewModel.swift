@@ -20,13 +20,12 @@ import CoreLocation
 
  */
 
-class CardPileViewModel: CardDataSourceProtocol {
+class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
     private let gymRepository: GymRepositoryProtocol
     private let locationProvider: LocationProvider
     private let dataProvider: DataProviderProtocol
     private var currentLocation: CLLocation?
     private var gyms = [Gym]()
-    private var lock = NSLock()
 
     weak var delegate: CardPileViewModelDelegate?
 
@@ -41,6 +40,7 @@ class CardPileViewModel: CardDataSourceProtocol {
     }
 
     func load() {
+        delegate?.ready(false)
         locationProvider.getCurrentLocation { [weak self] location in
             self?.currentLocation = location
 
@@ -48,21 +48,22 @@ class CardPileViewModel: CardDataSourceProtocol {
                 switch result {
                 case .success(let gyms):
                     self?.gyms = gyms.shuffled()
-                    self?.delegate?.update(error: nil)
+                    self?.delegate?.finishedLoading(error: nil)
                 case .failure(let error):
-                    self?.delegate?.update(error: error)
+                    self?.delegate?.finishedLoading(error: error)
                 }
             }
         }
     }
 
-    func next(completion: @escaping (Card?) -> Void) {
-        lock.lock()
-        let gym = gyms.popLast()
-        lock.unlock()
+    func ready(cardPileView: CardPileView, isReady: Bool) {
+        delegate?.ready(isReady)
+    }
 
-        if let gym = gym {
+    func next(completion: @escaping (Card?) -> Void) {
+        if let gym = gyms.popLast() {
             dataProvider.download(url: gym.imageUrl) { [weak self] result in
+                guard let self = self else { return }
                 let imageData: Data?
 
                 switch result {
@@ -73,7 +74,7 @@ class CardPileViewModel: CardDataSourceProtocol {
                 }
 
                 let gymLocation = CLLocation(latitude: gym.latitude, longitude: gym.longitude)
-                let distance = gymLocation.formattedDistanceTo(self?.currentLocation)
+                let distance = gymLocation.formattedDistanceTo(self.currentLocation)
                 let card = Card(title: gym.name, distance: distance, imageData: imageData)
                 completion(card)
             }

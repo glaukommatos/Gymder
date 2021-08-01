@@ -15,5 +15,6 @@ import Foundation
  */
 
 protocol CardPileViewModelDelegate: AnyObject {
-    func update(error: GymRepositoryError?)
+    func finishedLoading(error: GymRepositoryError?)
+    func ready(_ isReady: Bool)
 }

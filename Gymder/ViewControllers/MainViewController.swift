@@ -8,19 +8,21 @@
 import Foundation
 import UIKit
 
-class MainViewController: UIViewController {
-    var mainView: MainView!
-    var cardPileViewController: CardPileViewController!
-    var choiceBarViewController: ChoiceBarController!
+class MainViewController: UIViewController, CardChoiceDelegate, CardPileViewModelDelegate, ChoiceBarDelegate {
+    let mainView = MainView()
+    let viewModel: CardPileViewModel
+    let matchViewController: MatchViewController
+    let errorViewController: ErrorViewController
 
     init(
-        cardPileViewController: CardPileViewController,
-        choiceBarViewController: ChoiceBarController
+        matchViewController: MatchViewController,
+        errorViewController: ErrorViewController,
+        viewModel: CardPileViewModel
     ) {
+        self.matchViewController = matchViewController
+        self.errorViewController = errorViewController
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-
-        self.cardPileViewController = cardPileViewController
-        self.choiceBarViewController = choiceBarViewController
     }
 
     required init?(coder: NSCoder) {
@@ -28,84 +30,71 @@ class MainViewController: UIViewController {
     }
 
     override func loadView() {
-        mainView = MainView()
         view = mainView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        mainView.stackView.addArrangedSubview(TitleBar())
-        mainView.stackView.addArrangedSubview(cardPileViewController.view)
-        mainView.stackView.addArrangedSubview(choiceBarViewController.view)
+        mainView.choiceBar.delegate = self
+        mainView.cardPileView.cardChoiceDelegate = self
+        mainView.cardPileView.cardDataSource = viewModel
+        mainView.cardPileView.cardPileReadinessDelegate = viewModel
 
-        mainView.stackView.sendSubviewToBack(choiceBarViewController.view)
+        matchViewController.closeHandler = { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+        }
 
-        addChild(cardPileViewController)
-        addChild(choiceBarViewController)
+        errorViewController.retryHandler = { [weak self] in
+            self?.dismiss(animated: true) {
+                self?.viewModel.load()
+            }
+        }
 
-        cardPileViewController.didMove(toParent: self)
-        choiceBarViewController.didMove(toParent: self)
-    }
-}
-
-class TitleBar: UIView {
-    var titleLabel: UILabel!
-    var bottomBorderView: UIView!
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        titleLabel = UILabel()
-        titleLabel.text = "gymder"
-        titleLabel.font = UIFont.systemFont(ofSize: 45, weight: .bold)
-        titleLabel.textColor = #colorLiteral(red: 0.993135035, green: 0.3929346204, blue: 0.4089930058, alpha: 1)
-        titleLabel.textAlignment = .center
-
-        bottomBorderView = UIView()
-        bottomBorderView.backgroundColor = #colorLiteral(red: 0.8509055972, green: 0.851028502, blue: 0.8508786559, alpha: 1)
-
-        addSubview(titleLabel)
-        addSubview(bottomBorderView)
+        viewModel.delegate = self
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.load()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        titleLabel.frame = bounds
-        bottomBorderView.frame = CGRect(x: 0, y: bounds.height - 1, width: bounds.width, height: 1)
+    // MARK: CardPileViewModelDelegate
+
+    func finishedLoading(error: GymRepositoryError?) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            if error == nil {
+                self.mainView.cardPileView.load()
+            } else {
+                self.present(self.errorViewController, animated: true, completion: nil)
+            }
+        }
     }
 
-    override var intrinsicContentSize: CGSize {
-        CGSize(width: titleLabel.intrinsicContentSize.width, height: titleLabel.intrinsicContentSize.height + 30)
-    }
-}
-
-class MainView: UIView {
-    var stackView: UIStackView!
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        backgroundColor = .white
-
-        stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fill
-
-        addSubview(stackView)
+    func ready(_ isReady: Bool) {
+        DispatchQueue.main.async { [weak self] in
+            self?.mainView.choiceBar.buttonContainer.leftButton.isEnabled = isReady
+            self?.mainView.choiceBar.buttonContainer.rightButton.isEnabled = isReady
+        }
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        stackView.frame = bounds.inset(by: safeAreaInsets)
+    // MARK: ChoiceBarDelegate
+
+    func accept(choiceBar: ChoiceBar) {
+        mainView.cardPileView.swipeTopCard(direction: .right)
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func reject(choiceBar: ChoiceBar) {
+        mainView.cardPileView.swipeTopCard(direction: .left)
     }
+
+    // MARK: CardChoiceDelegate
+
+    func accept() {
+        if Int.random(in: 0..<20) == 0 {
+            present(matchViewController, animated: true, completion: nil)
+        }
+    }
+
+    func reject() {}
 }

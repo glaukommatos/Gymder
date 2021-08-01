@@ -18,17 +18,15 @@ import UIKit
  */
 
 class ErrorViewController: UIViewController {
-    private var errorView: ErrorView!
+    private lazy var errorView = ErrorView()
     var retryHandler: (() -> Void)?
 
     override func loadView() {
-        errorView = ErrorView()
         view = errorView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         errorView.retryHandler = retryHandler
     }
 }

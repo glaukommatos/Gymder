@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 class ChoiceBar: UIView {
-    var buttonContainer: UIView!
+    var buttonContainer: ButtonContainer!
+    weak var delegate: ChoiceBarDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         buttonContainer = ButtonContainer()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
+        buttonContainer.choiceBar = self
 
         addSubview(buttonContainer)
 
@@ -29,11 +31,21 @@ class ChoiceBar: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func accept() {
+        delegate?.accept(choiceBar: self)
+    }
+
+    func reject() {
+        delegate?.reject(choiceBar: self)
+    }
 }
 
 class ButtonContainer: UIView {
     var leftButton: RoundButton!
     var rightButton: RoundButton!
+
+    weak var choiceBar: ChoiceBar?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,11 +54,15 @@ class ButtonContainer: UIView {
         leftButton.translatesAutoresizingMaskIntoConstraints = false
         leftButton.setImage(UIImage(named: "Cross"), for: .normal)
         leftButton.tintColor = #colorLiteral(red: 0.9949885011, green: 0.4292141497, blue: 0.4242331982, alpha: 1)
+        leftButton.accessibilityIdentifier = "swipeLeft"
+        leftButton.addTarget(self, action: #selector(reject), for: .touchUpInside)
 
         rightButton = RoundButton(type: .system)
         rightButton.setImage(UIImage(named: "Heart"), for: .normal)
         rightButton.tintColor = #colorLiteral(red: 0.3013241887, green: 0.7947661281, blue: 0.5758426189, alpha: 1)
+        rightButton.accessibilityIdentifier = "swipeRight"
         rightButton.translatesAutoresizingMaskIntoConstraints = false
+        rightButton.addTarget(self, action: #selector(accept), for: .touchUpInside)
 
         addSubview(leftButton)
         addSubview(rightButton)
@@ -60,6 +76,14 @@ class ButtonContainer: UIView {
             rightButton.rightAnchor.constraint(equalTo: rightAnchor),
             leftButton.rightAnchor.constraint(equalTo: rightButton.leftAnchor, constant: 15)
         ])
+    }
+
+    @objc func accept() {
+        choiceBar?.accept()
+    }
+
+    @objc func reject() {
+        choiceBar?.reject()
     }
 
     required init?(coder: NSCoder) {

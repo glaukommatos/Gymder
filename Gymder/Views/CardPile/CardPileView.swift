@@ -7,37 +7,26 @@
 
 import UIKit
 
-/**
-
-    Pretty sure this is the longest file in the project. I hope it's not too bad.
-    If there's any one file that's gonna show how little manual view layout
-    I've done I suspect it's gonna be this one.
-
-    Hopefully it's not too bad though. The idea here is to try to always
-    maintain three `CardView`s as subviews until we exhaust the
-    card data source.
-
-    The cards are wiggled around a bit so that they look cute and a
-    `UIPanGestureRecognizer` is added to each card
-    to allow the user to swipe left and right on the `CardView`s.
-
-    Upon the initial load, there's also a little loading indicator, but
-    this is removed as soon as cards `reload()` is called at
-    which point will new `CardView`s will be created using
-    `Card`s vended from the card data source.
-
-    Hope it's not too unidiomatic as view code. Every time I open
-    the docs for `UIView` I always learn something new, so I'm
-    sure there's some room for improvement here.
-
- */
+protocol CardPileReadinessDelegate: AnyObject {
+    func ready(cardPileView: CardPileView, isReady: Bool)
+}
 
 class CardPileView: UIView {
+    enum SwipeDirection {
+        case left
+        case right
+    }
+
+    static let animationDuration = 0.2
+    static let cardCount = 4
+
     weak var cardChoiceDelegate: CardChoiceDelegate?
     weak var cardDataSource: CardDataSourceProtocol?
+    weak var cardPileReadinessDelegate: CardPileReadinessDelegate?
 
-    let backFake = CardView()
-    let frontFake = CardView()
+    private let backFake = CardView()
+    private let frontFake = CardView()
+    private var currentCardCount = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,50 +57,90 @@ class CardPileView: UIView {
     }
 
     func load() {
-        for _ in 0..<4 {
+        for _ in 0 ..< CardPileView.cardCount {
             addNextCard()
         }
     }
 
-    var currentCards = 0
+    var busySwiping = false
+
+    @discardableResult
+    func swipeTopCard(direction: SwipeDirection) -> Bool {
+        guard let card = subviews.last as? CardView,
+              card.alpha == 1 else { return false }
+
+        if busySwiping {
+            return false
+        }
+
+        busySwiping = true
+
+        let translation: CGFloat
+        switch direction {
+        case .left:
+            translation = -500
+        case .right:
+            translation = 500
+        }
+
+        UIView.animate(withDuration: CardPileView.animationDuration) {
+            card.transform = CGAffineTransform(
+                translationX: translation, y: 0
+            )
+        } completion: { [weak self] _ in
+            guard let self = self else { return }
+            card.removeFromSuperview()
+            self.currentCardCount -= 1
+            self.busySwiping = false
+            self.updatePlaceholderVisibility()
+            self.addNextCard()
+
+            switch direction {
+            case .left:
+                self.cardChoiceDelegate?.reject()
+            case .right:
+                self.cardChoiceDelegate?.accept()
+            }
+        }
+
+        return true
+    }
+
     private func updatePlaceholderVisibility() {
-        DispatchQueue.main.async { [weak self] in
-            switch self?.currentCards {
-            case 2:
-                UIView.animate(withDuration: 0.2) {
-                    self?.backFake.alpha = 0
-                    self?.frontFake.alpha = 1
-                }
+        let currentCardCount = self.currentCardCount
+        cardPileReadinessDelegate?.ready(cardPileView: self, isReady: currentCardCount > 0)
+
+        UIView.animate(withDuration: CardPileView.animationDuration) { [weak self] in
+            guard let self = self else { return }
+
+            switch currentCardCount {
             case 1, 0:
-                UIView.animate(withDuration: 0.2) {
-                    self?.backFake.alpha = 0
-                    self?.frontFake.alpha = 0
-                }
+                self.backFake.alpha = 0
+                self.frontFake.alpha = 0
+            case 2:
+                self.backFake.alpha = 0
+                self.frontFake.alpha = 1
+            case 3...CardPileView.cardCount:
+                self.backFake.alpha = 1
+                self.frontFake.alpha = 1
             default:
-                UIView.animate(withDuration: 0.2) {
-                    self?.backFake.alpha = 1
-                    self?.frontFake.alpha = 1
-                }
+                preconditionFailure("Big Nope: currentCardCount not in 0..<CardPileView.cardCount")
             }
         }
     }
 
     private func addNextCard() {
-        updatePlaceholderVisibility()
-
         cardDataSource?.next(completion: { [weak self] card in
-            guard let card = card else { return }
-
-            self?.currentCards += 1
-            self?.updatePlaceholderVisibility()
-
+            guard let self = self,
+                  let card = card else { return }
             DispatchQueue.main.async {
-                guard let self = self else { return }
                 let nextCardView = CardView()
                 nextCardView.card = card
 
                 self.addGestureRecognizer(to: nextCardView)
                 self.insertSubview(nextCardView, aboveSubview: self.frontFake)
+                self.currentCardCount += 1
+                self.updatePlaceholderVisibility()
             }
         })
     }
@@ -124,7 +153,6 @@ class CardPileView: UIView {
         card.addGestureRecognizer(gestureRecognizer)
     }
 
-    var panPercentage: CGFloat = 0.0
     @objc func pan(sender: UIPanGestureRecognizer) {
         guard let card = sender.view as? CardView,
               let cardIndex = subviews.firstIndex(of: card),
@@ -135,14 +163,12 @@ class CardPileView: UIView {
         switch sender.state {
         case .began, .changed:
             card.transform = CGAffineTransform(translationX: translation.x, y: translation.y)
-            panPercentage = min(1.0, abs(translation.x) / 100.0)
         case .ended:
-            panPercentage = 0
             if abs(translation.x) > 100 {
-                removeSwipedCardAndAddAnother(card, translation)
-
                 if translation.x > 0 {
-                    cardChoiceDelegate?.accept()
+                    swipeTopCard(direction: .right)
+                } else {
+                    swipeTopCard(direction: .left)
                 }
             } else {
                 returnCardToCenter(card: card)
@@ -152,19 +178,8 @@ class CardPileView: UIView {
         }
     }
 
-    private func removeSwipedCardAndAddAnother(_ card: CardView, _ translation: CGPoint) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0, options: []) {
-            card.transform = CGAffineTransform(translationX: translation.x * 5, y: translation.y)
-        } completion: { [weak self] _ in
-            card.removeFromSuperview()
-            self?.currentCards -= 1
-            self?.updatePlaceholderVisibility()
-            self?.addNextCard()
-        }
-    }
-
     private func returnCardToCenter(card: CardView) {
-        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.1, delay: 0, options: []) {
+        UIView.animate(withDuration: CardPileView.animationDuration) {
             card.transform = .identity
         }
     }

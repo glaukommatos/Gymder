@@ -22,9 +22,10 @@ import UIKit
  */
 
 class MatchView: UIView {
-    private var animator: UIViewPropertyAnimator!
     private var ball1: UILabel!
     private var ball2: UILabel!
+
+    var animator: UIViewPropertyAnimator!
 
     private let balls = ["⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉"]
 
@@ -40,7 +41,6 @@ class MatchView: UIView {
         addMessage()
         addButton()
         addBalls()
-        addAndStartAnimations()
     }
 
     required init?(coder: NSCoder) {
@@ -116,7 +116,7 @@ class MatchView: UIView {
         ])
     }
 
-    private func addAndStartAnimations() {
+    func startAnimation() {
         animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: { [weak self] in
             if let ball1 = self?.ball1,
                let ball2 = self?.ball2 {
@@ -126,10 +126,14 @@ class MatchView: UIView {
         })
 
         animator.addCompletion { [weak self] _ in
-            self?.addAndStartAnimations()
+            self?.startAnimation()
         }
 
         animator.startAnimation()
+    }
+
+    func stopAnimations() {
+        animator.stopAnimation(true)
     }
 
     @objc func executeCloseHandler() {

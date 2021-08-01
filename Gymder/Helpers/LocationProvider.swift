@@ -21,10 +21,13 @@ import CoreLocation
     that would indicate it's not going to happen (as far as I know),
     then the callback will be called with `nil`.
 
-    Depending on requirements, this could be changed to give
-    a different location each time, rather than a cached one. But
-    for the way in which is is consumed in this app, it seems
-    prudent just to get the location once at startup.
+    # Important Note
+
+    The method `locationManager(_:didUpdateLocations:)`
+    can be called even after we ask to stop receiving updates.
+
+    For this reason we also set the callback to `nil`.
+    We want `getCurrentLocation(completion:)` to return *only once*.
 
  */
 
@@ -32,33 +35,28 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     private var callback: ((CLLocation?) -> Void)?
 
-    var attemptAlreadyMade = false
-    var cachedLocation: CLLocation?
-
     override init() {
         super.init()
-
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
 
     func getCurrentLocation(completion: @escaping (CLLocation?) -> Void) {
-        if attemptAlreadyMade {
-            completion(cachedLocation)
-        } else {
-            self.callback = completion
+        self.callback = completion
 
-            switch CLLocationManager.authorizationStatus() {
-            case .authorizedAlways, .authorizedWhenInUse:
-                locationManager.requestLocation()
-            case .denied, .restricted:
-                completion(nil)
-            default:
-                locationManager.requestWhenInUseAuthorization()
-            }
-
-            attemptAlreadyMade = true
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways, .authorizedWhenInUse:
+            locationManager.requestLocation()
+        case .denied, .restricted:
+            executeThenDisableCallback(location: nil)
+        default:
+            locationManager.requestWhenInUseAuthorization()
         }
+    }
+
+    private func executeThenDisableCallback(location: CLLocation?) {
+        callback?(location)
+        callback = nil
     }
 
     // MARK: CLLocationManagerDelegate
@@ -68,7 +66,7 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
         case .authorizedAlways, .authorizedWhenInUse:
             locationManager.requestLocation()
         case .denied, .restricted:
-            callback?(nil)
+            executeThenDisableCallback(location: nil)
         default:
             return
         }
@@ -76,8 +74,7 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
-        cachedLocation = locations.last
-        callback?(cachedLocation)
+        executeThenDisableCallback(location: locations.last)
     }
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -88,7 +85,7 @@ class LocationProvider: NSObject, CLLocationManagerDelegate {
             return
         default:
             locationManager.stopUpdatingLocation()
-            callback?(nil)
+            executeThenDisableCallback(location: nil)
         }
     }
 }

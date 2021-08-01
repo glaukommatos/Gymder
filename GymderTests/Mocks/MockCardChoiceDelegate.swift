@@ -19,4 +19,8 @@ class MockCardChoiceDelegate: CardChoiceDelegate {
     func accept() {
         lastChoice = .accept
     }
+
+    func reject() {
+        lastChoice = .none
+    }
 }

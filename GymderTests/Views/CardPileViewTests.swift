@@ -38,7 +38,7 @@ class CardPileViewTests: XCTestCase {
 
         let expectation = XCTestExpectation()
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             XCTAssertEqual(self?.visibleCardViews.count, 6)
 
             self?.rightSwipe()
@@ -69,7 +69,7 @@ class CardPileViewTests: XCTestCase {
 
         let expectation = XCTestExpectation()
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             self?.swipeLeft()
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -91,10 +91,10 @@ class CardPileViewTests: XCTestCase {
 
         let expectation = XCTestExpectation()
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             self?.nonCommittalSwipe()
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 XCTAssertEqual(self?.topCard?.transform, .identity)
                 expectation.fulfill()
             }
@@ -111,7 +111,7 @@ class CardPileViewTests: XCTestCase {
         mockDataSource.cards = cards
         view.load()
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             self?.dragAndHold()
 
             XCTAssertNotEqual(self?.topCard?.transform, .identity)
@@ -126,7 +126,7 @@ class CardPileViewTests: XCTestCase {
         mockDataSource.cards = cards
         view.load()
 
-        DispatchQueue.main.async { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
             self?.rightSwipe()
             XCTAssertEqual(self?.mockDelegate.lastChoice, .accept)
         }
