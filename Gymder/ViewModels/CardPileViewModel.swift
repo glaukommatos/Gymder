@@ -57,10 +57,6 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
         }
     }
 
-    func cardPileView(_ cardPileView: CardPileView, didChangeReadiness ready: Bool) {
-        delegate?.cardPileViewModel(self, didChangeReadiness: ready)
-    }
-
     func next(completion: @escaping (Card?) -> Void) {
         if let gym = gyms.popLast() {
             dataProvider.download(url: gym.imageUrl) { [weak self] result in
@@ -82,5 +78,9 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
         } else {
             completion(nil)
         }
+    }
+
+    func cardPileView(_ cardPileView: CardPileView, didChangeReadiness ready: Bool) {
+        delegate?.cardPileViewModel(self, didChangeReadiness: ready)
     }
 }

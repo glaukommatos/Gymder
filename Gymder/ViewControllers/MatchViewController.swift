@@ -15,7 +15,7 @@ import UIKit
  */
 
 class MatchViewController: UIViewController {
-    var matchView = MatchView()
+    private lazy var matchView = MatchView()
     var closeHandler: (() -> Void)?
 
     override func loadView() {

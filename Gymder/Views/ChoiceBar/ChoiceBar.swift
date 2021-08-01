@@ -17,7 +17,8 @@ class ChoiceBar: UIView {
 
     var isEnabled: Bool {
         get {
-            leftButton.isEnabled && rightButton.isEnabled
+            leftButton.isEnabled &&
+                rightButton.isEnabled
         }
         set {
             leftButton.isEnabled = newValue
@@ -28,27 +29,43 @@ class ChoiceBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        addContainerView()
+        addLeftButton()
+        addRightButton()
+        addConstraints()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    private func addContainerView() {
         buttonContainer = UIView()
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(buttonContainer)
+    }
 
+    private func addLeftButton() {
         leftButton = RoundButton(type: .system)
         leftButton.translatesAutoresizingMaskIntoConstraints = false
         leftButton.setImage(UIImage(named: "Cross"), for: .normal)
         leftButton.tintColor = #colorLiteral(red: 0.9949885011, green: 0.4292141497, blue: 0.4242331982, alpha: 1)
         leftButton.accessibilityIdentifier = "swipeLeft"
         leftButton.addTarget(self, action: #selector(reject), for: .touchUpInside)
+        buttonContainer.addSubview(leftButton)
+    }
 
+    private func addRightButton() {
         rightButton = RoundButton(type: .system)
         rightButton.setImage(UIImage(named: "Heart"), for: .normal)
         rightButton.tintColor = #colorLiteral(red: 0.3013241887, green: 0.7947661281, blue: 0.5758426189, alpha: 1)
         rightButton.accessibilityIdentifier = "swipeRight"
         rightButton.translatesAutoresizingMaskIntoConstraints = false
         rightButton.addTarget(self, action: #selector(accept), for: .touchUpInside)
-
-        buttonContainer.addSubview(leftButton)
         buttonContainer.addSubview(rightButton)
-        addSubview(buttonContainer)
+    }
 
+    private func addConstraints() {
         NSLayoutConstraint.activate([
             buttonContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
             buttonContainer.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -69,9 +86,5 @@ class ChoiceBar: UIView {
 
     @objc func reject() {
         delegate?.choiceBar(self, didChoose: .reject)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
