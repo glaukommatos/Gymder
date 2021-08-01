@@ -78,7 +78,7 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
 
     // MARK: ChoiceBarDelegate
 
-    func choiceBar(_ choiceBar: ChoiceBar, didChoose choice: Choice) {
+    func choiceBar(_ choiceBar: ChoiceBarView, didChoose choice: Choice) {
         switch choice {
         case .accept:
             mainView.cardPileView.swipeTopCard(direction: .right)

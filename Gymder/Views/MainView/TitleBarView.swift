@@ -1,5 +1,5 @@
 //
-//  TitleBar.swift
+//  TitleBarView.swift
 //  Gymder
 //
 //  Created by Kyle Pointer on 01.08.21.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TitleBar: UIView {
+class TitleBarView: UIView {
     var titleLabel: UILabel!
     var bottomBorderView: UIView!
 

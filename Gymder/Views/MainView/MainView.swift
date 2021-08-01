@@ -8,9 +8,9 @@
 import UIKit
 
 class MainView: UIView {
-    var titleBar: TitleBar!
+    var titleBar: TitleBarView!
     var cardPileView: CardPileView!
-    var choiceBar: ChoiceBar!
+    var choiceBar: ChoiceBarView!
 
     private var stackView: UIStackView!
 
@@ -26,9 +26,9 @@ class MainView: UIView {
 
         addSubview(stackView)
 
-        titleBar = TitleBar()
+        titleBar = TitleBarView()
         cardPileView = CardPileView()
-        choiceBar = ChoiceBar()
+        choiceBar = ChoiceBarView()
 
         stackView.addArrangedSubview(titleBar)
         stackView.addArrangedSubview(cardPileView)

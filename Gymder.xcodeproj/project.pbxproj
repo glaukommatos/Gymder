@@ -20,10 +20,10 @@
 		272224DB26B4445C0080A992 /* CardChoiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DA26B4445C0080A992 /* CardChoiceSpy.swift */; };
 		272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DC26B444880080A992 /* MockCardDataSource.swift */; };
 		272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */; };
-		272224E126B54AED0080A992 /* ChoiceBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E026B54AED0080A992 /* ChoiceBar.swift */; };
+		272224E126B54AED0080A992 /* ChoiceBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E026B54AED0080A992 /* ChoiceBarView.swift */; };
 		272224E526B54C730080A992 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E426B54C730080A992 /* MainViewController.swift */; };
 		272224E726B619540080A992 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E626B619540080A992 /* MainView.swift */; };
-		272224E926B6198B0080A992 /* TitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E826B6198B0080A992 /* TitleBar.swift */; };
+		272224E926B6198B0080A992 /* TitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E826B6198B0080A992 /* TitleBarView.swift */; };
 		273F740226B6EEA20032BC6C /* ChoiceBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740126B6EEA20032BC6C /* ChoiceBarDelegate.swift */; };
 		273F740526B712490032BC6C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740426B712490032BC6C /* RoundButton.swift */; };
 		273F740726B725860032BC6C /* CardPileReadinessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */; };
@@ -85,10 +85,10 @@
 		272224DA26B4445C0080A992 /* CardChoiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChoiceSpy.swift; sourceTree = "<group>"; };
 		272224DC26B444880080A992 /* MockCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardDataSource.swift; sourceTree = "<group>"; };
 		272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIPanGestureRecognizer.swift; sourceTree = "<group>"; };
-		272224E026B54AED0080A992 /* ChoiceBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBar.swift; sourceTree = "<group>"; };
+		272224E026B54AED0080A992 /* ChoiceBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBarView.swift; sourceTree = "<group>"; };
 		272224E426B54C730080A992 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		272224E626B619540080A992 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		272224E826B6198B0080A992 /* TitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBar.swift; sourceTree = "<group>"; };
+		272224E826B6198B0080A992 /* TitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBarView.swift; sourceTree = "<group>"; };
 		273F740126B6EEA20032BC6C /* ChoiceBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBarDelegate.swift; sourceTree = "<group>"; };
 		273F740426B712490032BC6C /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileReadinessDelegate.swift; sourceTree = "<group>"; };
@@ -179,11 +179,11 @@
 			isa = PBXGroup;
 			children = (
 				272224D026B1CDED0080A992 /* Card.swift */,
-				76EF506626AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift */,
 				76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */,
+				76EF506626AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift */,
+				273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */,
 				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
 				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
-				273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */,
 			);
 			path = CardPile;
 			sourceTree = "<group>";
@@ -207,11 +207,22 @@
 		273F740326B7113E0032BC6C /* ChoiceBar */ = {
 			isa = PBXGroup;
 			children = (
-				272224E026B54AED0080A992 /* ChoiceBar.swift */,
+				272224E026B54AED0080A992 /* ChoiceBarView.swift */,
 				273F740126B6EEA20032BC6C /* ChoiceBarDelegate.swift */,
 				273F740426B712490032BC6C /* RoundButton.swift */,
 			);
 			path = ChoiceBar;
+			sourceTree = "<group>";
+		};
+		273F740826B7366A0032BC6C /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				272224D226B1CE360080A992 /* CardPile */,
+				273F740326B7113E0032BC6C /* ChoiceBar */,
+				272224E626B619540080A992 /* MainView.swift */,
+				272224E826B6198B0080A992 /* TitleBarView.swift */,
+			);
+			path = MainView;
 			sourceTree = "<group>";
 		};
 		76EF500026AAAD3200A8EAC3 = {
@@ -289,12 +300,9 @@
 		76EF506D26AC293F00A8EAC3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				273F740326B7113E0032BC6C /* ChoiceBar */,
-				272224D226B1CE360080A992 /* CardPile */,
+				273F740826B7366A0032BC6C /* MainView */,
 				272224CC26B1CAC40080A992 /* ErrorView.swift */,
 				76EF504A26AAFE0500A8EAC3 /* MatchView.swift */,
-				272224E626B619540080A992 /* MainView.swift */,
-				272224E826B6198B0080A992 /* TitleBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -546,9 +554,9 @@
 				272224CB26B1CAA90080A992 /* ErrorViewController.swift in Sources */,
 				272224BD26B1A5600080A992 /* Serialization.swift in Sources */,
 				272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */,
-				272224E126B54AED0080A992 /* ChoiceBar.swift in Sources */,
+				272224E126B54AED0080A992 /* ChoiceBarView.swift in Sources */,
 				273F740226B6EEA20032BC6C /* ChoiceBarDelegate.swift in Sources */,
-				272224E926B6198B0080A992 /* TitleBar.swift in Sources */,
+				272224E926B6198B0080A992 /* TitleBarView.swift in Sources */,
 				76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */,
 				272224B926B1A2830080A992 /* Container.swift in Sources */,
 				76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */,

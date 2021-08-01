@@ -1,5 +1,5 @@
 //
-//  ChoiceBar.swift
+//  ChoiceBarView.swift
 //  Gymder
 //
 //  Created by Kyle Pointer on 31.07.21.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ChoiceBar: UIView {
+class ChoiceBarView: UIView {
     private var buttonContainer: UIView!
     private var leftButton: RoundButton!
     private var rightButton: RoundButton!
