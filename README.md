@@ -32,6 +32,11 @@ There's a few things I just haven't done because of time:
   to see the changes take effect. I have made no effort to listen to these changes, although
   this could be done.
   
+- Just noticed there's something in the assignment about using the "correct size of the main image".
+  I'm assuming this means using the device-specfic image from the API response instead of always
+  using the same size. I forgot to do that, but that's a really simply change I can do for you still
+  if you're missing it.
+  
 ## Screenshot 
 
 ![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")

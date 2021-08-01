@@ -50,7 +50,6 @@
 		76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */; };
 		76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507826AC2D7C00A8EAC3 /* Gym.swift */; };
 		76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */; };
-		76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,7 +120,6 @@
 		76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceCodables.swift; sourceTree = "<group>"; };
 		76EF507826AC2D7C00A8EAC3 /* Gym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
 		76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSourceProtocol.swift; sourceTree = "<group>"; };
-		76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloatExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -310,7 +308,6 @@
 		76EF506F26AC298600A8EAC3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				76EF507C26AC345600A8EAC3 /* CGFloatExtensions.swift */,
 				76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */,
 			);
 			path = Extensions;
@@ -536,7 +533,6 @@
 				272224D726B1DFCF0080A992 /* CardPileViewModelDelegate.swift in Sources */,
 				76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */,
 				272224D526B1DFB60080A992 /* CardPileViewModel.swift in Sources */,
-				76EF507D26AC345600A8EAC3 /* CGFloatExtensions.swift in Sources */,
 				76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */,
 				273F740726B725860032BC6C /* CardPileReadinessDelegate.swift in Sources */,
 				273F740526B712490032BC6C /* RoundButton.swift in Sources */,

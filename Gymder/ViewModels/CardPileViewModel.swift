@@ -10,13 +10,24 @@ import CoreLocation
 
 /**
 
- This one was pretty fun. The ViewController can setup this
- view model with a delegate and then that delgate will get
- updated when there are new `Cards` waiting.
+    The `CardPileViewModel` provides an API to
+    allow a consumer to `load()` data. It then calls
+    back to the `CardPileViewModelDelegate` to
+    inform whenever the data is ready (or when it begins
+    it's loading process and is definitely _not_ ready).
 
- It also implements `CardDataSourceProtocol` so that
- the `CardPileView` can query it for additional cards which
- can then be swiped by the user.
+    The `CardPileView` can use this also as a
+    data source (this might not be completely
+    appropriate, I'd like to spend more time considering
+    how these concerns might be separated).
+
+    The `CardPileViewModel` implements
+    `CardDataSourceProtocol` so that the
+    `CardPileView` can use `next()` to request the
+    next `Card`s from  it, as well as the
+    `CardPileReadinessDelegate` so that it
+    can be notified by the `CardPileView` when
+    its readiness changes.
 
  */
 

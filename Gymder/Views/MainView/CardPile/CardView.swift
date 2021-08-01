@@ -13,6 +13,8 @@ import CoreLocation
     This view lays out two `UILabel`s allowing them to take up as much space
     as they would like to. Then it fills up the remaining space with a `UIImage`.
 
+    This is what happens when I don't use autolayout. Hope it's not weird.
+
  */
 
 class CardView: UIView {
@@ -22,7 +24,7 @@ class CardView: UIView {
 
     var card: Card? {
         didSet {
-            updateView(for: card)
+            updateView(with: card)
         }
     }
 
@@ -116,7 +118,7 @@ class CardView: UIView {
         addSubview(distanceLabel)
     }
 
-    private func updateView(for card: Card?) {
+    private func updateView(with card: Card?) {
         if let card = card {
             titleLabel.text = card.title
             distanceLabel.text = card.distance

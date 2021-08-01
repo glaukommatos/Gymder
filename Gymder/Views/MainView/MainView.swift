@@ -20,6 +20,7 @@ class MainView: UIView {
         backgroundColor = .white
 
         stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .fill
         stackView.distribution = .fill
@@ -34,11 +35,13 @@ class MainView: UIView {
         stackView.addArrangedSubview(cardPileView)
         stackView.addArrangedSubview(choiceBar)
         stackView.sendSubviewToBack(choiceBar)
-    }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        stackView.frame = bounds.inset(by: safeAreaInsets)
+        NSLayoutConstraint.activate([
+            stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
+            stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 
     required init?(coder: NSCoder) {

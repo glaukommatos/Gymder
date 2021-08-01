@@ -105,6 +105,9 @@ class CardPileView: UIView {
     private func updateReadinessAndPlaceholderViews() {
         cardPileReadinessDelegate?.cardPileView(self, didChangeReadiness: currentCardCount > 0)
 
+        // I'm so sorry, I just REALLY wanted to have a stack of cards that would shrink
+        // down to nothing as the cards run out. I decided always having a stack of
+        // three looked nice (and like the Tinder screenshots).
         UIView.animate(withDuration: CardPileView.animationDuration) { [weak self] in
             guard let self = self else { return }
             switch self.currentCardCount {
@@ -127,7 +130,11 @@ class CardPileView: UIView {
         cardDataSource?.next(completion: { [weak self] card in
             guard let self = self,
                   let card = card else { return }
+
             DispatchQueue.main.async {
+                // Was really tempted to pretend I was implementing something like
+                // `UITableView` and let the user register different views, for
+                // reuse, but that's probably a little overkill. :)
                 let nextCardView = CardView()
                 nextCardView.card = card
 
@@ -176,13 +183,5 @@ class CardPileView: UIView {
         UIView.animate(withDuration: CardPileView.animationDuration) {
             card.transform = .identity
         }
-    }
-
-    private var cardSize: CGSize {
-        let leastBound = min(bounds.height, bounds.width)
-        let cardHeight = leastBound
-        let cardWidth = cardHeight * (7/8)
-
-        return CGSize(width: cardWidth, height: cardHeight)
     }
 }
