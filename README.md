@@ -37,6 +37,9 @@ There's a few things I just haven't done because of time:
   using the same size. I forgot to do that, but that's a really simply change I can do for you still
   if you're missing it.
   
+- I need to do a bit more work to make the design adapt nicely to smaller screens. Just looked
+  at it on a 5s and it's PRETTY cramped because those buttons at the bottom are too big. :)
+  
 ## Screenshot 
 
 ![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")
