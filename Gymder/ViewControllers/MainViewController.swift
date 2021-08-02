@@ -78,6 +78,13 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupDelegatesAndHandlers()
+        setupViewControllerPresentationStyles()
+
+        viewModel.load()
+    }
+
+    func setupDelegatesAndHandlers() {
         viewModel.delegate = self
         mainView.choiceBar.delegate = self
         mainView.cardPileView.cardChoiceDelegate = self
@@ -89,24 +96,28 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         }
 
         errorViewController.retryHandler = { [weak self] in
-            DispatchQueue.main.async {
-                self?.dismiss(animated: true) {
-                    self?.viewModel.load()
-                }
+            self?.dismiss(animated: true) {
+                self?.viewModel.load()
             }
         }
+    }
 
-        viewModel.load()
+    func setupViewControllerPresentationStyles() {
+        errorViewController.modalPresentationStyle = .fullScreen
+        errorViewController.modalTransitionStyle = .crossDissolve
+        matchViewController.modalPresentationStyle = .fullScreen
+        matchViewController.modalTransitionStyle = .crossDissolve
     }
 
     // MARK: CardPileViewModelDelegate
 
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError error: Error?) {
-        if error == nil {
-            self.mainView.cardPileView.load()
-        } else {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            if error == nil {
+                self.mainView.cardPileView.load()
+            } else {
                 self.present(self.errorViewController, animated: true)
             }
         }

@@ -20,7 +20,7 @@ in comments at the top of most files.
 
 There's a few things I just haven't done because of time:
 
-- More testing (ideally I would also like to test the lone view model and view controllers).
+- Would love to add more tests. :)
 
 - No way to reload once you run out of data (although for a while I thought about putting a
   cute animation or something if you actually swiped through everything).
