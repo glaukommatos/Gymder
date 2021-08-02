@@ -13,8 +13,8 @@ You can either run the tests via Xcode's testing UI or on the command line via a
 ## Thoughts
 
 This was a fun toy to make and a great opportunity to practice some view programming and trying
-out some design patterns. If you want to know more of my thoughts, I've included a lot of information
-in comments at the top of most files.
+out some new things. If you want to know more of my thoughts, I've included a lot of information
+in comments at the top of many files.
 
 ## Caveats
 
