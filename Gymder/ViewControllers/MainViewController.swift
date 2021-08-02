@@ -55,6 +55,7 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     private let viewModel: CardPileViewModel
     private let matchViewController: MatchViewController
     private let errorViewController: ErrorViewController
+    private var viewModelLoaded = false
 
     init(
         matchViewController: MatchViewController,
@@ -96,7 +97,9 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        viewModel.load()
+        if !viewModelLoaded {
+            viewModel.load()
+        }
     }
 
     // MARK: CardPileViewModelDelegate
@@ -104,6 +107,7 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError error: Error?) {
         if error == nil {
             self.mainView.cardPileView.load()
+            viewModelLoaded = true
         } else {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
