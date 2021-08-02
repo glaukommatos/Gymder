@@ -39,8 +39,7 @@ There's a few things I just haven't done because of time:
   
 ## Screenshot 
 
-![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")
-
+<kbd>![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")</kbd>
 
 ## Credits
 
