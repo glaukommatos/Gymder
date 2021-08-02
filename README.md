@@ -37,12 +37,6 @@ There's a few things I just haven't done because of time:
   using the same size. I forgot to do that, but that's a really simply change I can do for you still
   if you're missing it.
   
-- Have just noticed a bug in CardPileView that so far I've only seen happen on the 5s for some reason.
-  I'll have to make sure I fix that. I think the `viewWillAppear` is getting called a second time for
-  devices that don't do popover modals. I'll fix that when I get a chance. Right now I've just set it
-  to only load once. I'd like to come up with a nicer solution. Maybe I'm not using the right
-  ViewController method to kick-off the loading. *This fix is not yet in the latest build.*
-   
 ## Screenshot 
 
 ![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")
