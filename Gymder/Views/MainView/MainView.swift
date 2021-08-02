@@ -40,7 +40,8 @@ class MainView: UIView {
             stackView.leftAnchor.constraint(equalTo: safeAreaLayoutGuide.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: safeAreaLayoutGuide.rightAnchor),
             stackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            stackView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
+            choiceBar.heightAnchor.constraint(lessThanOrEqualTo: heightAnchor, multiplier: 0.20)
         ])
     }
 
