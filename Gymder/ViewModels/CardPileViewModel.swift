@@ -57,12 +57,14 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
             self.currentLocation = location
 
             self.gymRepository.getGyms { result in
-                switch result {
-                case .success(let gyms):
-                    self.gyms = gyms.shuffled()
-                    self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: nil)
-                case .failure(let error):
-                    self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: error)
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let gyms):
+                        self.gyms = gyms.shuffled()
+                        self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: nil)
+                    case .failure(let error):
+                        self.delegate?.cardPileViewModel(self, didFinishLoadingWithError: error)
+                    }
                 }
             }
         }
@@ -92,6 +94,9 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
     }
 
     func cardPileView(_ cardPileView: CardPileView, didChangeReadiness ready: Bool) {
-        delegate?.cardPileViewModel(self, didChangeReadiness: ready)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.delegate?.cardPileViewModel(self, didChangeReadiness: ready)
+        }
     }
 }

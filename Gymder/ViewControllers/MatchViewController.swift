@@ -16,7 +16,6 @@ import UIKit
 
 class MatchViewController: UIViewController {
     private lazy var matchView = MatchView()
-    var closeHandler: (() -> Void)?
 
     override func loadView() {
         view = matchView
@@ -24,7 +23,10 @@ class MatchViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        matchView.closeHandler = closeHandler
+
+        matchView.closeHandler = { [weak self] in
+            self?.dismiss(animated: true)
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

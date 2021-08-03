@@ -37,6 +37,12 @@ There's a few things I just haven't done because of time:
   using the same size. I forgot to do that, but that's a really simply change I can do for you still
   if you're missing it.
   
+## Todos
+
+- [ ] See about moving what logic I can out of `CardPileView` and into a view model or similar.
+- [ ] Continue to yak-shave and improve the relationship between `CardPileView` and its data source.
+- [ ] Rejig the view controllers to take advantage of the view controller lifecycle.
+
 ## Screenshot 
 
 <kbd>![Screenshot](https://raw.githubusercontent.com/glaukommatos/Gymder/main/screenshot.png "Screenshot")</kbd>

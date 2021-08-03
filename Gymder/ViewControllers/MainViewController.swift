@@ -91,14 +91,8 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         mainView.cardPileView.cardDataSource = viewModel
         mainView.cardPileView.cardPileReadinessDelegate = viewModel
 
-        matchViewController.closeHandler = { [weak self] in
-            self?.dismiss(animated: true, completion: nil)
-        }
-
         errorViewController.retryHandler = { [weak self] in
-            self?.dismiss(animated: true) {
-                self?.viewModel.load()
-            }
+            self?.viewModel.load()
         }
     }
 
@@ -112,21 +106,16 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     // MARK: CardPileViewModelDelegate
 
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError error: Error?) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-
-            if error == nil {
-                self.mainView.cardPileView.load()
-            } else {
-                self.present(self.errorViewController, animated: true)
-            }
+        guard error == nil else {
+            self.present(self.errorViewController, animated: true)
+            return
         }
+
+        self.mainView.cardPileView.load()
     }
 
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool) {
-        DispatchQueue.main.async { [weak self] in
-            self?.mainView.choiceBar.isEnabled = ready
-        }
+        mainView.choiceBar.isEnabled = ready
     }
 
     // MARK: ChoiceBarDelegate

@@ -15,7 +15,7 @@ import UIKit
  */
 
 class ErrorView: UIView {
-    var retryHandler: (() -> Void)?
+    var closeHandler: (() -> Void)?
     private var stackView: UIStackView!
 
     override init(frame: CGRect) {
@@ -31,10 +31,6 @@ class ErrorView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    @objc func retry(sender: UIButton) {
-        retryHandler?()
     }
 
     private func addStackView() {
@@ -78,5 +74,9 @@ class ErrorView: UIView {
         retryButton.layer.cornerRadius = 5
 
         stackView.addArrangedSubview(retryButton)
+    }
+
+    @objc func retry(sender: UIButton) {
+        closeHandler?()
     }
 }
