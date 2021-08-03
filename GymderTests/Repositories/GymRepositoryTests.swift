@@ -24,7 +24,12 @@ class GymRepositoryTests: XCTestCase {
         )
 
         let expectedGyms = [
-            Gym(name: "Gym 1", latitude: 12.32, longitude: 43.34, imageUrl: URL(string: "https://valid.url.com/")!)
+            Gym(
+                name: "Gym 1",
+                latitude: 12.32,
+                longitude: 43.34,
+                imageUrl: URL(string: "https://valid.url.com/image.png")!
+            )
         ]
 
         let expectation = XCTestExpectation()
@@ -67,20 +72,28 @@ class GymRepositoryTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
+    lazy var examplePartnersResponseData = try! Serialization.encoder.encode(examplePartnersResponse)
+
     var expectedRequestUrl = URL(string: "https://api.one.fit/v2/en-nl/partners/city/UTR")!
     var expectedUserAgent = "OneFit/1.19.0"
+    let imageUrl = URL(string: "https://valid.url.com/image.png")!
+    lazy var headerImage = PartnersResponse.Data.Image(
+        desktop: imageUrl,
+        xxxhdpi: imageUrl,
+        xxhdpi: imageUrl,
+        xhdpi: imageUrl,
+        hdpi: imageUrl
+    )
 
-    lazy var examplePartnersResponseData = try! Serialization.encoder.encode(examplePartnersResponse)
-    let examplePartnersResponse = PartnersResponse(
+    lazy var examplePartnersResponse = PartnersResponse(
         data: [
             PartnersResponse.Data(
                 name: "Gym 1",
-                headerImage: PartnersResponse.Data.Image(xxhdpi: URL(string: "https://valid.url.com/")!),
+                headerImage: headerImage,
                 locations: [
                     PartnersResponse.Data.Location(latitude: 12.32, longitude: 43.34)
                 ]
             )
         ]
     )
-
 }

@@ -30,9 +30,9 @@ These are generally things I would like to do to make the app better, but that I
 - [ ] See about moving what logic I can out of `CardPileView` and into a view model or similar.
 - [ ] Add ability to reload once gyms are swiped (need to make some minor changes to `CardPileView` to support this).
 - [ ] Improve relationship between `CardPileView` and its data source. I think there's still plenty of room for improvement here.
-- [ ] Add more tests.
 - [ ] Respond in some sensible way to changes of location service permission without restarting the app.
-- [ ] Use device-size specific version of the gym images.
+- [ ] Add aspect ratio constraint for the cards (so iPad doesn't look weird in landscape).
+- [ ] Add more tests.
 
 ## Screenshot 
 
