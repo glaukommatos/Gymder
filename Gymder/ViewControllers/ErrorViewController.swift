@@ -27,6 +27,7 @@ class ErrorViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         errorView.closeHandler = { [weak self] in
             self?.dismiss(animated: true)
         }
@@ -34,9 +35,5 @@ class ErrorViewController: UIViewController {
 
     override func viewDidDisappear(_ animated: Bool) {
         retryHandler?()
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        .lightContent
     }
 }

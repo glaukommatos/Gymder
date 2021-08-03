@@ -79,8 +79,6 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         super.viewDidLoad()
 
         setupDelegatesAndHandlers()
-        setupViewControllerPresentationStyles()
-
         viewModel.load()
     }
 
@@ -94,13 +92,6 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         errorViewController.retryHandler = { [weak self] in
             self?.viewModel.load()
         }
-    }
-
-    func setupViewControllerPresentationStyles() {
-        errorViewController.modalPresentationStyle = .fullScreen
-        errorViewController.modalTransitionStyle = .crossDissolve
-        matchViewController.modalPresentationStyle = .fullScreen
-        matchViewController.modalTransitionStyle = .crossDissolve
     }
 
     // MARK: CardPileViewModelDelegate
