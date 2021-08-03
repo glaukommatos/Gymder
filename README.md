@@ -18,6 +18,10 @@ and try a bunch of new things out!
 In many of the main files in this project, I have included a fair amount of information about my intentions
 and decisions in the comments.
 
+I have relied very heavily on the delegate pattern for this implementation. If I were targetting a newer version
+of iOS than iOS 11, I would probably use Combine more heavily instead. I haven't played with RxSwift yet,
+which might have been an option on that lower target.
+
 ## Todos
 
 These are generally things I would like to do to make the app better, but that I need more time to do.
