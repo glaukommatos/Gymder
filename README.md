@@ -41,7 +41,7 @@ There's a few things I just haven't done because of time:
 
 - [ ] See about moving what logic I can out of `CardPileView` and into a view model or similar.
 - [ ] Add ability to reload once gyms are swiped (need to make some minor changes to `CardPileView` to support this).
-- [ ] Improve relationship between `CardPileView` and its data source. I'm iffy on the current implementation.
+- [ ] Improve relationship between `CardPileView` and its data source. I think there's room for improvement here.
 
 ## Screenshot 
 
