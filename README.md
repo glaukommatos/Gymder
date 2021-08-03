@@ -16,32 +16,17 @@ This was a fun toy to make and a great opportunity to practice some view program
 out some new things. If you want to know more of my thoughts, I've included a lot of information
 in comments at the top of many files.
 
-## Caveats
-
-There's a few things I just haven't done because of time:
-
-- Would love to add more tests. :)
-
-- No way to reload once you run out of data (although for a while I thought about putting a
-  cute animation or something if you actually swiped through everything).
-  
-- The match view could actually include some details about the match.
-
-- If location permissions change while the app is running (if they are granted when they
-  previously were not, specifically), then you'll have to kill and relaunch the app in order
-  to see the changes take effect. I have made no effort to listen to these changes, although
-  this could be done.
-  
-- Just noticed there's something in the assignment about using the "correct size of the main image".
-  I'm assuming this means using the device-specfic image from the API response instead of always
-  using the same size. I forgot to do that, but that's a really simply change I can do for you still
-  if you're missing it.
-  
 ## Todos
 
+These are generally things I would like to do to make the app better, but that I need more time to do.
+
+- [ ] Display some match details in the `MatchView`.
 - [ ] See about moving what logic I can out of `CardPileView` and into a view model or similar.
 - [ ] Add ability to reload once gyms are swiped (need to make some minor changes to `CardPileView` to support this).
 - [ ] Improve relationship between `CardPileView` and its data source. I think there's room for improvement here.
+- [ ] Add more tests.
+- [ ] Respond in some sensible way to changes of location service permission without restarting the app.
+- [ ] Use device-size specific version of the gym images.
 
 ## Screenshot 
 
