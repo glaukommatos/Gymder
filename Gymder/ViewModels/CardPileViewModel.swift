@@ -22,7 +22,7 @@ import CoreLocation
     how these concerns might be separated).
 
     The `CardPileViewModel` implements
-    `CardDataSourceProtocol` so that the
+    `CardPileDataSource` so that the
     `CardPileView` can use `next()` to request the
     next `Card`s from  it, as well as the
     `CardPileReadinessDelegate` so that it
@@ -31,7 +31,7 @@ import CoreLocation
 
  */
 
-class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
+class CardPileViewModel: CardPileDataSource, CardPileViewDelegate {
     private let gymRepository: GymRepositoryProtocol
     private let locationProvider: LocationProvider
     private let dataProvider: DataProviderProtocol
@@ -100,7 +100,11 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
         }
     }
 
-    func cardPileViewNeedsMoreCards(_ cardPileView: CardPileView) {
+    func cardPileView(_ cardPileView: CardPileView, didChoose choice: CardPileChoice) {
+        delegate?.cardPileViewModel(self, didChoose: choice)
+    }
+
+    func cardPileViewDidRunOutOfCards(_ cardPileView: CardPileView) {
         load()
     }
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2709FC0626BB183600460C2A /* CardPileChoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2709FC0526BB183600460C2A /* CardPileChoice.swift */; };
 		272224BD26B1A5600080A992 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224BC26B1A5600080A992 /* Serialization.swift */; };
 		272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C526B1B0EF0080A992 /* DataProvider.swift */; };
 		272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C826B1C69C0080A992 /* DataProviderProtocol.swift */; };
@@ -15,7 +16,7 @@
 		272224D126B1CDED0080A992 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D026B1CDED0080A992 /* Card.swift */; };
 		272224D526B1DFB60080A992 /* CardPileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D426B1DFB60080A992 /* CardPileViewModel.swift */; };
 		272224D726B1DFCF0080A992 /* CardPileViewModelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224D626B1DFCF0080A992 /* CardPileViewModelDelegate.swift */; };
-		272224DB26B4445C0080A992 /* CardChoiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DA26B4445C0080A992 /* CardChoiceSpy.swift */; };
+		272224DB26B4445C0080A992 /* CardPileViewDelegateSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DA26B4445C0080A992 /* CardPileViewDelegateSpy.swift */; };
 		272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DC26B444880080A992 /* MockCardDataSource.swift */; };
 		272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */; };
 		272224E126B54AED0080A992 /* ChoiceBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E026B54AED0080A992 /* ChoiceBarView.swift */; };
@@ -24,7 +25,7 @@
 		272224E926B6198B0080A992 /* TitleBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224E826B6198B0080A992 /* TitleBarView.swift */; };
 		273F740226B6EEA20032BC6C /* ChoiceBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740126B6EEA20032BC6C /* ChoiceBarDelegate.swift */; };
 		273F740526B712490032BC6C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740426B712490032BC6C /* RoundButton.swift */; };
-		273F740726B725860032BC6C /* CardPileReadinessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */; };
+		273F740726B725860032BC6C /* CardPileViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273F740626B725860032BC6C /* CardPileViewDelegate.swift */; };
 		76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */; };
 		76EF501626AAAD3500A8EAC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501526AAAD3500A8EAC3 /* Assets.xcassets */; };
 		76EF501926AAAD3500A8EAC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76EF501726AAAD3500A8EAC3 /* LaunchScreen.storyboard */; };
@@ -41,13 +42,12 @@
 		76EF505D26AB5FFB00A8EAC3 /* MockDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */; };
 		76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF505E26AB682100A8EAC3 /* PartnersResponseMapper.swift */; };
 		76EF506226AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */; };
-		76EF506726AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506626AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift */; };
 		76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506826AC218B00A8EAC3 /* LocationProvider.swift */; };
 		76EF506B26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */; };
 		76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507426AC2AF600A8EAC3 /* GymRepositoryProtocol.swift */; };
 		76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */; };
 		76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507826AC2D7C00A8EAC3 /* Gym.swift */; };
-		76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */; };
+		76EF507B26AC2DEC00A8EAC3 /* CardPileDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EF507A26AC2DEC00A8EAC3 /* CardPileDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2709FC0526BB183600460C2A /* CardPileChoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileChoice.swift; sourceTree = "<group>"; };
 		272224BC26B1A5600080A992 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		272224C526B1B0EF0080A992 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		272224C826B1C69C0080A992 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
@@ -77,7 +78,7 @@
 		272224D426B1DFB60080A992 /* CardPileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModel.swift; sourceTree = "<group>"; };
 		272224D626B1DFCF0080A992 /* CardPileViewModelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewModelDelegate.swift; sourceTree = "<group>"; };
 		272224D826B205B20080A992 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		272224DA26B4445C0080A992 /* CardChoiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardChoiceSpy.swift; sourceTree = "<group>"; };
+		272224DA26B4445C0080A992 /* CardPileViewDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewDelegateSpy.swift; sourceTree = "<group>"; };
 		272224DC26B444880080A992 /* MockCardDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCardDataSource.swift; sourceTree = "<group>"; };
 		272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUIPanGestureRecognizer.swift; sourceTree = "<group>"; };
 		272224E026B54AED0080A992 /* ChoiceBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBarView.swift; sourceTree = "<group>"; };
@@ -86,7 +87,7 @@
 		272224E826B6198B0080A992 /* TitleBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleBarView.swift; sourceTree = "<group>"; };
 		273F740126B6EEA20032BC6C /* ChoiceBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChoiceBarDelegate.swift; sourceTree = "<group>"; };
 		273F740426B712490032BC6C /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
-		273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileReadinessDelegate.swift; sourceTree = "<group>"; };
+		273F740626B725860032BC6C /* CardPileViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileViewDelegate.swift; sourceTree = "<group>"; };
 		76EF500926AAAD3200A8EAC3 /* Gymder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gymder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76EF501526AAAD3500A8EAC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -109,13 +110,12 @@
 		76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataProvider.swift; sourceTree = "<group>"; };
 		76EF505E26AB682100A8EAC3 /* PartnersResponseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersResponseMapper.swift; sourceTree = "<group>"; };
 		76EF506126AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnersResponseMapperTests.swift; sourceTree = "<group>"; };
-		76EF506626AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileChoiceDelegate.swift; sourceTree = "<group>"; };
 		76EF506826AC218B00A8EAC3 /* LocationProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationProvider.swift; sourceTree = "<group>"; };
 		76EF506A26AC257C00A8EAC3 /* CLLocationFormattedDistanceExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationFormattedDistanceExtension.swift; sourceTree = "<group>"; };
 		76EF507426AC2AF600A8EAC3 /* GymRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymRepositoryProtocol.swift; sourceTree = "<group>"; };
 		76EF507626AC2B2800A8EAC3 /* GymServiceCodables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymServiceCodables.swift; sourceTree = "<group>"; };
 		76EF507826AC2D7C00A8EAC3 /* Gym.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gym.swift; sourceTree = "<group>"; };
-		76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDataSourceProtocol.swift; sourceTree = "<group>"; };
+		76EF507A26AC2DEC00A8EAC3 /* CardPileDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPileDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,10 +173,10 @@
 			isa = PBXGroup;
 			children = (
 				272224D026B1CDED0080A992 /* Card.swift */,
-				76EF507A26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift */,
-				76EF506626AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift */,
-				273F740626B725860032BC6C /* CardPileReadinessDelegate.swift */,
+				2709FC0526BB183600460C2A /* CardPileChoice.swift */,
+				76EF507A26AC2DEC00A8EAC3 /* CardPileDataSource.swift */,
 				76EF504426AAC5C600A8EAC3 /* CardPileView.swift */,
+				273F740626B725860032BC6C /* CardPileViewDelegate.swift */,
 				76EF503C26AAAFBC00A8EAC3 /* CardView.swift */,
 			);
 			path = CardPile;
@@ -333,7 +333,7 @@
 			children = (
 				272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */,
 				76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */,
-				272224DA26B4445C0080A992 /* CardChoiceSpy.swift */,
+				272224DA26B4445C0080A992 /* CardPileViewDelegateSpy.swift */,
 				272224DC26B444880080A992 /* MockCardDataSource.swift */,
 			);
 			path = Mocks;
@@ -520,14 +520,14 @@
 				76EF507926AC2D7C00A8EAC3 /* Gym.swift in Sources */,
 				272224D526B1DFB60080A992 /* CardPileViewModel.swift in Sources */,
 				76EF507526AC2AF600A8EAC3 /* GymRepositoryProtocol.swift in Sources */,
-				273F740726B725860032BC6C /* CardPileReadinessDelegate.swift in Sources */,
+				273F740726B725860032BC6C /* CardPileViewDelegate.swift in Sources */,
 				273F740526B712490032BC6C /* RoundButton.swift in Sources */,
 				272224E526B54C730080A992 /* MainViewController.swift in Sources */,
-				76EF507B26AC2DEC00A8EAC3 /* CardDataSourceProtocol.swift in Sources */,
+				2709FC0626BB183600460C2A /* CardPileChoice.swift in Sources */,
+				76EF507B26AC2DEC00A8EAC3 /* CardPileDataSource.swift in Sources */,
 				76EF500D26AAAD3200A8EAC3 /* AppDelegate.swift in Sources */,
 				272224D126B1CDED0080A992 /* Card.swift in Sources */,
 				272224CD26B1CAC40080A992 /* ErrorView.swift in Sources */,
-				76EF506726AC19DB00A8EAC3 /* CardPileChoiceDelegate.swift in Sources */,
 				76EF504B26AAFE0500A8EAC3 /* MatchView.swift in Sources */,
 				76EF505526AB5C1B00A8EAC3 /* GymRepository.swift in Sources */,
 				76EF507726AC2B2800A8EAC3 /* GymServiceCodables.swift in Sources */,
@@ -552,7 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76EF506226AB68AB00A8EAC3 /* PartnersResponseMapperTests.swift in Sources */,
-				272224DB26B4445C0080A992 /* CardChoiceSpy.swift in Sources */,
+				272224DB26B4445C0080A992 /* CardPileViewDelegateSpy.swift in Sources */,
 				76EF504F26AB575E00A8EAC3 /* MatchViewTests.swift in Sources */,
 				76EF505726AB5DF000A8EAC3 /* GymRepositoryTests.swift in Sources */,
 				272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */,

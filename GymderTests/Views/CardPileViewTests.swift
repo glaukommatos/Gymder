@@ -14,14 +14,14 @@ import XCTest
 class CardPileViewTests: XCTestCase {
     private var view: CardPileView!
     private var mockDataSource: MockCardDataSource!
-    private var mockDelegate: CardChoiceSpy!
+    private var mockDelegate: CardPileViewDelegateSpy!
 
     override func setUp() {
         view = CardPileView()
-        mockDelegate = CardChoiceSpy()
+        mockDelegate = CardPileViewDelegateSpy()
         mockDataSource = MockCardDataSource()
-        view.cardChoiceDelegate = mockDelegate
-        view.cardDataSource = mockDataSource
+        view.delegate = mockDelegate
+        view.dataSource = mockDataSource
     }
 
     func testDisplaysAndMaintainsFourCardsAndTwoPlaceholdersWhilePossible() throws {
@@ -123,13 +123,20 @@ class CardPileViewTests: XCTestCase {
             Card(title: "Gym 1", distance: "Distance 1", imageData: nil)
         ]
 
+        let expectation = XCTestExpectation()
         mockDataSource.cards = cards
+        view.delegate = mockDelegate
         view.load()
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
             self?.rightSwipe()
-            XCTAssertEqual(self?.mockDelegate.lastChoice, .accept)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                XCTAssertEqual(self?.mockDelegate.lastChoice, .accept)
+                expectation.fulfill()
+            }
         }
+
+        wait(for: [expectation], timeout: 2)
     }
 
     private func swipeLeft() {

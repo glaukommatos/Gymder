@@ -50,7 +50,7 @@ import UIKit
 
  */
 
-class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileChoiceDelegate, ChoiceBarDelegate {
+class MainViewController: UIViewController, CardPileViewModelDelegate, ChoiceBarDelegate {
     private lazy var mainView = MainView()
     private let viewModel: CardPileViewModel
     private var matchViewController: MatchViewController {
@@ -90,12 +90,25 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     func setupDelegates() {
         viewModel.delegate = self
         mainView.choiceBar.delegate = self
-        mainView.cardPileView.cardChoiceDelegate = self
-        mainView.cardPileView.cardDataSource = viewModel
-        mainView.cardPileView.cardPileReadinessDelegate = viewModel
+        mainView.cardPileView.dataSource = viewModel
+        mainView.cardPileView.delegate = viewModel
     }
 
-    // MARK: CardPileViewModelDelegate
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool) {
+        mainView.choiceBar.isEnabled = ready
+    }
+
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChoose choice: CardPileChoice) {
+        switch choice {
+        case .accept:
+            // that's 5%, right?
+            if Int.random(in: 0..<20) == 0 {
+                present(matchViewController, animated: true, completion: nil)
+            }
+        case .reject:
+            return
+        }
+    }
 
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError error: Error?) {
         guard error == nil else {
@@ -106,32 +119,12 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
         self.mainView.cardPileView.load()
     }
 
-    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool) {
-        mainView.choiceBar.isEnabled = ready
-    }
-
-    // MARK: ChoiceBarDelegate
-
-    func choiceBar(_ choiceBar: ChoiceBarView, didChoose choice: Choice) {
+    func choiceBar(_ choiceBar: ChoiceBarView, didChoose choice: CardPileChoice) {
         switch choice {
         case .accept:
             mainView.cardPileView.swipeTopCard(direction: .right)
         case .reject:
             mainView.cardPileView.swipeTopCard(direction: .left)
-        }
-    }
-
-    // MARK: CardChoiceDelegate
-
-    func cardPile(_ cardPileView: CardPileView, didChoose choice: Choice) {
-        switch choice {
-        case .accept:
-            // that's 5%, right?
-            if Int.random(in: 0..<20) == 0 {
-                present(matchViewController, animated: true, completion: nil)
-            }
-        case .reject:
-            return
         }
     }
 }

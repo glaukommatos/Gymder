@@ -8,16 +8,16 @@
 import Foundation
 @testable import Gymder
 
-class MockCardDataSource: CardDataSourceProtocol {
+class MockCardDataSource: CardPileDataSource {
     var cards = [Card]()
-    var cardsLock = NSLock()
+    var serialQueue = DispatchQueue(label: "MockCardDataSource-serialQueue")
 
     func next(completion: @escaping (Card?) -> Void) {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            self.cardsLock.lock()
-            completion(self.cards.popLast())
-            self.cardsLock.unlock()
+            self.serialQueue.sync {
+                completion(self.cards.popLast())
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ import Foundation
  */
 
 protocol CardPileViewModelDelegate: AnyObject {
-    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError: Error?)
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool)
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChoose choice: CardPileChoice)
+    func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didFinishLoadingWithError: Error?)
 }

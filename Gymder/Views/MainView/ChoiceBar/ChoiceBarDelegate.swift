@@ -8,5 +8,5 @@
 import Foundation
 
 protocol ChoiceBarDelegate: AnyObject {
-    func choiceBar(_ choiceBar: ChoiceBarView, didChoose choice: Choice)
+    func choiceBar(_ choiceBar: ChoiceBarView, didChoose choice: CardPileChoice)
 }

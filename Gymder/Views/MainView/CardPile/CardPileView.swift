@@ -16,9 +16,8 @@ class CardPileView: UIView {
     private static let animationDuration = 0.2
     private static let cardCount = 4
 
-    weak var cardChoiceDelegate: CardPileChoiceDelegate?
-    weak var cardDataSource: CardDataSourceProtocol?
-    weak var cardPileReadinessDelegate: CardPileReadinessDelegate?
+    weak var dataSource: CardPileDataSource?
+    weak var delegate: CardPileViewDelegate?
 
     private let backPlaceholderCard = CardView()
     private let frontPlaceholderCard = CardView()
@@ -84,9 +83,9 @@ class CardPileView: UIView {
     private func updateCardChoiceDelegate(with direction: SwipeDirection) {
         switch direction {
         case .left:
-            self.cardChoiceDelegate?.cardPile(self, didChoose: .reject)
+            self.delegate?.cardPileView(self, didChoose: .reject)
         case .right:
-            self.cardChoiceDelegate?.cardPile(self, didChoose: .accept)
+            self.delegate?.cardPileView(self, didChoose: .accept)
         }
     }
 
@@ -103,7 +102,7 @@ class CardPileView: UIView {
     }
 
     private func updateReadinessAndPlaceholderViews() {
-        cardPileReadinessDelegate?.cardPileView(self, didChangeReadiness: currentCardCount > 0)
+        delegate?.cardPileView(self, didChangeReadiness: currentCardCount > 0)
 
         // I'm so sorry, I just REALLY wanted to have a stack of cards that would shrink
         // down to nothing as the cards run out. I decided always having a stack of
@@ -127,7 +126,7 @@ class CardPileView: UIView {
     }
 
     private func addNextCard() {
-        cardDataSource?.next(completion: { [weak self] card in
+        dataSource?.next(completion: { [weak self] card in
             guard let self = self else { return }
 
             if let card = card {
@@ -142,7 +141,7 @@ class CardPileView: UIView {
                 }
             } else {
                 if self.currentCardCount == 0 {
-                    self.cardPileReadinessDelegate?.cardPileViewNeedsMoreCards(self)
+                    self.delegate?.cardPileViewDidRunOutOfCards(self)
                 }
             }
         })
