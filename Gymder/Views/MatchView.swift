@@ -7,20 +7,6 @@
 
 import UIKit
 
-/**
-
-    According to the instructions there needed to be some sort of
-    matching _animation_. I'm not sure strictly speaking whether
-    or not the animated modal presentation of a view controller
-    really counts as this, so I figured I would at least use
-    `UIViewPropertyAnimator` to spin some random balls
-    around to try to keep things fun.
-
-    Is this an abuse  of `UILabel`? Yeah, probably is.
-    Is it worth it? Of course!
-
- */
-
 class MatchView: UIView {
     private let balls = ["⚽️", "🏀", "🏈", "⚾️", "🥎", "🎾", "🏐", "🏉"]
     var closeHandler: (() -> Void)?

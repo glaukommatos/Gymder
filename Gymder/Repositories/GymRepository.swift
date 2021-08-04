@@ -9,17 +9,6 @@ import Foundation
 import CoreLocation
 import Combine
 
-/**
-    Grabs the "partners" from the API and maps them into
-    `Gym`s.
-
-    Decided to have this return `Result`s because I think
-    it's kidna nice. In the future they play really well with
-    Combine, which sadly doesn't have nearly as many
-    fancy `Publisher`s when I'm targetting iOS 11.
-
- */
-
 struct GymRepository: GymRepositoryProtocol {
     let dataProvider: DataProviderProtocol
     let partnersResponseMapper: PartnersResponseMapperProtocol

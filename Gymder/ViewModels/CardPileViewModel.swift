@@ -8,29 +8,6 @@
 import Foundation
 import CoreLocation
 
-/**
-
-    The `CardPileViewModel` provides an API to
-    allow a consumer to `load()` data. It then calls
-    back to the `CardPileViewModelDelegate` to
-    inform whenever the data is ready (or when it begins
-    it's loading process and is definitely _not_ ready).
-
-    The `CardPileView` can use this also as a
-    data source (this might not be completely
-    appropriate, I'd like to spend more time considering
-    how these concerns might be separated).
-
-    The `CardPileViewModel` implements
-    `CardPileDataSource` so that the
-    `CardPileView` can use `next()` to request the
-    next `Card`s from  it, as well as the
-    `CardPileReadinessDelegate` so that it
-    can be notified by the `CardPileView` when
-    its readiness changes.
-
- */
-
 class CardPileViewModel: CardPileDataSource, CardPileViewDelegate {
     private let gymRepository: GymRepositoryProtocol
     private let locationProvider: LocationProvider

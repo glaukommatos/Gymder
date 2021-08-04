@@ -34,8 +34,6 @@ class PartnersResponseMapper: PartnersResponseMapperProtocol {
 
     private func imageUrlForDeviceSize(headerImage: PartnersResponse.Data.Image) -> URL {
         guard let screenWidth = UIScreen.main.currentMode?.size.width else {
-            // I really think this shouldn't happen. (Unless maybe in a unit test that isn't
-            // hosted by the actual app).
             return headerImage.hdpi
         }
 

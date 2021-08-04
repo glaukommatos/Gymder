@@ -7,12 +7,6 @@
 
 import Foundation
 
-/**
-
-    This is the data needed to display the `CardView`.
-
- */
-
 struct Card {
     let title: String
     let distance: String

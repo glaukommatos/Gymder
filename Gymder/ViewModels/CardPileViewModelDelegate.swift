@@ -7,13 +7,6 @@
 
 import Foundation
 
-/**
-
- Implement this if you'd like to listen to updates from the
- `CardPileViewModel`.
-
- */
-
 protocol CardPileViewModelDelegate: AnyObject {
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChangeReadiness ready: Bool)
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChoose choice: CardPileChoice)

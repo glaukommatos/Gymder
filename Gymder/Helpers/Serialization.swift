@@ -7,17 +7,6 @@
 
 import Foundation
 
-/**
-
- Convenience so that we can be consistent about JSON serialization/deserialization.
-
- Right now it returns a new encoder/decoder each time. I'm honestly not sure at the
- moment if these these two are thread-safe, so I want to make sure if they aren't that
- consumers are at least getting their own instances– and I think these are cheap enough
- to make. :)
-
- */
-
 struct Serialization {
     static var encoder: JSONEncoder {
         let encoder = JSONEncoder()

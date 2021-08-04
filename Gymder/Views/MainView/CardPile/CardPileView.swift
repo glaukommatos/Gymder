@@ -104,9 +104,6 @@ class CardPileView: UIView {
     private func updateReadinessAndPlaceholderViews() {
         delegate?.cardPileView(self, didChangeReadiness: currentCardCount > 0)
 
-        // I'm so sorry, I just REALLY wanted to have a stack of cards that would shrink
-        // down to nothing as the cards run out. I decided always having a stack of
-        // three looked nice (and like the Tinder screenshots).
         UIView.animate(withDuration: CardPileView.animationDuration) { [weak self] in
             guard let self = self else { return }
             switch self.currentCardCount {

@@ -7,18 +7,6 @@
 
 import Foundation
 
-/**
-
-    A fairly simple wrapper around `URLSession.downloadTask(...)`
-    which the purpose of simplifing the API for the caller (since we largely
-    don't  care precisely about HTTP statuses / network errors in our case).
-
-    Since it implements `DataProviderProtocol`, it can also be more
-    easily tested and replaced with another implementation if the need should
-    arise..
-
- */
-
 class DataProvider: DataProviderProtocol {
     func download(url: URL, completion: @escaping (Result<Data, Error>) -> Void) {
         download(url: url, withUserAgent: nil, completion: completion)

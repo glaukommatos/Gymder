@@ -331,10 +331,10 @@
 		76EF508026AC44E000A8EAC3 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */,
-				76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */,
 				272224DA26B4445C0080A992 /* CardPileViewDelegateSpy.swift */,
 				272224DC26B444880080A992 /* MockCardDataSource.swift */,
+				76EF505C26AB5FFB00A8EAC3 /* MockDataProvider.swift */,
+				272224DE26B444F10080A992 /* MockUIPanGestureRecognizer.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -350,9 +350,9 @@
 		76EF508226AC44F200A8EAC3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */,
-				76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */,
 				76EF504626AAC67C00A8EAC3 /* CardPileViewTests.swift */,
+				76EF503E26AAAFEF00A8EAC3 /* CardViewTests.swift */,
+				76EF504E26AB575E00A8EAC3 /* MatchViewTests.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
