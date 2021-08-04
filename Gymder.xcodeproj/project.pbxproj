@@ -191,13 +191,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		272224D926B422160080A992 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		273F740326B7113E0032BC6C /* ChoiceBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,7 +253,6 @@
 		76EF502226AAAD3600A8EAC3 /* GymderTests */ = {
 			isa = PBXGroup;
 			children = (
-				272224D926B422160080A992 /* Resources */,
 				76EF502526AAAD3600A8EAC3 /* Info.plist */,
 				76EF508326AC44FF00A8EAC3 /* Mappers */,
 				76EF508026AC44E000A8EAC3 /* Mocks */,
