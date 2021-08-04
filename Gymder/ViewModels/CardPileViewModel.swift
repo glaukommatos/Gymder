@@ -99,4 +99,8 @@ class CardPileViewModel: CardDataSourceProtocol, CardPileReadinessDelegate {
             self.delegate?.cardPileViewModel(self, didChangeReadiness: ready)
         }
     }
+
+    func cardPileViewNeedsMoreCards(_ cardPileView: CardPileView) {
+        load()
+    }
 }

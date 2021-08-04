@@ -18,10 +18,6 @@ import CoreLocation
  */
 
 class CardView: UIView {
-    var imageView: UIImageView!
-    var titleLabel: UILabel!
-    var distanceLabel: UILabel!
-
     var card: Card? {
         didSet {
             updateView(with: card)
@@ -32,9 +28,9 @@ class CardView: UIView {
         super.init(frame: frame)
 
         customizeViewAndLayerProperties()
-        addImage()
-        addTitleLabel()
-        addDistanceLabel()
+        addSubview(imageView)
+        addSubview(titleLabel)
+        addSubview(distanceLabel)
     }
 
     required init?(coder: NSCoder) {
@@ -77,27 +73,18 @@ class CardView: UIView {
         )
     }
 
-    private func customizeViewAndLayerProperties() {
-        accessibilityIdentifier = "card"
-        backgroundColor = .white
-        layer.cornerRadius = 15
-        layer.borderWidth = 1
-        layer.borderColor = #colorLiteral(red: 0.8509055972, green: 0.851028502, blue: 0.8508786559, alpha: 1)
-    }
-
-    private func addImage() {
-        imageView = UIImageView()
+    lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
         imageView.layer.cornerRadius = 15
         imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         imageView.clipsToBounds = true
         imageView.backgroundColor = .darkGray
         imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
 
-        addSubview(imageView)
-    }
-
-    private func addTitleLabel() {
-        titleLabel = UILabel()
+    lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
         titleLabel.accessibilityIdentifier = "titleLabel"
         titleLabel.numberOfLines = 2
         titleLabel.adjustsFontSizeToFitWidth = true
@@ -105,17 +92,23 @@ class CardView: UIView {
         titleLabel.minimumScaleFactor = 0.8
         titleLabel.font = UIFont.preferredFont(forTextStyle: .title1)
         titleLabel.textColor = #colorLiteral(red: 0.2391913533, green: 0.2392312586, blue: 0.2391825914, alpha: 1)
+        return titleLabel
+    }()
 
-        addSubview(titleLabel)
-    }
-
-    private func addDistanceLabel() {
-        distanceLabel = UILabel()
+    lazy var distanceLabel: UILabel = {
+        let distanceLabel = UILabel()
         distanceLabel.accessibilityIdentifier = "distanceLabel"
         distanceLabel.font = UIFont.preferredFont(forTextStyle: .body)
         distanceLabel.textColor = #colorLiteral(red: 0.2391913533, green: 0.2392312586, blue: 0.2391825914, alpha: 1)
+        return distanceLabel
+    }()
 
-        addSubview(distanceLabel)
+    private func customizeViewAndLayerProperties() {
+        accessibilityIdentifier = "card"
+        backgroundColor = .white
+        layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.borderColor = #colorLiteral(red: 0.8509055972, green: 0.851028502, blue: 0.8508786559, alpha: 1)
     }
 
     private func updateView(with card: Card?) {

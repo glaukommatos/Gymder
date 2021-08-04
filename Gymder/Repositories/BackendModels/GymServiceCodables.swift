@@ -5,8 +5,6 @@
 //  Created by Kyle Pointer on 24.07.21.
 //
 
-// swiftlint:disable nesting
-
 import Foundation
 
 /**
@@ -26,23 +24,29 @@ import Foundation
 
 struct PartnersResponse: Codable, Equatable {
     let data: [Data]
+}
 
+extension PartnersResponse {
     struct Data: Codable, Equatable {
         let name: String
         let headerImage: Image
         let locations: [Location]
+    }
+}
 
-        struct Image: Codable, Equatable {
-            let desktop: URL
-            let xxxhdpi: URL
-            let xxhdpi: URL
-            let xhdpi: URL
-            let hdpi: URL
-        }
+extension PartnersResponse.Data {
+    struct Image: Codable, Equatable {
+        let desktop: URL
+        let xxxhdpi: URL
+        let xxhdpi: URL
+        let xhdpi: URL
+        let hdpi: URL
+    }
+}
 
-        struct Location: Codable, Equatable {
-            let latitude: Double
-            let longitude: Double
-        }
+extension PartnersResponse.Data {
+    struct Location: Codable, Equatable {
+        let latitude: Double
+        let longitude: Double
     }
 }

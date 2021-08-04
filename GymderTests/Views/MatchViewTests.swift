@@ -5,43 +5,56 @@
 //  Created by Kyle Pointer on 23.07.21.
 //
 
-// swiftlint:disable force_cast
-
 import XCTest
 @testable import Gymder
 
 class MatchViewTests: XCTestCase {
 
     func testAddsSubviews() throws {
-        let matchView = MatchView()
-
-        XCTAssertTrue(matchView.stackView.subviews.contains(where: { view in
-            guard let label = view as? UILabel else { return false }
-
-            return label.text == "It's a match!"
-        }))
-
-        XCTAssertTrue(matchView.stackView.subviews.contains(where: { view in
-            guard let button = view as? UIButton else { return false }
-
-            return button.titleLabel!.text == "Awesome!"
-        }))
+        XCTAssertEqual(label?.text, "It's a match!")
+        XCTAssertEqual(button?.titleLabel?.text, "Awesome!")
     }
 
     func testInvokesCloseHandler() throws {
         let expectation = XCTestExpectation()
-        let matchView = MatchView()
         matchView.closeHandler = {
             expectation.fulfill()
         }
 
-        let button = matchView.stackView.subviews.first { view in
-            let button = view as? UIButton
-            return button != nil
-        } as! UIButton
-
-        button.sendActions(for: .touchUpInside)
+        button?.sendActions(for: .touchUpInside)
 
         wait(for: [expectation], timeout: 1)
     }
+
+    lazy var matchView = MatchView()
+    lazy var stackView: UIStackView? = {
+        guard let stackView = matchView.subviews.first(where: { view in
+            view is UIStackView
+        }) as? UIStackView else {
+            XCTFail("No Stack View")
+            return nil
+        }
+
+        return stackView
+    }()
+
+    lazy var label: UILabel? = {
+        if let label = stackView?.subviews.first(where: {
+            $0 is UILabel
+        }) as? UILabel {
+            return label
+        } else {
+            return nil
+        }
+    }()
+
+    lazy var button: UIButton? = {
+        if let label = stackView?.subviews.first(where: {
+            $0 is UIButton
+        }) as? UIButton {
+            return label
+        } else {
+            return nil
+        }
+    }()
 }

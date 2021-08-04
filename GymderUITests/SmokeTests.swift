@@ -59,8 +59,24 @@ class SmokeTests: XCTestCase {
 
             app.buttons["Awesome!"].tap()
             swipeLeftButton.tap()
-        } else {
-            XCTFail("Card never appeared")
         }
     }
+
+//    func testMemoryUsage() {
+//        let app = XCUIApplication()
+//        app.launch()
+//
+//        let topCard = app.otherElements["card"].firstMatch
+//        let swipeRightButton = app.buttons["swipeRight"].firstMatch
+//        let swipeLeftButton = app.buttons["swipeLeft"].firstMatch
+//
+//        while topCard.waitForExistence(timeout: 5) {
+//            while !app.staticTexts["It's a match!"].exists {
+//                swipeRightButton.tap()
+//            }
+//
+//            app.buttons["Awesome!"].tap()
+//            swipeLeftButton.tap()
+//        }
+//    }
 }

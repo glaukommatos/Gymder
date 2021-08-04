@@ -28,13 +28,4 @@ class MatchViewController: UIViewController {
             self?.dismiss(animated: true)
         }
     }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        matchView.stopAnimations()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        matchView.updateBalls()
-        matchView.startAnimation()
-    }
 }

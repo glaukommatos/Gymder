@@ -53,16 +53,21 @@ import UIKit
 class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileChoiceDelegate, ChoiceBarDelegate {
     private lazy var mainView = MainView()
     private let viewModel: CardPileViewModel
-    private let matchViewController: MatchViewController
-    private let errorViewController: ErrorViewController
+    private var matchViewController: MatchViewController {
+        MatchViewController()
+    }
+
+    private var errorViewController: ErrorViewController {
+        let errorViewController = ErrorViewController()
+        errorViewController.retryHandler = { [weak self] in
+            self?.viewModel.load()
+        }
+        return errorViewController
+    }
 
     init(
-        matchViewController: MatchViewController,
-        errorViewController: ErrorViewController,
         viewModel: CardPileViewModel
     ) {
-        self.matchViewController = matchViewController
-        self.errorViewController = errorViewController
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -78,20 +83,16 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, CardPileC
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupDelegatesAndHandlers()
+        setupDelegates()
         viewModel.load()
     }
 
-    func setupDelegatesAndHandlers() {
+    func setupDelegates() {
         viewModel.delegate = self
         mainView.choiceBar.delegate = self
         mainView.cardPileView.cardChoiceDelegate = self
         mainView.cardPileView.cardDataSource = viewModel
         mainView.cardPileView.cardPileReadinessDelegate = viewModel
-
-        errorViewController.retryHandler = { [weak self] in
-            self?.viewModel.load()
-        }
     }
 
     // MARK: CardPileViewModelDelegate

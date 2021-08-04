@@ -15,59 +15,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        registerDependencies()
-        createRootVC()
-
+        window = UIWindow()
+        window?.rootViewController = mainViewController
+        window?.makeKeyAndVisible()
         return true
     }
 
-    private func createRootVC() {
-        window = UIWindow()
-        window?.rootViewController = Container.shared.get(instanceOf: MainViewController.self)
-        window?.makeKeyAndVisible()
-    }
+    lazy var mainViewController: MainViewController = {
+        let dataProvider = DataProvider()
+        let cardPileViewModel = CardPileViewModel(
+            gymRepository: GymRepository(
+                urlSessionWrapper: dataProvider,
+                partnersResponseMapper: PartnersResponseMapper()
+            ),
+            locationProvider: LocationProvider(),
+            dataProvider: dataProvider
+        )
 
-    private func registerDependencies() {
-        Container.shared.register(for: MainViewController.self) { container in
-            MainViewController(
-                matchViewController: container.get(instanceOf: MatchViewController.self),
-                errorViewController: container.get(instanceOf: ErrorViewController.self),
-                viewModel: container.get(instanceOf: CardPileViewModel.self))
-        }
-
-        Container.shared.register(for: CardPileViewModel.self) { container in
-            CardPileViewModel(
-                gymRepository: container.get(instanceOf: GymRepositoryProtocol.self),
-                locationProvider: container.get(instanceOf: LocationProvider.self),
-                dataProvider: container.get(instanceOf: DataProviderProtocol.self)
-            )
-        }
-
-        Container.shared.register(for: ErrorViewController.self) { _ in
-            ErrorViewController()
-        }
-
-        Container.shared.register(for: MatchViewController.self) { _ in
-            MatchViewController()
-        }
-
-        Container.shared.register(for: LocationProvider.self) { _ in
-            LocationProvider()
-        }
-
-        Container.shared.register(for: GymRepositoryProtocol.self) { container in
-            GymRepository(
-                urlSessionWrapper: container.get(instanceOf: DataProviderProtocol.self),
-                partnersResponseMapper: container.get(instanceOf: PartnersResponseMapperProtocol.self)
-            )
-        }
-
-        Container.shared.register(for: DataProviderProtocol.self) { _ in
-            DataProvider()
-        }
-
-        Container.shared.register(for: PartnersResponseMapperProtocol.self) { _ in
-            PartnersResponseMapper()
-        }
-    }
+        return MainViewController(viewModel: cardPileViewModel)
+    }()
 }

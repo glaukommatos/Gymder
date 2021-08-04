@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		272224B926B1A2830080A992 /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224B826B1A2830080A992 /* Container.swift */; };
-		272224BB26B1A2A20080A992 /* ContainerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224BA26B1A2A20080A992 /* ContainerTests.swift */; };
 		272224BD26B1A5600080A992 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224BC26B1A5600080A992 /* Serialization.swift */; };
 		272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C526B1B0EF0080A992 /* DataProvider.swift */; };
 		272224C926B1C69C0080A992 /* DataProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272224C826B1C69C0080A992 /* DataProviderProtocol.swift */; };
@@ -70,8 +68,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		272224B826B1A2830080A992 /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
-		272224BA26B1A2A20080A992 /* ContainerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerTests.swift; sourceTree = "<group>"; };
 		272224BC26B1A5600080A992 /* Serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		272224C526B1B0EF0080A992 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		272224C826B1C69C0080A992 /* DataProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProviderProtocol.swift; sourceTree = "<group>"; };
@@ -248,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				76EF500C26AAAD3200A8EAC3 /* AppDelegate.swift */,
-				272224B826B1A2830080A992 /* Container.swift */,
 				76EF506F26AC298600A8EAC3 /* Extensions */,
 				76EF507126AC29B900A8EAC3 /* Helpers */,
 				76EF507326AC2A7A00A8EAC3 /* Mappers */,
@@ -271,7 +266,6 @@
 				76EF508026AC44E000A8EAC3 /* Mocks */,
 				76EF508126AC44EB00A8EAC3 /* Repositories */,
 				76EF508226AC44F200A8EAC3 /* Views */,
-				272224BA26B1A2A20080A992 /* ContainerTests.swift */,
 			);
 			path = GymderTests;
 			sourceTree = "<group>";
@@ -554,7 +548,6 @@
 				273F740226B6EEA20032BC6C /* ChoiceBarDelegate.swift in Sources */,
 				272224E926B6198B0080A992 /* TitleBarView.swift in Sources */,
 				76EF506026AB685900A8EAC3 /* PartnersResponseMapper.swift in Sources */,
-				272224B926B1A2830080A992 /* Container.swift in Sources */,
 				76EF506926AC218B00A8EAC3 /* LocationProvider.swift in Sources */,
 				272224E726B619540080A992 /* MainView.swift in Sources */,
 				272224C626B1B0EF0080A992 /* DataProvider.swift in Sources */,
@@ -572,7 +565,6 @@
 				76EF505726AB5DF000A8EAC3 /* GymRepositoryTests.swift in Sources */,
 				272224DD26B444880080A992 /* MockCardDataSource.swift in Sources */,
 				76EF505D26AB5FFB00A8EAC3 /* MockDataProvider.swift in Sources */,
-				272224BB26B1A2A20080A992 /* ContainerTests.swift in Sources */,
 				76EF504726AAC67C00A8EAC3 /* CardPileViewTests.swift in Sources */,
 				272224DF26B444F10080A992 /* MockUIPanGestureRecognizer.swift in Sources */,
 				76EF503F26AAAFEF00A8EAC3 /* CardViewTests.swift in Sources */,

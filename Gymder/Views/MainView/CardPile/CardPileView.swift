@@ -128,20 +128,22 @@ class CardPileView: UIView {
 
     private func addNextCard() {
         cardDataSource?.next(completion: { [weak self] card in
-            guard let self = self,
-                  let card = card else { return }
+            guard let self = self else { return }
 
-            DispatchQueue.main.async {
-                // Was really tempted to pretend I was implementing something like
-                // `UITableView` and let the user register different views, for
-                // reuse, but that's probably a little overkill. :)
-                let nextCardView = CardView()
-                nextCardView.card = card
+            if let card = card {
+                DispatchQueue.main.async {
+                    let nextCardView = CardView()
+                    nextCardView.card = card
 
-                self.addGestureRecognizer(to: nextCardView)
-                self.insertSubview(nextCardView, aboveSubview: self.frontPlaceholderCard)
-                self.currentCardCount += 1
-                self.updateReadinessAndPlaceholderViews()
+                    self.addGestureRecognizer(to: nextCardView)
+                    self.insertSubview(nextCardView, aboveSubview: self.frontPlaceholderCard)
+                    self.currentCardCount += 1
+                    self.updateReadinessAndPlaceholderViews()
+                }
+            } else {
+                if self.currentCardCount == 0 {
+                    self.cardPileReadinessDelegate?.cardPileViewNeedsMoreCards(self)
+                }
             }
         })
     }
