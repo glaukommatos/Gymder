@@ -101,7 +101,6 @@ class MainViewController: UIViewController, CardPileViewModelDelegate, ChoiceBar
     func cardPileViewModel(_ cardPileViewModel: CardPileViewModel, didChoose choice: CardPileChoice) {
         switch choice {
         case .accept:
-            // that's 5%, right?
             if Int.random(in: 0..<20) == 0 {
                 present(matchViewController, animated: true, completion: nil)
             }

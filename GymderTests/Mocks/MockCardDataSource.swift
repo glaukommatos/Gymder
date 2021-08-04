@@ -10,14 +10,8 @@ import Foundation
 
 class MockCardDataSource: CardPileDataSource {
     var cards = [Card]()
-    var serialQueue = DispatchQueue(label: "MockCardDataSource-serialQueue")
 
     func next(completion: @escaping (Card?) -> Void) {
-        DispatchQueue.global().async { [weak self] in
-            guard let self = self else { return }
-            self.serialQueue.sync {
-                completion(self.cards.popLast())
-            }
-        }
+        completion(cards.popLast())
     }
 }
