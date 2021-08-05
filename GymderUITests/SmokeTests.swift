@@ -62,7 +62,7 @@ class SmokeTests: XCTestCase {
         }
     }
 
-    func testInfiniteRunForProfiling() {
+    func testLongTestForProfiling() {
         let app = XCUIApplication()
         app.launch()
 
@@ -70,13 +70,17 @@ class SmokeTests: XCTestCase {
         let swipeRightButton = app.buttons["swipeRight"].firstMatch
         let swipeLeftButton = app.buttons["swipeLeft"].firstMatch
 
-        while topCard.waitForExistence(timeout: 5) {
-            while !app.staticTexts["It's a match!"].exists {
-                swipeRightButton.tap()
-            }
+        for _ in 0..<50 {
+            if topCard.waitForExistence(timeout: 5) {
+                while !app.staticTexts["It's a match!"].exists {
+                    swipeRightButton.tap()
+                }
 
-            app.buttons["Awesome!"].tap()
-            swipeLeftButton.tap()
+                app.buttons["Awesome!"].tap()
+                swipeLeftButton.tap()
+            } else {
+                XCTFail("No more cards?!")
+            }
         }
     }
 }

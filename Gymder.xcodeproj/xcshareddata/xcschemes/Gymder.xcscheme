@@ -50,7 +50,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "SmokeTests/testInfiniteRunForProfiling()">
+                  Identifier = "SmokeTests/testLongTestForProfiling()">
                </Test>
             </SkippedTests>
          </TestableReference>
