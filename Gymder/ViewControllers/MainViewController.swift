@@ -5,7 +5,6 @@
 //  Created by Kyle Pointer on 31.07.21.
 //
 
-import Foundation
 import UIKit
 
 class MainViewController: UIViewController, CardPileViewModelDelegate, ChoiceBarDelegate {
